@@ -55,12 +55,22 @@ export default {
           localStorage.setItem('user', JSON.stringify(response.data.user_name));
           localStorage.setItem('userId', JSON.stringify(response.data.user_id));
           //Mostra um alerta com os dados do usuário
-          alert(`Login feito com sucesso. Bem-vindo ${response.data.user_name}!`);
-          this.$router.push('/');
-          console.log('usuario', $response.data);
+          Swal.fire({
+            title: 'Login bem-sucedido!',
+            text: `Bem-vindo ${response.data.user_name}!`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.$router.push('/');
+          });
         })
         .catch(error => {
-          console.error('Error during login:', error);
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Falha ao fazer login. Verifique suas credenciais e tente novamente.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         });
     }
   },
