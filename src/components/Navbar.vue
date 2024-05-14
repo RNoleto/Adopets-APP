@@ -35,7 +35,8 @@ export default {
         { id: 2, url: "/about", name: "Quem somos" },
         { id: 3, url: "/posts", name: "Todos os Posts" },
         { id: 4, url: "/breedsgalery", name: "Galeria de Raças" },
-        { id: 5, url: "/Dashboard", name: "Dashboard" }
+        { id: 5, url: "/userpage", name: "Pagina do usuário" },
+        { id: 6, url: "/Dashboard", name: "Dashboard" }
       ],
       tokenExists: false
     };
