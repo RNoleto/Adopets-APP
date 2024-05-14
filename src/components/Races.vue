@@ -26,11 +26,10 @@
       <input type="number" id="lifespan" v-model="lifespan" />
     </div>
     <div class="inputType">
-      <input type="file" id="imageUpload" ref="imageUpload" @change="handleImageUpload" multiple />
+      <input type="file" id="imageUpload" ref="imageUpload" multiple />
     </div>
     <div>
       <label for="story">Conte a história dessa Raça</label>
-      <!-- <textarea name="story" id="story" v-model="story"></textarea> -->
       <ckeditor class="ckeditor" :editor="editor" v-model="story" :config="editorConfig"></ckeditor>
     </div>
     <button type="submit">Cadastrar Raça</button>
@@ -88,22 +87,6 @@ export default {
     }
   },
   methods: {
-    handleImageUpload(event) {
-      const files = event.target.files;
-      const formData = new FormData();
-
-      for (let i = 0; i < files.length; i++) {
-        formData.append('file', files[i]);
-      }
-      //Enviar os arquivos de imagens para o servidor
-      axios.post('/files', formData)
-        .then(response => {
-
-        })
-        .catch(error => {
-          console.error('Erro ao enviar imagens:', error);
-        })
-    },
     loadSpecies() {
       axios
         .get("/species")
@@ -126,8 +109,6 @@ export default {
     },
     async submitRaceForm() {
       try {
-        const userId = JSON.parse(localStorage.getItem('userId'));
-        // Criar um objeto FormData para enviar os dados do formulário
         const formData = new FormData();
         formData.append('breed', this.breed);
         formData.append('ref_id_specie', this.selectedSpecies);
@@ -135,29 +116,40 @@ export default {
         formData.append('average_weight', this.average_weight);
         formData.append('lifespan', this.lifespan);
         formData.append('story', this.story);
+
+        const userId = JSON.parse(localStorage.getItem('userId'));
         formData.append('ref_id_user', userId);
 
-        // Adicionar as imagens selecionadas ao objeto FormData
-        const imageUploadInput = this.$refs.imageUpload;
-        const imageFiles = imageUploadInput.files;
-        for (let i = 0; i < imageFiles.length; i++) {
-          formData.append('images[]', imageFiles[i]);
-        }
-
-        // Enviar os dados do formulário para o servidor
         const response = await axios.post("/breeds", formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
 
-        console.log("Resposta do backend:", response.data);
+        if (response.status === 200) {
+          await this.uploadImages(response.data.breed_id);
+        }
 
-        // Exibir uma mensagem de sucesso, se necessário
-        this.resetForm(); // Método para limpar o formulário, se necessário
+        this.resetForm();
       } catch (error) {
         console.error('Erro ao criar nova raça:', error);
-        // Exibir uma mensagem de erro para o usuário, se necessário
+      }
+    },
+    async uploadImages(breedId) {
+      const formData = new FormData();
+      const imageUploadInput = this.$refs.imageUpload;
+      const imageFiles = imageUploadInput.files;
+
+      for (let i = 0; i < imageFiles.length; i++) {
+        formData.append('file', imageFiles[i]);
+        formData.append('ref_id_breed', breedId);
+      }
+
+      try {
+        const response = await axios.post('/files', formData);
+        console.log("Resposta do upload de imagens:", response.data);
+      } catch (error) {
+        console.error('Erro ao enviar imagens:', error);
       }
     },
     resetForm() {
@@ -168,6 +160,7 @@ export default {
       this.average_weight = null;
       this.lifespan = null;
       this.story = "";
+      this.$refs.imageUpload.value = '';
     }
   }
 }
