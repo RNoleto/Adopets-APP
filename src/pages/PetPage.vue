@@ -7,7 +7,7 @@
                 <p>{{ selectedPet.name }}</p>
             </div>
             <div v-else>
-                Nenhum Pet Selecionado
+                Nenhum Pet Selecionado aqui
             </div>
         </div>
     </div>
