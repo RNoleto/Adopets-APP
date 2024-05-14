@@ -8,16 +8,17 @@
             </div>
         </div>
         <div class="pets">
-            <div v-for="(mypet, index) in myPets" :key="index" class="card" @click.prevent="select(mypet.name)">
-                <img :src="mypet.img" :alt="mypet.name" class="photo">
-                <div class="infos">
-                    <div class="content">
-                        <p class="title">{{ mypet.name }}</p>
-                        <p class="text">{{ mypet.sexo }}</p>
-                        <p class="text">{{ mypet.birth_day }}</p>
+            <div v-for="(mypet, index) in myPets" :key="index" class="card">
+                    <img :src="mypet.img" :alt="mypet.name" class="photo">
+                    <div class="infos">
+                        <div class="content">
+                            <p class="title">{{ mypet.name }}</p>
+                            <p class="text">{{ mypet.sexo }}</p>
+                            <p class="text">{{ mypet.birth_day }}</p>
+                            <router-link :to="{ name: 'PetPage', params: { id: mypet.id }}">Página do Pet</router-link>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </template>
@@ -83,13 +84,9 @@ export default {
         }
     },
     methods:{
-        select(name){
-            Swal.fire({
-            title: `${name}`,
-            text: `Você clicou em ${name}`,
-            icon: 'info',
-            confirmButtonText: 'Entendi'
-        })
+        editPet(id){
+            const selectedPet = this.myPets.find(pet => pet.id === id);
+            this.$router.push({ name: 'PetPage', params: { id }, state: { pet: selectedPet }});
         }
     }
 }

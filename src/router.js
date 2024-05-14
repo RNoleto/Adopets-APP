@@ -35,7 +35,8 @@ const routes = [
     component: UserPage,
   },
   {
-    path: '/petpage',
+    name:'PetPage',
+    path: '/petpage/:id',
     component: PetPage,
   },
   {
@@ -60,12 +61,12 @@ const routes = [
     component: Register,
     meta: { hideFooter: true }
   },
-  {
-    path: '/post/:url',
-    name: 'PostPage',
-    component: () => import('@/pages/PostPage.vue'),
-    props: true,
-  },
+  // {
+  //   path: '/post/:url',
+  //   name: 'PostPage',
+  //   component: () => import('@/pages/PostPage.vue'),
+  //   props: true,
+  // },
   {
     path: '/:catchAll(.*)',
     redirect: '/',
