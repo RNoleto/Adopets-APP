@@ -126,8 +126,11 @@ export default {
           }
         });
 
-        if (response.status === 200) {
-          await this.uploadImages(response.data.breed_id);
+        if (response.status === 201 || response.status === 200) {
+          const breedId = response.data.id;
+          console.log("Dados da raça criada:", response.data.id);
+          // Envio das imagens com o ref_id_breed correto
+          await this.uploadImages(breedId);
         }
 
         this.resetForm();
@@ -136,17 +139,18 @@ export default {
       }
     },
     async uploadImages(breedId) {
-      const formData = new FormData();
-      const imageUploadInput = this.$refs.imageUpload;
-      const imageFiles = imageUploadInput.files;
-
-      for (let i = 0; i < imageFiles.length; i++) {
-        formData.append('file', imageFiles[i]);
-        formData.append('ref_id_breed', breedId);
-      }
-
       try {
+        const formData = new FormData();
+        const imageUploadInput = this.$refs.imageUpload;
+        const imageFiles = imageUploadInput.files;
+
+        for (let i = 0; i < imageFiles.length; i++) {
+          formData.append('file' + i, imageFiles[i]);
+          formData.append('ref_id_breed', breedId);
+        }
+
         const response = await axios.post('/files', formData);
+
         console.log("Resposta do upload de imagens:", response.data);
       } catch (error) {
         console.error('Erro ao enviar imagens:', error);
