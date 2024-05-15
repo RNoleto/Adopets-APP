@@ -26,7 +26,7 @@
       <input type="number" id="lifespan" v-model="lifespan" />
     </div>
     <div class="inputType">
-      <input type="file" id="imageUpload" ref="imageUpload" multiple />
+      <input type="file" id="imageUpload" ref="imageUpload" name="file" multiple />
     </div>
     <div>
       <label for="story">Conte a história dessa Raça</label>
@@ -145,7 +145,7 @@ export default {
         const imageFiles = imageUploadInput.files;
 
         for (let i = 0; i < imageFiles.length; i++) {
-          formData.append('file' + i, imageFiles[i]);
+          formData.append('file', imageFiles[i]);
           formData.append('ref_id_breed', breedId);
         }
 
