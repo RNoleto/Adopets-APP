@@ -12,9 +12,21 @@
         </div>
       </div>
       <div class="other_posts">
-        <p>primeiro</p>
-        <p>segundo</p>
-        <p>terceiro</p>
+        <div class="card_post">
+          <img src="https://images.unsplash.com/photo-1577099595920-bf19294bc408?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aGFtc3RlcnxlbnwwfHwwfHx8MA%3D%3D" alt="">
+          <div class="post_infos">
+              <p class="title_post">primeiro</p>
+              <p class="date_post">01/03/2024</p>
+          </div>
+        </div>
+        <div class="card_post">
+          <p>segundo</p>
+        </div>
+        <div class="card_post">
+          <div class="content">
+            <p>terceiro</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -66,6 +78,7 @@ export default {
     width: 660px;
     border-radius: 5px;
     background-color: var(--c2);
+    box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.10);
     .featured_img{
       width: 100%;
     }
@@ -87,6 +100,32 @@ export default {
         color: var(--c9);
         margin-top: 10px;
         font: var(--post-date-font-composite);
+      }
+    }
+  }
+  .other_posts{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    .card_post{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      img{
+        width: 200px;
+        height: 118px;
+        border-radius: 5px;
+        z-index: 1;
+      }
+      .post_infos{
+        background-color: var(--c2);
+        border-radius: 5px;
+        height: 158px;
+        width: 100%;
+        .title_post{
+          color: var(--c11);
+        }
       }
     }
   }
