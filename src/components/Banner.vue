@@ -1,52 +1,38 @@
-<template>
-  <div class="hero">
-    <div class="content">
-      <h3 class="title">Seja o lar dessas fofuras</h3>
-      <p class="text">Torne-se um herói peludo! 🐶🐱 Adote um amigo de quatro patas e mude uma vida para sempre. Nossos
-        cães e gatos aguardam amor, cuidado e um lar. Faça a diferença hoje - traga alegria e amor para sua casa, adote
-        um companheiro leal.</p>
-    </div>
+<template>  
+  <div class="content">
+      <div class="info">
+        <p class="title">Adote amor, adote um pet.</p>
+        <p class="text_body">Torne-se um herói peludo! Adote um amigo de quatro patas e mude uma vida para sempre. Nossos pets aguardam amor, cuidado e um lar. Faça a diferença hoje - traga alegria e amor para sua casa, adote um companheiro leal.</p>
+        <button><p>Conheça o seu amiguinho</p> <span>&rarr;</span></button>
+      </div>
+      <img class="imgbanner" src="../../public/assets/img/petbanner.png" alt="dogbanner">
   </div>
 </template>
 
 <style lang="scss" scoped>
-.hero {
-  width: 100%;
-  height: 70vh;
-
-  display: flex;
-  justify-content: center;
+.content{
+  background-color: var(--p5);
+  justify-content: space-between;
   align-items: center;
-
-  text-align: center;
-
-  background-image: url('/public/assets/img/hero.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: local;
-  border-radius: 0px 0px 30px 30px;
-  box-shadow: 1px 3px 10px rgba($color: #24252A, $alpha: .5);
-
-  .content {
-    background-color: rgba($color: #EEF5EF, $alpha: .7);
-    border-radius: 15px;
-    padding: 5px;
-    width: 80%;
-    backdrop-filter: blur(5px);
-    transform: translateY(220px);
-    box-shadow: 1px 1px 5px rgba($color: #24252A, $alpha: .3);
-
-    .title,
-    .text {
-      color: var(--color-3);
+  display: flex;
+  gap: 70px;
+  position: relative;
+  height: 700px;
+  .info{
+    width: 540px;
+    .title{
+    color: var(--c2);
+    margin-bottom: 36px;
     }
   }
-
-  @media (min-width:800px) {
-    .content {
-      width: 60%;
-    }
+  .imgbanner{
+    width: 540px;
+    height: 748px;
+    border-radius: 5px;
+    top: 60px;
+    right: 220px;
+    position: absolute;
+    box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.10);
   }
 }
 </style>

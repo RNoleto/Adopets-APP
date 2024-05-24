@@ -46,16 +46,19 @@ a {
   // fonts  
   --logo-font-size: 36px;
   --logo-line-height: 48px;
+  
+  --link-font-size: 14px;
+  --link-line-height: 32px;
+
 
   --title-font-size: 64px;
   --title-line-height: 72px;
 
-  --link-font-size: 14px;
-  --link-line-height: 32px;
 
   --subtitle-font-size: 0.9rem;
   
-  --content-font-size: 0.8rem;
+  --body-font-size: 24px;
+  --body-line-height: 36px;
   
   --title-font: 'Poppins', sans-serif;
   --body-font: 'Roboto', sans-serif;
@@ -63,10 +66,13 @@ a {
   // Font composite variable
   --logo-font-composite: 700 var(--logo-font-size)/var(--logo-line-height) var(--title-font);
 
+  --link-font-composite: 500 var(--link-font-size)/var(--link-line-height) var(--title-font);
+
+  --button-font-composite: 600 var(--link-font-size)/var(--body-line-height) var(--title-font);
+  
   --title-font-composite: 600 var(--title-font-size)/var(--title-line-height) var(--title-font);
 
-  --link-font-composite: 500 var(--link-font-size)/var(--link-line-height) var(--title-font);
-  
+  --body-font-composite: 400 var(--body-font-size)/var(--body-line-height) var(--body-font);
 }
 
 /*====  BASE ============================ */
@@ -75,10 +81,23 @@ html {
 }
 
 body {
-  max-width: 1600px;
-  margin: 0px auto;
+  // max-width: 1600px;
+  // margin: 0px auto;
   background-color: var(--c1);
   -webkit-font-smoothing: antialiased;
+}
+
+button{
+  font: var(--button-font-composite);
+  border: none;
+  margin-top: 20px;
+  padding: 16px 32px;
+  border-radius: 5px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: .10);
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, #81CAEE 0%, #00AAFF 100%);
 }
 
 .logo {
@@ -111,6 +130,11 @@ body {
   font: var(--title-font-composite);
 }
 
+.text_body{
+  font: var(--body-font-composite);
+  color: var(--c5);
+}
+
 .title,
 .subtitle{
   -webkit-font-smoothing: auto;
@@ -123,6 +147,14 @@ img {
 
 
 /*====  LAYOUT ============================ */
+.container{
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.content{
+  padding: 60px 220px;
+}
 
 textarea {
   width: 100%;
