@@ -28,7 +28,6 @@
   .imgbanner{
     width: 540px;
     height: 748px;
-    border-radius: 5px;
     top: 60px;
     right: 220px;
     position: absolute;

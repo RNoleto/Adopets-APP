@@ -1,17 +1,19 @@
 <template>
   <Banner />
   <AboutUs />
-  <div class="content">
-  </div>
+  <AdoptionList/>
 </template>
 <script>
 import Banner from "@/components/Banner.vue";
 import AboutUs from "@/components/AboutUs.vue";
+import AdoptionList from "@/components/AdoptionList.vue";
+
 
 export default {
   components: {
     Banner,
     AboutUs,
+    AdoptionList,
   },
 };
 </script>

@@ -33,7 +33,6 @@
             width: 200px;
             height: 200px;
             z-index: 2;
-            border-radius: 5px;
             box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
         }
         .img2{
@@ -42,7 +41,6 @@
             width: 200px;
             height: 300px;
             z-index: 1;
-            border-radius: 5px;
             box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
         }
         .img3{
@@ -50,7 +48,6 @@
             right: 67px;
             width: 200px;
             height: 200px;
-            border-radius: 5px;
             box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
         }
     }

@@ -127,6 +127,7 @@ button{
 }
 
 .title {
+  color: var(--c2);
   font: var(--title-font-composite);
 }
 
@@ -144,6 +145,7 @@ button{
 img {
   width: 100%;
   height: auto;
+  border-radius: 5px;
 }
 
 
