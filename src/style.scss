@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap&family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 
 /*====  RESET ============================ */
@@ -24,16 +24,28 @@ a {
 
 /*====  VARIABLES ============================ */
 :root {
-  // colors
-  --color-1: #218FB3;
-  --color-2: #F5C401;
-  --color-3: #181b25;
-  --color-4: #EEF5EF;
+  // Cores escala cinza
+ --c1: #F7F7F7;
+ --c2: #EDEDED;
+ --c3: #DEDEDE;
+ --c4: #CCCCCC;
+ --c5: #B3B3B3;
+ --c6: #9C9C9C;
+ --c7: #707070;
+ --c8: #595959;
+ --c9: #404040;
+ --c10: #2E2E2E;
+ --c11: #121212;
+ --c12: #000000;
+ --w: #fff;
 
-  //colors test
-  --color-5: #1f212e;
-  --color-6: #252837;
-  --color-7: #FC742A;
+ //Cores principais
+ --p1: #00AAFF;
+ --p2: #0B94E4;
+ --p3: #0063A6;
+ --p4: #003366;
+ --p5: #002233;
+ --p6: #001722;
 
   // fonts
   --title-font-size: 1.375rem;
@@ -57,43 +69,33 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  color: var(--color-5);
-  background-color: var(--color-4);
   -webkit-font-smoothing: antialiased;
 }
 
 main{
-  height: 100vh;
+
 }
 
 section {
-  padding-top: 40px;
+
 }
 
 .title {
-  font: 700 var(--title-font-size) var(--title-font);
-  color: var(--title-color);
-  font-style: bold;
+
   -webkit-font-smoothing: auto;
 }
 
 .subtitle {
-  font: 300 var(--subtitle-font-size) var(--title-font);
-  color: var(--title-color);
+
   -webkit-font-smoothing: auto;
-  font-style: italic;
-  margin-top: 2px;
 }
 
 .date{
-  font: 200 var(--content-font-size-mobile) var(--body-font);
+
 }
 
 .text {
-  font: 200 var(--content-font-size-mobile) var(--body-font);
-  margin-top: 5px;
-  text-align: justify;
+
 }
 
 img {
@@ -102,61 +104,49 @@ img {
 }
 
 h1 {
-  font-weight: 600;
+
 }
 
 p {
-  font-size: var(--content-font-size);
-  font-weight: 100;
+
 }
 
 
 /*====  LAYOUT ============================ */
 .container {
-  margin: auto;
-  max-width: 1200px;
+
 }
 
 .content {
-  margin: 0 auto;
-  padding: 0px 10px;
+
 }
 
 // Cards em Posts
 .card-title {
-  font-size: 18px;
-  font-weight: 600;
+  
 }
 
 .date {
-  font-size: 12px;
+
 }
 
 .inputType {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0px;
+ 
 
   input {
-    padding: 5px;
-    font-size: 12px;
+  
   }
 }
 
 label {
-  font-size: 12px;
+ 
 }
 
 input,
 select,
 textarea,
 option {
-  border-radius: 3px;
   border: none;
-  width: 100%;
-  height: 30px;
-  font-size: 10px;
   outline: none;
 }
 
@@ -171,21 +161,11 @@ option {
 }
 
 button {
-  width: 100%;
-  padding: 5px;
-  border-radius: 3px;
-  background-color: var(--color-1);
-  color: var(--color-4);
   border: none;
-  box-shadow: 1px 1px 1px rgba($color: #000, $alpha: 0.3);
 
   &:hover,
   &:focus {
-    transition: 500ms ease-in-out;
-    border: 1px solid var(--color-1);
-    box-shadow: none;
-    color: var(--color-3);
-    background-color: var(--color-4);
+ 
   }
 }
 
@@ -211,23 +191,4 @@ button {
 .ck.ck-editor__main>.ck-editor__editable {
   min-height: 50vw;
   max-height: 20vw;
-}
-
-/*====  MOBILE ============================ */
-@media (max-width: 768px) {
-  .title {
-    font-size: var(--title-font-size-mobile);
-  }
-
-  .subtitle {
-    font-size: var(--subtitle-font-size-mobile);
-  }
-
-  .text {
-    font-size: var(--content-font-size-mobile);
-  }
-
-  .menu-mobile {
-    font-size: var(--content-font-size-mobile);
-  }
 }
