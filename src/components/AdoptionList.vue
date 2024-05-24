@@ -3,7 +3,7 @@
         <div class="info">
             <p class="title">Adoção.</p>
             <p class="text_body">Aqui você encontra os nossos amiguinhos que estão cheios de amor e a espera de um lar.</p>
-            <button>Veja mais pets <span>&rarr;</span></button>
+            <button>Veja mais pets</button>
         </div>
         <div class="pet_galery">
             <div v-for="animal in animalList" :key="animal.key" class="pet_card">
