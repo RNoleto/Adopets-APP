@@ -1,7 +1,9 @@
 <template>
     <div class="content">
         <div class="images">
-            <img src="../../public/assets/img/petbanner.png" alt="">
+            <img class="img1" src="../../public/assets/img/about1.webp" alt="">
+            <img class="img2" src="../../public/assets/img/about2.webp" alt="">
+            <img class="img3" src="../../public/assets/img/about3.webp" alt="">
         </div>
         <div class="info">
             <p class="title">Sobre nós.</p>
@@ -14,15 +16,53 @@
 .content{
     margin-top: 60px;
     display: flex;
+    // justify-content: space-between;
     gap: 70px;
     align-items: center;
+    justify-content: center;
     .images{
+        position: relative;
         width: 380px;
         height: 500px;
+        img{
+            position: absolute;
+        }
+        .img1{
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            z-index: 2;
+            border-radius: 5px;
+            box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
+        }
+        .img2{
+            top: 40px;
+            right: 0;
+            width: 200px;
+            height: 300px;
+            z-index: 1;
+            border-radius: 5px;
+            box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
+        }
+        .img3{
+            bottom: 0;
+            right: 67px;
+            width: 200px;
+            height: 200px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
+        }
     }
     .info{
         width: 720px;
         height: 320px;
+        .title{
+            color: var(--c11);
+        }
+        .text_body{
+            color: var(--c10);
+        }
     }
 }
 </style>
