@@ -14,12 +14,8 @@ ul {
 
 a {
   text-decoration: none;
-  font: 600 var(--subtitle-font-size) var(--body-font);
-  color: var(--color-4);
-
-  &:hover {
-    color: var(--color-2);
-  }
+  font: var(--link-font-composite);
+  color: var(--c2);
 }
 
 /*====  VARIABLES ============================ */
@@ -37,7 +33,7 @@ a {
  --c10: #2E2E2E;
  --c11: #121212;
  --c12: #000000;
- --w: #fff;
+ --w: #ffffff;
 
  //Cores principais
  --p1: #00AAFF;
@@ -47,20 +43,30 @@ a {
  --p5: #002233;
  --p6: #001722;
 
-  // fonts
-  --title-font-size: 1.375rem;
-  --title-font-size-mobile: 1.25rem;
+  // fonts  
+  --logo-font-size: 36px;
+  --logo-line-height: 48px;
+
+  --title-font-size: 64px;
+  --title-line-height: 72px;
+
+  --link-font-size: 14px;
+  --link-line-height: 32px;
 
   --subtitle-font-size: 0.9rem;
-  --subtitle-font-size-mobile: 0.85rem;
-
+  
   --content-font-size: 0.8rem;
-  --content-font-size-mobile: 0.85rem;
-
+  
   --title-font: 'Poppins', sans-serif;
-  // --subtitle-font: '', sans-serif;
-  --body-font: 'DM Sans', sans-serif;
+  --body-font: 'Roboto', sans-serif;
+  
+  // Font composite variable
+  --logo-font-composite: 700 var(--logo-font-size)/var(--logo-line-height) var(--title-font);
 
+  --title-font-composite: 600 var(--title-font-size)/var(--title-line-height) var(--title-font);
+
+  --link-font-composite: 500 var(--link-font-size)/var(--link-line-height) var(--title-font);
+  
 }
 
 /*====  BASE ============================ */
@@ -69,33 +75,45 @@ html {
 }
 
 body {
+  max-width: 1600px;
+  margin: 0px auto;
+  background-color: var(--c1);
   -webkit-font-smoothing: antialiased;
 }
 
-main{
-
+.logo {
+  font: var(--logo-font-composite);
+  color: var(--c1);
 }
 
-section {
+.link_menu {
+  position: relative;
+  text-decoration: none; // Remove underline padrão
 
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: var(--p1);
+    transition: width 0.3s ease;
+  }
+
+  &:hover:after,
+  &.active:after {
+    width: 100%;
+  }
 }
 
 .title {
+  font: var(--title-font-composite);
+}
 
+.title,
+.subtitle{
   -webkit-font-smoothing: auto;
-}
-
-.subtitle {
-
-  -webkit-font-smoothing: auto;
-}
-
-.date{
-
-}
-
-.text {
-
 }
 
 img {
@@ -103,70 +121,12 @@ img {
   height: auto;
 }
 
-h1 {
-
-}
-
-p {
-
-}
-
 
 /*====  LAYOUT ============================ */
-.container {
-
-}
-
-.content {
-
-}
-
-// Cards em Posts
-.card-title {
-  
-}
-
-.date {
-
-}
-
-.inputType {
- 
-
-  input {
-  
-  }
-}
-
-label {
- 
-}
-
-input,
-select,
-textarea,
-option {
-  border: none;
-  outline: none;
-}
 
 textarea {
   width: 100%;
   min-height: 100px;
-}
-
-li,
-option {
-  text-transform: capitalize;
-}
-
-button {
-  border: none;
-
-  &:hover,
-  &:focus {
- 
-  }
 }
 
 /*====  CKEDITOR ============================ */
