@@ -1,20 +1,24 @@
 <template>
-  <h3 class="title">Nossos Posts</h3>
   <div class="content">
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div v-for="post in posts" :key="post.id" class="swiper-slide">
-          <img :src="post.img" :alt="post.title">
-          <div class="info">
-            <p class="date">{{ post.date }}</p>
-            <div class="title">{{ post.title }}</div>
-          </div>
+    <p class="title">Posts.</p>
+    <p class="text_body">Fique por dentro de tudo quando o assunto é mundo pet.</p>
+    <button>ver mais posts</button>
+    <div class="posts_galery">
+      <div class="featured_post">
+        <img class="featured_img" src="https://images.unsplash.com/photo-1450096315186-13dc369ab43e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGV0JTIwdHJpcHxlbnwwfHwwfHx8MA%3D%3D" alt="imagem destaque">
+        <div class="post_infos">
+          <p class="title_post">Dicas para aproveitar a viagem com seu pet</p>
+          <p class="date_post">22/05/2024</p>
         </div>
+      </div>
+      <div class="other_posts">
+        <p>primeiro</p>
+        <p>segundo</p>
+        <p>terceiro</p>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -41,62 +45,48 @@ export default {
       ]
     }
   },
-  mounted() {
-    import('swiper/swiper-bundle.css').then(() => {
-      import('swiper').then((Swiper) => {
-        new Swiper.default('.swiper-container', {
-          // Configurações do Swiper
-          slidesPerView: 'auto',
-          spaceBetween: 10,
-          // Adicione outras configurações conforme necessário
-        });
-      });
-    });
-  },
 };
 </script>
 
 <style scoped lang="scss">
-.content {
-  justify-content: center;
+.title {
+  color: var(--c11);
+}
 
-  /* Seus estilos SCSS para o componente aqui */
-  .swiper-container {
-    width: 98%;
-    height: 100%;
-    padding: 10px 0px;
+.text_body {
+  color: var(--c9);
+  width: 500px;
+}
 
-    // overflow: hidden;
-
-    .swiper-slide {
-      overflow: hidden;
+.posts_galery{
+  margin-top: 20px;
+  display: flex;
+  gap: 40px;
+  .featured_post{
+    width: 660px;
+    border-radius: 5px;
+    background-color: var(--c2);
+    .featured_img{
       width: 100%;
-      height: 220px;
-      border-radius: 10px;
-      box-shadow: 1px 1px 5px rgba($color: #24252A, $alpha: .3);
-      display: flex;
-      flex-direction: column-reverse;
-
-      img {
-        object-fit: cover;
-        object-position: center;
-        position: absolute;
-        z-index: -1;
-        height: 100%;
-        width: 100%;
-      }
-
-      .info {
-        border-radius: 5px;
-        box-shadow: 0px -2px 10px rgba($color: #24252A, $alpha: .3);
-        text-align: start;
-        align-content: end;
-        padding: 5px 10px;
-        background-color: rgba($color: #EEF5EF, $alpha: .7);
-        backdrop-filter: blur(5px);
-        .title {
-          line-height: 23px;
+    }
+    .post_infos{
+      padding: 10px 10px 40px 16px;
+      .title_post{
+        color: var(--c11);
+        font: var(--post-title-font-composite);
+        &::before{
+          content: "";
+          display: inline-block;
+          margin-right: 2px;
+          width: 4px;
+          height: 22px;
+          background-color: var(--p2);
         }
+      }
+      .date_post{
+        color: var(--c9);
+        margin-top: 10px;
+        font: var(--post-date-font-composite);
       }
     }
   }

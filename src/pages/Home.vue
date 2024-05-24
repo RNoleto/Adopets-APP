@@ -1,12 +1,14 @@
 <template>
-  <Banner />
-  <AboutUs />
-  <AdoptionList/>
+    <Banner />
+    <AboutUs />
+    <AdoptionList/>
+    <PostsList/>
 </template>
 <script>
 import Banner from "@/components/Banner.vue";
 import AboutUs from "@/components/AboutUs.vue";
 import AdoptionList from "@/components/AdoptionList.vue";
+import PostsList from "@/components/PostsList.vue";
 
 
 export default {
@@ -14,6 +16,7 @@ export default {
     Banner,
     AboutUs,
     AdoptionList,
+    PostsList,
   },
 };
 </script>
