@@ -59,6 +59,11 @@ a {
   
   --body-font-size: 24px;
   --body-line-height: 36px;
+
+  --cardtitle-font-size: 24px;
+  --cardtitle-line-height: 30px;
+  --cardtag-font-size: 12px;
+  --cardtag-line-height: 20px;
   
   --title-font: 'Poppins', sans-serif;
   --body-font: 'Roboto', sans-serif;
@@ -73,6 +78,10 @@ a {
   --title-font-composite: 600 var(--title-font-size)/var(--title-line-height) var(--title-font);
 
   --body-font-composite: 400 var(--body-font-size)/var(--body-line-height) var(--body-font);
+
+  // Card PetAdoption
+  --cardtitle-font-composite: 700 var(--cardtitle-font-size)/var(--cardtitle-line-height) var(--body-font);
+  --cardtag-font-composite: 400 var(--cardtag-font-size)/var(--cardtag-line-height) var(--body-font);
 }
 
 /*====  BASE ============================ */
@@ -107,8 +116,7 @@ button{
 
 .link_menu {
   position: relative;
-  text-decoration: none; // Remove underline padrão
-
+  text-decoration: none;
   &:after {
     content: '';
     position: absolute;
@@ -140,6 +148,24 @@ button{
 .title,
 .subtitle{
   -webkit-font-smoothing: auto;
+}
+
+.card_title{
+  margin-top: 10px;
+  font: var(--cardtitle-font-composite);
+  color: var(--c3);
+}
+
+.card_tag{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  text-transform: uppercase;
+  font: var(--cardtag-font-composite);
+  color: var(--c3);
+  &.top{
+    width: 100%;
+  }
 }
 
 img {
