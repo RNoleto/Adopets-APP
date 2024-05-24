@@ -76,10 +76,10 @@ export default{
         margin-top: 20px;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: start;
         gap: 40px;
         .pet_card{
-            max-width:360px;
+            width: 360px;
             .img_animal{
                 object-fit: cover;
                 max-height: 280px;
