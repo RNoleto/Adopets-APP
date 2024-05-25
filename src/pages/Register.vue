@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="content page">
-      <img src="/assets/img/logo.png" alt="logo" class="logo" />
+      <img src="/public/assets/logo_adopets.svg" alt="logo" class="logo" />
       <h2>Cadastro de Usuário</h2>
       <form @submit.prevent="registerUser" method="POST">
         <div class="inputTypes">

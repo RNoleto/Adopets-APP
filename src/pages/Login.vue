@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="content page">
-      <img src="/assets/img/logo.png" alt="logo" class="logo" />
+      <img src="/public/assets/logo_adopets.svg" alt="logo" class="logo" />
       <h2>Login</h2>
       <form @submit.prevent="submit">
         <div>
