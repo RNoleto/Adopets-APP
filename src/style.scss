@@ -89,9 +89,13 @@ a {
   --cardtitle-font-composite: 700 var(--cardtitle-font-size)/var(--cardtitle-line-height) var(--body-font);
   --cardtag-font-composite: 400 var(--cardtag-font-size)/var(--cardtag-line-height) var(--body-font);
 
-  // Posts
+  // Posts Feature
   --post-title-font-composite: 600 var(--post-title-font-size)/var(--post-title-line-height) var(--title-font);
   --post-date-font-composite: 600 var(--post-date-font-size)/var(--post-date-line-height) var(--title-font);
+
+  // Post Other
+  --post-other-title-font-composite: 600 var(--post-date-font-size)/var(--post-date-line-height) var(--title-font);
+  --post-other-date-font-composite: 600 var(--cardtag-font-size)/var(--post-date-line-height) var(--title-font);
 }
 
 /*====  BASE ============================ */

@@ -5,7 +5,9 @@
     <button>ver mais posts</button>
     <div class="posts_galery">
       <div class="featured_post">
-        <img class="featured_img" src="https://images.unsplash.com/photo-1450096315186-13dc369ab43e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGV0JTIwdHJpcHxlbnwwfHwwfHx8MA%3D%3D" alt="imagem destaque">
+        <img class="featured_img"
+          src="https://images.unsplash.com/photo-1450096315186-13dc369ab43e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGV0JTIwdHJpcHxlbnwwfHwwfHx8MA%3D%3D"
+          alt="imagem destaque">
         <div class="post_infos">
           <p class="title_post">Dicas para aproveitar a viagem com seu pet</p>
           <p class="date_post">22/05/2024</p>
@@ -13,18 +15,30 @@
       </div>
       <div class="other_posts">
         <div class="card_post">
-          <img src="https://images.unsplash.com/photo-1577099595920-bf19294bc408?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aGFtc3RlcnxlbnwwfHwwfHx8MA%3D%3D" alt="">
+          <img
+            src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGV0c3xlbnwwfHwwfHx8MA%3D%3D"
+            alt="roedores">
           <div class="post_infos">
-              <p class="title_post">primeiro</p>
-              <p class="date_post">01/03/2024</p>
+            <p class="title_post">Cuidados com alimentação.</p>
+            <p class="date_post">01/03/2024</p>
           </div>
         </div>
         <div class="card_post">
-          <p>segundo</p>
+          <img
+            src="https://images.unsplash.com/photo-1525253013412-55c1a69a5738?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZmlsaG90ZXN8ZW58MHx8MHx8fDA%3D"
+            alt="filhotes">
+          <div class="post_infos">
+            <p class="title_post">Primeiros cuidados com filhotes.</p>
+            <p class="date_post">23/02/2024</p>
+          </div>
         </div>
         <div class="card_post">
-          <div class="content">
-            <p>terceiro</p>
+          <img
+            src="https://images.unsplash.com/photo-1590852679106-21db332081e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2F0JTIwc2xlZXB8ZW58MHx8MHx8fDA%3D"
+            alt="cat">
+          <div class="post_infos">
+            <p class="title_post">Conheça seu gato.</p>
+            <p class="date_post">23/02/2024</p>
           </div>
         </div>
       </div>
@@ -70,24 +84,29 @@ export default {
   width: 500px;
 }
 
-.posts_galery{
+.posts_galery {
   margin-top: 20px;
   display: flex;
   gap: 40px;
-  .featured_post{
+
+  .featured_post {
     width: 660px;
     border-radius: 5px;
     background-color: var(--c2);
     box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.10);
-    .featured_img{
+
+    .featured_img {
       width: 100%;
     }
-    .post_infos{
+
+    .post_infos {
       padding: 10px 10px 40px 16px;
-      .title_post{
+
+      .title_post {
         color: var(--c11);
         font: var(--post-title-font-composite);
-        &::before{
+
+        &::before {
           content: "";
           display: inline-block;
           margin-right: 2px;
@@ -96,35 +115,61 @@ export default {
           background-color: var(--p2);
         }
       }
-      .date_post{
+
+      .date_post {
         color: var(--c9);
         margin-top: 10px;
         font: var(--post-date-font-composite);
       }
     }
   }
-  .other_posts{
+
+  .other_posts {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 30px;
-    .card_post{
+
+    .card_post {
       width: 100%;
       display: flex;
       align-items: center;
-      img{
+
+      img {
         width: 200px;
         height: 118px;
         border-radius: 5px;
         z-index: 1;
       }
-      .post_infos{
+
+      .post_infos {
         background-color: var(--c2);
         border-radius: 5px;
         height: 158px;
         width: 100%;
-        .title_post{
+
+
+        .title_post {
+          // margin: 30px 0px 0px 18px;
           color: var(--c11);
+          font-size: 18px !important;
+          font: var(--post-other-title-font-composite);
+
+          &::before {
+            content: "";
+            display: inline-block;
+            margin-right: 2px;
+            width: 4px;
+            height: 22px;
+            background-color: var(--p2);
+          }
+        }
+
+        .date_post {
+          font-size: 12px !important;
+          margin-left: 18px;
+          color: var(--c9);
+          font: var(--post-other-date-font-composite);
         }
       }
     }
