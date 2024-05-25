@@ -11,6 +11,7 @@
         <div class="post_infos">
           <p class="title_post">Dicas para aproveitar a viagem com seu pet</p>
           <p class="date_post">22/05/2024</p>
+          <img class="dec" src="../../public/assets/icons/dec.svg" alt="dec">
         </div>
       </div>
       <div class="other_posts">
@@ -21,6 +22,7 @@
           <div class="post_infos">
             <p class="title_post">Cuidados com alimentação.</p>
             <p class="date_post">01/03/2024</p>
+            <img class="dec" src="../../public/assets/icons/dec.svg" alt="dec">
           </div>
         </div>
         <div class="card_post">
@@ -30,6 +32,7 @@
           <div class="post_infos">
             <p class="title_post">Primeiros cuidados com filhotes.</p>
             <p class="date_post">23/02/2024</p>
+            <img class="dec" src="../../public/assets/icons/dec.svg" alt="dec">
           </div>
         </div>
         <div class="card_post">
@@ -39,6 +42,7 @@
           <div class="post_infos">
             <p class="title_post">Conheça seu gato.</p>
             <p class="date_post">23/02/2024</p>
+            <img class="dec" src="../../public/assets/icons/dec.svg" alt="dec">
           </div>
         </div>
       </div>
@@ -100,6 +104,7 @@ export default {
     }
 
     .post_infos {
+      position: relative;
       padding: 10px 10px 40px 16px;
 
       .title_post {
@@ -120,6 +125,13 @@ export default {
         color: var(--c9);
         margin-top: 10px;
         font: var(--post-date-font-composite);
+      }
+
+      .dec {
+        position: absolute;
+        width: 54px;
+        right: 10px;
+        bottom: 10px;
       }
     }
   }
@@ -147,10 +159,11 @@ export default {
         border-radius: 5px;
         height: 158px;
         width: 100%;
-
+        position: relative;
 
         .title_post {
-          // margin: 30px 0px 0px 18px;
+          display: flex;
+          margin: 30px 0px 0px 18px;
           color: var(--c11);
           font-size: 18px !important;
           font: var(--post-other-title-font-composite);
@@ -158,18 +171,26 @@ export default {
           &::before {
             content: "";
             display: inline-block;
-            margin-right: 2px;
+            margin-right: 4px;
             width: 4px;
-            height: 22px;
+            height: 18px;
+            transform: translateY(2px);
             background-color: var(--p2);
           }
         }
 
         .date_post {
           font-size: 12px !important;
-          margin-left: 18px;
+          margin-left: 26px;
           color: var(--c9);
           font: var(--post-other-date-font-composite);
+        }
+
+        .dec {
+          position: absolute;
+          width: 50px;
+          right: 10px;
+          bottom: -20px;
         }
       }
     }
