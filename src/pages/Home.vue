@@ -1,8 +1,10 @@
 <template>
+  <div>
     <Banner />
     <AboutUs />
-    <AdoptionList/>
-    <PostsList/>
+    <AdoptionList />
+    <PostsList />
+  </div>
 </template>
 <script>
 import Banner from "@/components/Banner.vue";
@@ -20,6 +22,4 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -7,27 +7,33 @@
         </div>
         <div class="info">
             <p class="title">Sobre nós.</p>
-            <p class="text_body">Somos mais do que apenas uma plataforma de adoção de animais; somos uma comunidade dedicada ao bem-estar dos nossos amigos peludos e ao incentivo da adoção responsável de pets. Acreditamos que cada patinha merece um lar amoroso e seguro, e estamos empenhados em fazer a diferença na vida desses animais e no mundo que compartilhamos.</p>
+            <p class="text_body">Somos mais do que apenas uma plataforma de adoção de animais; somos uma comunidade
+                dedicada ao bem-estar dos nossos amigos peludos e ao incentivo da adoção responsável de pets.
+                Acreditamos que cada patinha merece um lar amoroso e seguro, e estamos empenhados em fazer a diferença
+                na vida desses animais e no mundo que compartilhamos.</p>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.content{
+.content {
     margin-top: 60px;
     display: flex;
     // justify-content: space-between;
     gap: 70px;
     align-items: center;
     justify-content: center;
-    .images{
+
+    .images {
         position: relative;
         width: 380px;
         height: 500px;
-        img{
+
+        img {
             position: absolute;
         }
-        .img1{
+
+        .img1 {
             top: 0;
             left: 0;
             width: 200px;
@@ -35,7 +41,8 @@
             z-index: 2;
             box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
         }
-        .img2{
+
+        .img2 {
             top: 40px;
             right: 0;
             width: 200px;
@@ -43,7 +50,8 @@
             z-index: 1;
             box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
         }
-        .img3{
+
+        .img3 {
             bottom: 0;
             right: 67px;
             width: 200px;
@@ -51,13 +59,16 @@
             box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.1);
         }
     }
-    .info{
+
+    .info {
         width: 720px;
         height: 320px;
-        .title{
+
+        .title {
             color: var(--c11);
         }
-        .text_body{
+
+        .text_body {
             color: var(--c10);
         }
     }

@@ -21,39 +21,39 @@ a {
 /*====  VARIABLES ============================ */
 :root {
   // Cores escala cinza
- --c1: #F7F7F7;
- --c2: #EDEDED;
- --c3: #DEDEDE;
- --c4: #CCCCCC;
- --c5: #B3B3B3;
- --c6: #9C9C9C;
- --c7: #707070;
- --c8: #595959;
- --c9: #404040;
- --c10: #2E2E2E;
- --c11: #121212;
- --c12: #000000;
- --w: #ffffff;
+  --c1: #F7F7F7;
+  --c2: #EDEDED;
+  --c3: #DEDEDE;
+  --c4: #CCCCCC;
+  --c5: #B3B3B3;
+  --c6: #9C9C9C;
+  --c7: #707070;
+  --c8: #595959;
+  --c9: #404040;
+  --c10: #2E2E2E;
+  --c11: #121212;
+  --c12: #000000;
+  --w: #ffffff;
 
- //Cores principais
- --p1: #00AAFF;
- --p2: #0B94E4;
- --p3: #0063A6;
- --p4: #003366;
- --p5: #002233;
- --p6: #001722;
+  //Cores principais
+  --p1: #00AAFF;
+  --p2: #0B94E4;
+  --p3: #0063A6;
+  --p4: #003366;
+  --p5: #002233;
+  --p6: #001722;
 
   // fonts  
   --logo-font-size: 36px;
   --logo-line-height: 48px;
-  
+
   --link-font-size: 14px;
   --link-line-height: 32px;
 
 
   --title-font-size: 64px;
   --title-line-height: 72px;
-  
+
   --body-font-size: 24px;
   --body-line-height: 36px;
 
@@ -66,21 +66,21 @@ a {
   //Card dos posts
   --post-title-font-size: 32px;
   --post-title-line-height: 40px;
-  
+
   --post-date-font-size: 18px;
   --post-date-line-height: 24px;
-  
+
   //Fonts gerais
   --title-font: 'Poppins', sans-serif;
   --body-font: 'Roboto', sans-serif;
-  
+
   // Font composite variable
   --logo-font-composite: 700 var(--logo-font-size)/var(--logo-line-height) var(--title-font);
 
   --link-font-composite: 500 var(--link-font-size)/var(--link-line-height) var(--title-font);
 
   --button-font-composite: 600 var(--link-font-size)/var(--body-line-height) var(--title-font);
-  
+
   --title-font-composite: 600 var(--title-font-size)/var(--title-line-height) var(--title-font);
 
   --body-font-composite: 400 var(--body-font-size)/var(--body-line-height) var(--body-font);
@@ -90,7 +90,7 @@ a {
   --cardtag-font-composite: 400 var(--cardtag-font-size)/var(--cardtag-line-height) var(--body-font);
 
   // Posts
-  --post-title-font-composite: 600 var(--post-title-font-size)/var(--post-title-line-height)  var(--title-font);
+  --post-title-font-composite: 600 var(--post-title-font-size)/var(--post-title-line-height) var(--title-font);
   --post-date-font-composite: 600 var(--post-date-font-size)/var(--post-date-line-height) var(--title-font);
 }
 
@@ -100,13 +100,13 @@ html {
 }
 
 body {
-  max-width: 1600px;
-  margin: 0px auto;
+  // max-width: 1600px;
+  // margin: 0px auto !important;
   background-color: var(--c1);
   -webkit-font-smoothing: antialiased;
 }
 
-button{
+button {
   font: var(--button-font-composite);
   border: none;
   margin-top: 20px;
@@ -117,7 +117,9 @@ button{
   box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: .10);
   text-transform: uppercase;
   background: linear-gradient(to bottom, #81CAEE 0%, #00AAFF 100%);
-  &:active{
+  cursor: pointer;
+
+  &:active {
     color: var(--w);
     background: var(--p1);
   }
@@ -131,6 +133,7 @@ button{
 .link_menu {
   position: relative;
   text-decoration: none;
+
   &:after {
     content: '';
     position: absolute;
@@ -153,31 +156,32 @@ button{
   font: var(--title-font-composite);
 }
 
-.text_body{
+.text_body {
   margin-top: 36px;
   font: var(--body-font-composite);
   color: var(--c5);
 }
 
 .title,
-.subtitle{
+.subtitle {
   -webkit-font-smoothing: auto;
 }
 
-.card_title{
+.card_title {
   margin-top: 10px;
   font: var(--cardtitle-font-composite);
   color: var(--c3);
 }
 
-.card_tag{
+.card_tag {
   display: flex;
   gap: 5px;
   align-items: center;
   text-transform: uppercase;
   font: var(--cardtag-font-composite);
   color: var(--c3);
-  &.top{
+
+  &.top {
     width: 100%;
   }
 }
@@ -190,13 +194,14 @@ img {
 
 
 /*====  LAYOUT ============================ */
-.container{
-  max-width: 1600px;
+.container {
   margin: 0 auto;
+  background-color: var(--c1);
 }
 
-.content{
-  background-color: var(--c1);
+.content {
+  max-width: 1600px;
+  margin: 0 auto;
   padding: 60px 220px;
 }
 

@@ -1,14 +1,14 @@
 <template>
   <header>
-    <nav>
-        <div>
-          <router-link to="/" @click="toggleNav" class="logo">Adopets</router-link>
+    <nav class="content">
+      <div>
+        <router-link to="/" @click="toggleNav" class="logo">Adopets</router-link>
+      </div>
+      <div class="menu">
+        <div v-for="page in pages" :key="page.id">
+          <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
-        <div class="menu">
-          <div v-for="page in pages" :key="page.id">
-            <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
-          </div>
-        </div>
+      </div>
     </nav>
   </header>
 </template>
@@ -68,19 +68,20 @@ export default {
 
 
 <style lang="scss" scoped>
-header{
+header {
   background-color: var(--p6);
-  nav{
+
+  nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 34px 220px;
-    .menu{
+
+    .menu {
       display: flex;
       gap: 40px;
       color: var(--c2);
     }
   }
 }
-
 </style>

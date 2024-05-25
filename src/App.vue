@@ -1,11 +1,11 @@
 <template>
-  <Navbar v-if="!$route.meta.hideNavBar"/>
+  <Navbar v-if="!$route.meta.hideNavBar" />
   <div>
-  <main id="app">
-    <router-view></router-view>
-  </main>
-</div>
-<Footer v-if="!$route.meta.hideFooter"/>
+    <main id="app" class="container">
+      <router-view></router-view>
+    </main>
+  </div>
+  <Footer v-if="!$route.meta.hideFooter" />
 </template>
 <script>
 import Navbar from "./components/Navbar.vue";
@@ -18,7 +18,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#app{
+#app {
   overflow-x: hidden;
   // height: 100vh;
 }
