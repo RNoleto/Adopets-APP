@@ -161,6 +161,17 @@ export default {
         width: 100%;
         position: relative;
 
+        &::before {
+          position: absolute;
+          content: "";
+          display: inline-block;
+          left: -99px;
+          width: 100px;
+          height: 158px;
+          background-color: var(--c2);
+          border-radius: 5px 0px 0px 5px;
+        }
+
         .title_post {
           display: flex;
           margin: 30px 0px 0px 18px;
