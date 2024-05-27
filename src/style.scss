@@ -96,6 +96,11 @@ a {
   // Post Other
   --post-other-title-font-composite: 600 var(--post-date-font-size)/var(--post-date-line-height) var(--title-font);
   --post-other-date-font-composite: 600 var(--cardtag-font-size)/var(--post-date-line-height) var(--title-font);
+
+  // Footer Text
+  --footer-topic-text-composite: 400 var(--body-font-size)/var(--link-line-height) var(--body-font);
+
+  --footer-links-composite: 400 var(--post-date-font-size)/var(--body-line-height) var(--body-font);
 }
 
 /*====  BASE ============================ */
@@ -111,6 +116,7 @@ body {
 }
 
 button {
+  color: var(--p5);
   font: var(--button-font-composite);
   border: none;
   margin-top: 20px;
@@ -147,6 +153,11 @@ button {
     height: 2px;
     background-color: var(--p1);
     transition: width 0.3s ease;
+  }
+
+  &:hover {
+    transition: color 0.3s ease;
+    color: var(--p1);
   }
 
   &:hover:after,
