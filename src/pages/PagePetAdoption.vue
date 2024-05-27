@@ -37,6 +37,7 @@
                 <div class="info">
                     <p class="name">Malhado</p>
                     <div class="detail">
+                        <img src="../../public/assets/icons/male.svg" alt="icon" class="icon">
                         <p class="gender">Macho</p>
                         <p class="localization">Centro, Itajaí - SC</p>
                     </div>
@@ -45,6 +46,27 @@
         </div>
     </div>
 </template>
+
+<script>
+import femaleIcon from '../../public/assets/icons/female.svg';
+import maleIcon from '../../public/assets/icons/male.svg';
+
+export default{
+    data(){
+    },
+    methods: {
+        getGenderIcon(sexo) {
+            if (sexo.toLowerCase() === "femea") {
+                return femaleIcon;
+            } else if (sexo.toLowerCase() === "macho") {
+                return maleIcon;
+            }
+            return '';
+        }
+    }
+}
+
+</script>
 
 <style lang="scss" scoped>
 .content {
@@ -137,6 +159,11 @@
                 border-radius: 5px;
                 background-color: var(--p6);
                 color: var(--c1);
+                .detail{
+                    display: flex;
+                    margin-top: 10px;
+                    justify-content: space-between;
+                }
             }
         }
     }
