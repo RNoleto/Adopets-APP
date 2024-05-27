@@ -25,10 +25,12 @@ export default {
       isHandleShadow: false,
       pages: [
         { id: 1, url: "/about", name: "Quem somos" },
-        { id: 2, url: "/posts", name: "Todos os Posts" },
-        { id: 3, url: "/breedsgalery", name: "Galeria de Raças" },
-        { id: 4, url: "/userpage", name: "Pagina do usuário" },
-        { id: 5, url: "/Dashboard", name: "Dashboard" }
+        {id: 2, url: "/pageadoption", name: "Adoção"},
+        { id: 3, url: "/posts", name: "Posts" },
+        { id: 4, url:"#", name: "Achados e perdidos"},
+        // { id: 4, url: "/breedsgalery", name: "Galeria de Raças" },
+        // { id: 5, url: "/userpage", name: "Pagina do usuário" },
+        // { id: 6, url: "/Dashboard", name: "Dashboard" },
       ],
       tokenExists: false
     };
