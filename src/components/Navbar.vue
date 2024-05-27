@@ -48,7 +48,7 @@ export default {
     },
     toggleBodyScroll() {
       if (this.isNavOpen) {
-        document.body.style.overflow = "hidden";
+        // document.body.style.overflow = "hidden";
         document.body.addEventListener("touchmove", this.preventScroll, {
           passive: false
         });
