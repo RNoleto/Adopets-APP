@@ -38,14 +38,11 @@
 
     .imgbanner {
       width: 540px;
-      height: 748px;
       top: 60px;
       right: 220px;
       position: absolute;
       box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.10);
     }
-
-
   }
 }
 </style>
