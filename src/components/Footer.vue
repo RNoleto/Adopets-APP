@@ -4,7 +4,7 @@
       <div class="content">
         <div class="column">
           <router-link to="/" class="logo">Adopets</router-link>
-          <p class="copy">Adopets © Alguns direitos reservados.</p>
+          <p class="copy">Adopets© Alguns direitos reservados.</p>
         </div>
         <div class="column">
           <p class="title">Contato</p>
@@ -16,7 +16,7 @@
             <router-link class="link" to="/">Home</router-link>
             <router-link class="link" to="/about">Quem Somos</router-link>
             <router-link class="link" to="/posts">Posts</router-link>
-            <!-- <router-link class="link" to="#">Achados e Perdidos</router-link> -->
+            <router-link class="link" to="#">Achados e Perdidos</router-link>
           </div>
         </div>
       </div>
@@ -88,6 +88,7 @@ export default {
       }
 
       .copy {
+        font: var(--footer-links-composite);
         margin-top: 20px;
         color: var(--c4);
       }
