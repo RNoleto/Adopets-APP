@@ -36,8 +36,10 @@
                 <img class="img_pet" src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZG9nfGVufDB8fDB8fHww" alt="pet">
                 <div class="info">
                     <p class="name">Malhado</p>
-                    <p class="gender">Macho</p>
-                    <p class="localization">Centro, Itajaí - SC</p>
+                    <div class="detail">
+                        <p class="gender">Macho</p>
+                        <p class="localization">Centro, Itajaí - SC</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,16 +121,17 @@
         flex-wrap: wrap;
         justify-content: start;
         .card{
-            width: 360px;
-            height: 300px;
             position: relative;
             .img_pet{
+                width: 360px;
+                height: 300px;
                 object-fit: cover;
+                box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.1);
             }
             .info{
                 position: absolute;
                 left: 10px;
-                top: 160px;
+                top: 218px;
                 width: 340px;
                 padding: 10px;
                 border-radius: 5px;
