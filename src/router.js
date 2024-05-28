@@ -16,6 +16,7 @@ import UserPage from './pages/UserPage.vue';
 import PetPage from './pages/PetPage.vue';
 import PetAdoption from './pages/PetAdoption.vue';
 import Post from './pages/Post.vue';
+import PetLost from  './pages/PetLost.vue';
 
 import Dashboard from './pages/master/Dashboard.vue';
 
@@ -61,6 +62,10 @@ const routes = [
   {
     path: '/petadoption',
     component: PetAdoption,
+  },
+  {
+    path: '/petlost',
+    component: PetLost,
   },
   {
     path: '/breedsgalery',
