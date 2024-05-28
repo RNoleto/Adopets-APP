@@ -1,21 +1,18 @@
 <template>
-    <div class="container">
-        <div class="content">
-            <h1 class="title">Todos os Posts</h1>
-            <p class="subtitle">Fique por dentro de todas as noticias do mundo animal!</p>
-            <!-- Organização de todos os posts e paginate -->
-            <div class="posts">
-                <div v-for="post in posts" :key="post.id" class="card">
-                    <img :src="post.img" alt="imagem">
-                    <div class="description">
-                        <p class="date">{{ post.date }}</p>
-                        <p class="title">{{ post.title }}</p>
-                        <p class="text">{{ post.subtitle }}</p>
-                    </div>
+    <section class="content">
+        <p class="title">Posts.</p>
+        <p class="text_body">Fique por dentro de tudo quando o assunto é mundo pet.</p>
+        <div class="post_galery">
+            <div class="card_post" v-for="post in posts" :key="post.id">
+                <img class="img_post" :src="post.img" :alt="post.title">
+                <div class="card_infos">
+                    <p class="card_title">{{ post.title }}</p>
+                    <p class="card_date">{{ post.date }}</p>
+                    <img class="dec" src="../../public/assets/icons/dec_black.svg" alt="dec">
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -25,24 +22,21 @@ export default {
             posts: [
                 {
                     id: 1,
-                    img: 'https://images.unsplash.com/photo-1623387641168-d9803ddd3f35?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGV0c3xlbnwwfHwwfHx8MA%3D%3D',
-                    title: 'Como escolher o pet ideal para sua família',
-                    date: "05/05/2024",
-                    subtitle: 'Dicas para encontrar o companheiro perfeito'
+                    img: 'https://images.unsplash.com/photo-1450096315186-13dc369ab43e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    title: 'Dicas para aproveitar a viagem com seu pet.',
+                    date: "05/05/2024"
                 },
                 {
                     id: 2,
                     img: 'https://images.unsplash.com/photo-1601758177266-bc599de87707?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHBldHN8ZW58MHx8MHx8fDA%3D',
                     title: 'Por que adotar um animal de estimação',
-                    date: "02/05/2024",
-                    subtitle: 'Razões para escolher a adoção'
+                    date: "02/05/2024"
                 },
                 {
                     id: 3,
-                    img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBldHN8ZW58MHx8MHx8fDA%3D',
-                    title: '10 dicas para cuidar do seu gato',
-                    date: "20/04/2024",
-                    subtitle: 'Como proporcionar uma vida saudável ao seu felino'
+                    img: 'https://images.unsplash.com/photo-1525253013412-55c1a69a5738?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBldCUyMHB1cHB5c3xlbnwwfHwwfHx8MA%3D%3D',
+                    title: 'Primeiros cuidados com filhotes.',
+                    date: "20/04/2024"
                 }
             ]
         }
@@ -51,56 +45,51 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container{
-    .content {
-        .posts{
-            width: 100%;
+.post_galery{
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    .card_post{
+        width: 560px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--p5);
+        border-radius: 5px;
+        .img_post{
+            object-fit: cover;
+        }
+        .card_infos{
+            padding: 10px 16px;
             display: flex;
             flex-wrap: wrap;
-            // gap: .5rem;
-            margin: 10px 0px;
-            .card {
+            justify-content: space-between;
+            .card_title{
+                font: var(--post-title-font-composite);
+                color: var(--c2);
+                position: relative;
                 width: 100%;
-                display: flex;
-                padding: 10px 5px;
-                gap: 10px;
-                align-items: top;
-                border-bottom: 1px solid hsl(0, 0%, 50%);
-                transform: all;
-                &:hover{
-                    transition: .5s ease-in-out;
-                    border-radius: 10px;
-                    background-color:var(--color-1);
-                    box-shadow: 1px 1px 1px rgba($color: #000000, $alpha: .3);
-                    .description{
-                        .title,
-                        .text,
-                        .date{
-                            color: var(--color-4);
-                        }
-                    }
-                }
-                
-                img{
-                    width: 120px;
-                    height: 80px;
-                    border-radius: 5px;
-                    object-fit: cover;
-                    object-position: center;
-                }
-                .description{
-                    .title{
-                        font-weight: 500;
-                        font-size: 14px;
-                        line-height: 15px;
-                    }
-                    .text{
-                        line-height: 13px;
-                        text-align: start;
-                    }
+                &::before{
+                    position: absolute;
+                    content: ' ';
+                    width: 4px;
+                    height: 24px;
+                    top: 8px;
+                    left: -8px;
+                    background-color: var(--p2);
                 }
             }
+            .card_date{
+                margin-top: 10px;
+                color: var(--c4);
+                font: var(--post-date-font-composite);
+            }
+            .dec{
+                width: 50px;
+            }
         }
+
     }
 }
+
 </style>
