@@ -18,6 +18,17 @@
       </div>
       <div class="text_pet">
         <p class="name">Malhado</p>
+        <div class="details">
+          <p>Macho</p>
+          <p>5 Anos</p>
+          <p>Centro, Itajaí - SC</p>
+        </div>
+        <div class="caracteristics">
+          <p>Brincalhão</p>
+          <p>Sociável</p>
+          <p>Pequeno</p>
+          <p>4 Kg</p>
+        </div>
         <p class="text_body">
           Lorem ipsum dolor sit amet consectetur. Fringilla nunc semper neque duis. Porta donec a tristique libero
           ornare sed risus. Ultricies quis sed donec nunc ultricies nam sed. Ipsum vel nullam pellentesque fermentum
@@ -98,6 +109,18 @@
           left: -10px;
           background-color: var(--p3);
         }
+      }
+
+      .details {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .caracteristics {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
       }
     }
   }
