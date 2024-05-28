@@ -6,18 +6,17 @@
       <button>Ver mais posts</button>
       <div class="pets_galery">
         <div class="card" v-for="animal in animalList" :key="animal.key">
-          <img
-            class="pet_img"
-            :src="animal.img"
-            alt="pet perdido">
-            <div class="card_infos">
-              <p class="name">{{ animal.name }}</p>
-              <div class="details">
-                <span class="info"><img :src="getGenderIcon(animal.sexo)" class="icon" alt="icon">{{ animal.sexo }}</span>
-                <span class="info">{{ animal.idade }}<img src="../../public/assets/icons/event_available.svg" class="icon" alt="icon"></span>
-                <span class="info"><img src="../../public/assets/icons/location.svg" class="icon" alt="icon">{{ animal.localizacao }}</span>
-              </div>
+          <img class="pet_img" :src="animal.img" alt="pet perdido">
+          <div class="card_infos">
+            <p class="name">{{ animal.name }}</p>
+            <div class="details">
+              <span class="info"><img :src="getGenderIcon(animal.sexo)" class="icon" alt="icon">{{ animal.sexo }}</span>
+              <span class="info">{{ animal.idade }}<img src="../../public/assets/icons/event_available.svg" class="icon"
+                  alt="icon"></span>
+              <span class="info"><img src="../../public/assets/icons/location.svg" class="icon" alt="icon">{{
+                animal.localizacao }}</span>
             </div>
+          </div>
         </div>
       </div>
     </div>
@@ -28,10 +27,10 @@
 import femaleIcon from '../../public/assets/icons/female.svg';
 import maleIcon from '../../public/assets/icons/male.svg';
 
-export default{
-  data(){
-    return{
-      animalList:[
+export default {
+  data() {
+    return {
+      animalList: [
         {
           id: 1,
           img: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhZ2xlfGVufDB8fDB8fHww",
@@ -59,9 +58,9 @@ export default{
       ]
     }
   },
-  methods:{
-    getGenderIcon(sexo){
-      if(sexo.toLowerCase() === "femea"){
+  methods: {
+    getGenderIcon(sexo) {
+      if (sexo.toLowerCase() === "femea") {
         return femaleIcon;
       } else {
         return maleIcon;
@@ -86,48 +85,58 @@ export default{
       flex-wrap: wrap;
       gap: 40px;
       margin-top: 20px;
-      .card{
+
+      .card {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 360px;
-        .pet_img{
+
+        .pet_img {
           width: 320px;
           height: 300px;
           object-fit: cover;
           transform: translateY(20px);
         }
-        &_infos{
+
+        &_infos {
           z-index: 1;
           width: 360px;
           padding: 20px;
           border-radius: 5px;
           background-color: var(--p6);
-          .name{
+
+          .name {
+            width: max-content;
             color: var(--c1);
             font: var(--cardtitle-font-composite);
           }
-          .details{
+
+          .details {
             margin-top: 10px;
             color: var(--c5);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            .info{
+
+            .info {
               width: 50%;
               font: var(--cardtag-font-composite);
               text-transform: uppercase;
               display: flex;
               gap: 5px;
               padding: 2px 0px;
-              .icon{
+
+              .icon {
                 width: 20px;
               }
             }
-            .info:nth-child(2){
+
+            .info:nth-child(2) {
               flex-direction: row-reverse;
             }
-            .info:nth-child(3){
+
+            .info:nth-child(3) {
               margin-top: 10px;
             }
           }
