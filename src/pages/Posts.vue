@@ -45,51 +45,67 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.post_galery{
-    margin-top: 32px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    .card_post{
-        width: 560px;
+.content {
+    .title {
+        color: var(--c11);
+    }
+
+    .text_body {
+        color: var(--c9);
+    }
+
+    .post_galery {
+        margin-top: 32px;
         display: flex;
-        flex-direction: column;
-        background-color: var(--p5);
-        border-radius: 5px;
-        .img_post{
-            object-fit: cover;
-        }
-        .card_infos{
-            padding: 10px 16px;
+        flex-wrap: wrap;
+        gap: 40px;
+
+        .card_post {
+            width: 560px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            .card_title{
-                font: var(--post-title-font-composite);
-                color: var(--c2);
-                position: relative;
-                width: 100%;
-                &::before{
-                    position: absolute;
-                    content: ' ';
-                    width: 4px;
-                    height: 24px;
-                    top: 8px;
-                    left: -8px;
-                    background-color: var(--p2);
+            flex-direction: column;
+            background-color: var(--p5);
+            border-radius: 5px;
+
+            .img_post {
+                object-fit: cover;
+            }
+
+            .card_infos {
+                padding: 10px 16px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+
+                .card_title {
+                    font: var(--post-title-font-composite);
+                    color: var(--c2);
+                    position: relative;
+                    width: 100%;
+
+                    &::before {
+                        position: absolute;
+                        content: ' ';
+                        width: 4px;
+                        height: 24px;
+                        top: 8px;
+                        left: -8px;
+                        background-color: var(--p2);
+                    }
+                }
+
+                .card_date {
+                    margin-top: 10px;
+                    color: var(--c4);
+                    font: var(--post-date-font-composite);
+                }
+
+                .dec {
+                    width: 50px;
                 }
             }
-            .card_date{
-                margin-top: 10px;
-                color: var(--c4);
-                font: var(--post-date-font-composite);
-            }
-            .dec{
-                width: 50px;
-            }
-        }
 
+        }
     }
 }
-
 </style>
