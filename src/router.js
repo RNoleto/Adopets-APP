@@ -10,6 +10,7 @@ import Login from './pages/Login.vue';
 import Register from './pages/Register.vue';
 import BreedsGalery from './pages/BreedsGalery.vue';
 import PagePetAdoption from './pages/PagePetAdoption.vue';
+import PetAdoption from './pages/PetAdoption.vue';
 
 // Páginas individuais
 import UserPage from './pages/UserPage.vue';
@@ -36,7 +37,7 @@ const routes = [
     component: UserPage,
   },
   {
-    name:'PetPage',
+    name: 'PetPage',
     path: '/petpage/:id',
     component: PetPage,
   },
@@ -51,6 +52,10 @@ const routes = [
   {
     path: '/pageadoption',
     component: PagePetAdoption,
+  },
+  {
+    path: '/petadoption',
+    component: PetAdoption,
   },
   {
     path: '/breedsgalery',
