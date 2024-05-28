@@ -9,7 +9,7 @@ import Posts from './pages/Posts.vue';
 import Login from './pages/Login.vue';
 import Register from './pages/Register.vue';
 import BreedsGalery from './pages/BreedsGalery.vue';
-import PagePetAdoption from './pages/PagePetAdoption.vue';
+import Adoptions from './pages/Adoptions.vue';
 import PetAdoption from './pages/PetAdoption.vue';
 
 // Páginas individuais
@@ -50,8 +50,8 @@ const routes = [
     component: Posts,
   },
   {
-    path: '/pageadoption',
-    component: PagePetAdoption,
+    path: '/adoptions',
+    component: Adoptions,
   },
   {
     path: '/petadoption',

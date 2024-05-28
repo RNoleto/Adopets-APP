@@ -25,7 +25,7 @@ export default {
       isHandleShadow: false,
       pages: [
         { id: 1, url: "/about", name: "Quem somos" },
-        {id: 2, url: "/pageadoption", name: "Adoção"},
+        {id: 2, url: "/adoptions", name: "Adoção"},
         { id: 3, url: "/posts", name: "Posts" },
         { id: 4, url:"#", name: "Achados e perdidos"},
         // { id: 4, url: "/breedsgalery", name: "Galeria de Raças" },
