@@ -54,6 +54,9 @@ a {
   --title-font-size: 64px;
   --title-line-height: 72px;
 
+  --subtitle-font-size: 24px;
+  --subtitle-line-height: 36px;
+
   --body-font-size: 24px;
   --body-line-height: 36px;
 
@@ -82,6 +85,8 @@ a {
   --button-font-composite: 600 var(--link-font-size)/var(--body-line-height) var(--title-font);
 
   --title-font-composite: 600 var(--title-font-size)/var(--title-line-height) var(--title-font);
+
+  --subtitle-font-composite: 400 var(--subtitle-font-size)/var(--subtitle-line-height) var(--body-font);
 
   --body-font-composite: 400 var(--body-font-size)/var(--body-line-height) var(--body-font);
 
@@ -171,6 +176,10 @@ button {
 .title {
   color: var(--c2);
   font: var(--title-font-composite);
+}
+
+.subtitle{
+  font: var(--subtitle-font-composite);
 }
 
 .text_body {

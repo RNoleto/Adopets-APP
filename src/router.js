@@ -10,11 +10,12 @@ import Login from './pages/Login.vue';
 import Register from './pages/Register.vue';
 import BreedsGalery from './pages/BreedsGalery.vue';
 import Adoptions from './pages/Adoptions.vue';
-import PetAdoption from './pages/PetAdoption.vue';
 
 // Páginas individuais
 import UserPage from './pages/UserPage.vue';
 import PetPage from './pages/PetPage.vue';
+import PetAdoption from './pages/PetAdoption.vue';
+import Post from './pages/Post.vue';
 
 import Dashboard from './pages/master/Dashboard.vue';
 
@@ -48,6 +49,10 @@ const routes = [
   {
     path: '/posts',
     component: Posts,
+  },
+  {
+    path: '/post',
+    component: Post,
   },
   {
     path: '/adoptions',
