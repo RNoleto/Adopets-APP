@@ -2,7 +2,7 @@
   <div class="dashboard">
     <nav class="navbar">
       <router-link to="/">
-        <h3 class="title">Adopets</h3>
+        <p class="title">Adopets</p>
       </router-link>
       <!-- Conteúdo do Navbar aqui -->
       <p class="text">Admin Panel</p>
@@ -96,25 +96,26 @@ export default {
     background-color: #333;
     color: white;
     padding: 10px;
+    .title{
+      font-size: 36px;
+    }
   }
 
   .block {
     display: flex;
     height: 100%;
-
+    
     .sidebar {
       font-size: 12px;
       display: flex;
       flex-direction: column;
-      // gap: 0.1rem;
       background-color: #555;
       color: white;
-      padding: 10px 0px;
-      flex: 0 0 100px;
+      padding: 20px 0px;
+      flex: 0 0 120px;
       text-align: center;
-
       .menu {
-        font-size: var(--subtitle-font-size-mobile);
+        font-size: 16px;
         font-weight: lighter;
         padding: 5px 0px;
       }

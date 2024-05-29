@@ -28,9 +28,9 @@ export default {
         {id: 2, url: "/adoptions", name: "Adoção"},
         { id: 3, url: "/posts", name: "Posts" },
         { id: 4, url:"#", name: "Achados e perdidos"},
-        // { id: 4, url: "/breedsgalery", name: "Galeria de Raças" },
-        // { id: 5, url: "/userpage", name: "Pagina do usuário" },
-        // { id: 6, url: "/Dashboard", name: "Dashboard" },
+        { id: 5, url: "/breedsgalery", name: "Galeria de Raças" },
+        { id: 6, url: "/userpage", name: "Pagina do usuário" },
+        { id: 7, url: "/Dashboard", name: "Dashboard" },
       ],
       tokenExists: false
     };
