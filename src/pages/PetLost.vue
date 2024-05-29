@@ -74,6 +74,10 @@
                 color: var(--c2);
             }
         }
+        .text_body{
+            font-size: 18px;
+            margin-top: 24px;
+        }
     }
 }
 </style>

@@ -190,13 +190,17 @@ export default {
                 color: var(--c1);
 
                 .name {
+                    font-weight: bold;
+                    margin-left: 10px;
                     width: max-content;
                     color: var(--c1);
-
+                    position: relative;
                     &::before {
+                        position: absolute;
                         content: '';
                         width: 4px;
-                        height: 20px;
+                        height: 22px;
+                        left: -8px;
                         transform: translateY(-2px);
                         background-color: var(--p2);
                     }
