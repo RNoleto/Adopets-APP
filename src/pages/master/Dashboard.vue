@@ -93,9 +93,9 @@ export default {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 10px;
+    background-color: var(--p6);
+    color: var(--c2);
+    padding: 10px 40px;
     .title{
       font-size: 36px;
     }
@@ -109,29 +109,32 @@ export default {
       font-size: 12px;
       display: flex;
       flex-direction: column;
-      background-color: #555;
-      color: white;
+      background-color: var(--p5);
+      color: var(--c2);
       padding: 20px 0px;
-      flex: 0 0 120px;
+      flex: 0 0 150px;
       text-align: center;
       .menu {
         font-size: 16px;
-        font-weight: lighter;
+        font-weight: 500;
         padding: 5px 0px;
+        height: 40px;
+        align-content: center;
+        display: block;
       }
     }
 
     .accordion {
       padding: 5px 0px;
-      border-bottom: 1px solid #999;
+      border-bottom: 1px solid var(--c9);
       cursor: pointer;
 
       &:hover {
-        background-color: #888;
+        background-color: var(--p4);
       }
 
       &.active {
-        background-color: #888;
+        background-color: var(--p4);
         padding-bottom: 0px;
       }
     }
@@ -139,19 +142,18 @@ export default {
     .submenu {
       display: flex;
       flex-direction: column;
-      background-color: #555;
+      background-color: var(--p6);
 
       .link {
-        border-bottom: 1px solid #888;
-        background-color: #999;
-        font-size: var(--content-font-size-mobile);
+        border-bottom: 1px solid var(--p3);
+        background-color: var(--p3);
         text-decoration: none;
+        color: var(--c1);
         padding: 5px;
-        font-weight: lighter;
-
+        font-weight: 300;
         &:hover,
         &:active {
-          background-color: var(--color-4);
+          background-color: var(--p1);
         }
 
         &:last-child {
@@ -164,7 +166,7 @@ export default {
       width: 100px;
       margin: 10px;
       border-radius: 5px;
-      border: 1px solid #888;
+      border: 1px solid var(--p6);
       flex: 1;
       padding: 10px;
     }

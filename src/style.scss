@@ -63,6 +63,7 @@ a {
   //Card dos pets
   --cardtitle-font-size: 24px;
   --cardtitle-line-height: 30px;
+
   --cardtag-font-size: 12px;
   --cardtag-line-height: 20px;
 
@@ -80,15 +81,16 @@ a {
   // Font composite variable
   --logo-font-composite: 700 var(--logo-font-size)/var(--logo-line-height) var(--title-font);
 
-  --link-font-composite: 500 var(--link-font-size)/var(--link-line-height) var(--title-font);
-
-  --button-font-composite: 600 var(--link-font-size)/var(--body-line-height) var(--title-font);
-
   --title-font-composite: 600 var(--title-font-size)/var(--title-line-height) var(--title-font);
 
   --subtitle-font-composite: 400 var(--subtitle-font-size)/var(--subtitle-line-height) var(--body-font);
 
   --body-font-composite: 400 var(--body-font-size)/var(--body-line-height) var(--body-font);
+
+  --link-font-composite: 500 var(--link-font-size)/var(--link-line-height) var(--title-font);
+
+  --button-font-composite: 600 var(--link-font-size)/var(--body-line-height) var(--title-font);
+
 
   // Card PetAdoption
   --cardtitle-font-composite: 700 var(--cardtitle-font-size)/var(--cardtitle-line-height) var(--body-font);
@@ -108,6 +110,9 @@ a {
   // Footer Text
   --footer-topic-text-composite: 400 var(--body-font-size)/var(--link-line-height) var(--body-font);
   --footer-links-composite: 400 var(--post-date-font-size)/var(--body-line-height) var(--body-font);
+
+  //Itens de Dashboard
+
 }
 
 /*====  BASE ============================ */
@@ -116,8 +121,6 @@ html {
 }
 
 body {
-  // max-width: 1600px;
-  // margin: 0px auto !important;
   background-color: var(--c1);
   -webkit-font-smoothing: antialiased;
 }
@@ -176,6 +179,11 @@ button {
 .title {
   color: var(--c2);
   font: var(--title-font-composite);
+}
+
+.title_dashboard{
+  color: var(--c9);
+  font: var(--post-title-font-composite);
 }
 
 .subtitle{
