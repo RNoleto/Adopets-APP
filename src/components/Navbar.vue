@@ -5,7 +5,7 @@
         <router-link to="/" @click="toggleNav" class="logo">Adopets</router-link>
       </div>
       <div class="menu">
-        <div v-for="page in pages" :key="page.id">
+        <div v-for="page in filteredPages" :key="page.id">
           <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
       </div>
@@ -25,9 +25,9 @@ export default {
       isHandleShadow: false,
       pages: [
         { id: 1, url: "/about", name: "Quem somos" },
-        {id: 2, url: "/adoptions", name: "Adoção"},
+        { id: 2, url: "/adoptions", name: "Adoção" },
         { id: 3, url: "/posts", name: "Posts" },
-        { id: 4, url:"#", name: "Achados e perdidos"},
+        { id: 4, url: "#", name: "Achados e perdidos" },
         { id: 5, url: "/breedsgalery", name: "Galeria de Raças" },
         { id: 6, url: "/userpage", name: "Pagina do usuário" },
         { id: 7, url: "/Dashboard", name: "Dashboard" },
@@ -36,6 +36,14 @@ export default {
     };
   },
   computed: {
+    filteredPages() {
+      return this.pages.filter(page => {
+        if (page.url === '/Dashboard' || page.url === '/userpage') {
+          return this.tokenExists;
+        }
+        return true;
+      });
+    },
     isAuthenticated() {
       return this.$store.state.auth.isAuthenticated;
     }

@@ -16,7 +16,7 @@ import UserPage from './pages/UserPage.vue';
 import PetPage from './pages/PetPage.vue';
 import PetAdoption from './pages/PetAdoption.vue';
 import Post from './pages/Post.vue';
-import PetLost from  './pages/PetLost.vue';
+import PetLost from './pages/PetLost.vue';
 
 import Dashboard from './pages/master/Dashboard.vue';
 
@@ -36,6 +36,7 @@ const routes = [
   },
   {
     path: '/userpage',
+    beforeEnter: Guard.auth, //precisa de autenticação
     component: UserPage,
   },
   {
@@ -94,9 +95,8 @@ const routes = [
   {
     path: '/dashboard',
     component: Dashboard,
-    // beforeEnter: Guard.auth, //precisa de autenticação
-    meta: { hideFooter: true }, //retira o footer
-    meta: { hideNavBar: true },
+    beforeEnter: Guard.auth, //precisa de autenticação
+    meta: { hideFooter: true, hideNavBar: true }, //retira o footer e navbar
     children: [
       {
         name: 'users',
