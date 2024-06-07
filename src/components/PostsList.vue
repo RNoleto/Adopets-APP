@@ -207,4 +207,33 @@ export default {
     }
   }
 }
+
+@media (max-width: 450px) {
+  .posts_galery{
+    display: flex;
+    flex-wrap: wrap;
+    .featured_post{
+      .post_infos{
+        .title_post{
+          font: 600 28px/40px var(--title-font);
+        }
+        .dec{
+          width: 35px;
+          height: auto;
+        }
+      }
+    }
+    .other_posts{
+      .card_post{
+        .post_infos{
+          .dec{
+            width: 25px;
+            height: auto;
+            bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+}
 </style>
