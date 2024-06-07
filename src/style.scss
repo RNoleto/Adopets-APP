@@ -145,6 +145,20 @@ button {
   }
 }
 
+@media(min-width: 900px) and (max-width: 1200px) {
+  .title {
+    font-size: 48px !important;
+  }
+
+  .text_body {
+    font-size: 18px !important;
+  }
+
+  button {
+    font-size: 14px !important;
+  }
+}
+
 .logo {
   font: var(--logo-font-composite);
   color: var(--c1);
@@ -181,12 +195,12 @@ button {
   font: var(--title-font-composite);
 }
 
-.title_dashboard{
+.title_dashboard {
   color: var(--c9);
   font: var(--post-title-font-composite);
 }
 
-.subtitle{
+.subtitle {
   font: var(--subtitle-font-composite);
 }
 

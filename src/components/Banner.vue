@@ -45,4 +45,27 @@
     }
   }
 }
+
+@media (max-width:1500px) and (min-width: 1450px) {
+  .container {
+    .content {
+      .imgbanner {
+        width: 480px;
+      }
+    }
+  }
+}
+
+@media (max-width:1449px) {
+  .container {
+    .content {
+      .imgbanner {
+        width: 450px;
+        position: relative;
+        top: auto;
+        right: auto;
+      }
+    }
+  }
+}
 </style>
