@@ -148,6 +148,12 @@ export default {
 @media (max-width: 450px) {
   .container{
     .content{
+      .title{
+        width: max-content;
+        }
+        .text_body{
+        width: auto;
+      }
       .pets_galery{
         gap: 14px;
         .card{
