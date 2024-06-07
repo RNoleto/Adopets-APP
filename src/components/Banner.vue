@@ -59,6 +59,21 @@
 @media (max-width:1449px) {
   .container {
     .content {
+
+      .imgbanner {
+        width: 450px;
+        position: relative;
+        top: auto;
+        right: auto;
+      }
+    }
+  }
+}
+
+@media (max-width:1400px) {
+  .container {
+    .content {
+
       .imgbanner {
         width: 450px;
         position: relative;

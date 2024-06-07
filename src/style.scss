@@ -147,7 +147,7 @@ button {
 
 @media(min-width: 900px) and (max-width: 1200px) {
   .title {
-    font-size: 48px !important;
+    font: 600 50px/58px var(--title-font) !important;
   }
 
   .text_body {
