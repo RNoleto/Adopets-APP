@@ -9,6 +9,14 @@
           <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
       </div>
+      <div class="menu_mobile" :class="{ active: isNavOpen }" @click="toggleNav">
+        <span class="hamburger"></span>
+      </div>
+      <div :class="['mobile_menu', { active: isNavOpen }]">
+        <div v-for="page in filteredPages" :key="page.id" @click="toggleNav">
+          <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
+        </div>
+      </div>
     </nav>
   </header>
 </template>
@@ -31,6 +39,8 @@ export default {
         { id: 5, url: "/breedsgalery", name: "Galeria de Raças" },
         { id: 6, url: "/userpage", name: "Pagina do usuário" },
         { id: 7, url: "/Dashboard", name: "Dashboard" },
+        // { id: 8, url: "/Login", name: 'Login' },
+        // { id: 9, url: "/Register", name: 'Register' },
       ],
       tokenExists: false
     };
@@ -86,11 +96,105 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 34px 220px;
+    position: relative;
 
     .menu {
       display: flex;
       gap: 40px;
       color: var(--c2);
+
+    }
+
+    .menu_mobile {
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 0.4rem;
+      display: none;
+
+
+      .hamburger {
+        border-top: 0.125rem solid var(--c2);
+        width: 1.25rem;
+
+        &::before,
+        &::after {
+          content: " ";
+          display: grid;
+          width: 1.25rem;
+          height: 0.125rem;
+          background: var(--c2);
+          margin-top: 0.3125rem;
+          position: relative;
+          transition: 0.3s;
+          z-index: 2;
+        }
+      }
+
+      &.active .hamburguer {
+        transform: rotate(45deg);
+
+        .hamburger::before {
+          transform: rotate(90deg) translateX(0.3125rem);
+        }
+
+        &::after {
+          opacity: 0;
+        }
+      }
+
+    }
+
+    .mobile_menu {
+      position: absolute;
+      top: 116px;
+      right: 220px;
+      background-color: var(--p6);
+      z-index: 1;
+      padding: 20px 40px;
+      border-radius: 0px 0px 5px 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      border: 1px solid var(--p5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.5s ease;
+
+      &.active {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+  }
+}
+
+@media (max-width: 1200px) {
+  header {
+    nav {
+
+      .menu {
+        .link_menu {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 1160px) {
+  header {
+    nav {
+      .menu {
+        display: none;
+      }
+
+      .menu_mobile {
+        display: flex;
+      }
     }
   }
 }
