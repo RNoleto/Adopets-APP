@@ -215,7 +215,10 @@ export default {
     .featured_post{
       .post_infos{
         .title_post{
-          font: 600 28px/40px var(--title-font);
+          font: 600 28px/38px var(--title-font);
+        }
+        .date_post{
+          font: 600 14px/20px var(--title-font);
         }
         .dec{
           width: 35px;
@@ -226,6 +229,12 @@ export default {
     .other_posts{
       .card_post{
         .post_infos{
+          .title_post{
+            font: 600 16px/22px var(--title-font);
+          }
+          .date_post{
+            font: 600 10px/18px var(--title-font);
+          }
           .dec{
             width: 25px;
             height: auto;
