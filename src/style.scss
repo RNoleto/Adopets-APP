@@ -145,20 +145,6 @@ button {
   }
 }
 
-@media(min-width: 900px) and (max-width: 1200px) {
-  // .title {
-  //   font: 600 50px/58px var(--title-font) !important;
-  // }
-
-  .text_body {
-    // font-size: 18px !important;
-  }
-
-  button {
-    // font-size: 14px !important;
-  }
-}
-
 .logo {
   font: var(--logo-font-composite);
   color: var(--c1);
@@ -238,6 +224,20 @@ img {
   width: 100%;
   height: auto;
   border-radius: 5px;
+}
+
+
+@media (max-width: 450px){
+  .title{
+    font: 600 36px/48px var(--title-font) !important;
+  }
+  .text_body{
+    font: 400 16px/28px var(--body-font);
+  }
+
+  button{
+    padding: 10px 20px;
+  }
 }
 
 

@@ -73,4 +73,14 @@
         }
     }
 }
+
+@media (max-width: 450px) {
+    .content{
+        margin-top: 0px;
+        weight: 100vh;
+        .images{
+            display: none;
+        }
+    }
+}
 </style>

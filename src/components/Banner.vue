@@ -82,9 +82,7 @@
         .text_body{
           font: 400 18px/30px var(--body-font);
         }
-        button {
-         font-size: 10px !important;
-      }
+        
       }
       .imgbanner {
         width: 350px;
@@ -105,9 +103,7 @@
         .text_body{
           
         }
-        button {
-         font-size: 10px !important;
-      }
+      
       }
       .imgbanner {
         width: 250px;
@@ -142,14 +138,12 @@
     .content{
       .info{
         .title{
-          font: 600 36px/48px var(--title-font) !important;
+          
         }
         .text_body{
-          font: 400 16px/28px var(--body-font);
+          
         }
-        button{
-          padding: 10px 20px;
-        }
+        
       }
     }
   }
