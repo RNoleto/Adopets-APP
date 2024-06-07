@@ -145,4 +145,23 @@ export default {
     }
   }
 }
+@media (max-width: 450px) {
+  .container{
+    .content{
+      .pets_galery{
+        gap: 14px;
+        .card{
+          width: 100%;
+          .pet_img{
+            width: 300px;
+            height: 250px;
+          }
+          &_infos{
+            width: 350px;
+          }
+        }
+      }
+    }
+  }
+}
 </style>
