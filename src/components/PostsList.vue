@@ -233,6 +233,7 @@ export default {
             font: 600 16px/22px var(--title-font);
           }
           .date_post{
+            margin-top: 8px;
             font: 600 10px/18px var(--title-font);
           }
           .dec{
