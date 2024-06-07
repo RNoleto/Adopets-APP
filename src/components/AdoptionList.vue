@@ -120,4 +120,14 @@ export default {
         }
     }
 }
+
+@media (max-width: 450px) {
+    .container {
+        .content {
+            .pet_galery {
+                justify-content: center;
+            }
+        }
+    }
+}
 </style>

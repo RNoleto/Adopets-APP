@@ -7,7 +7,7 @@
           Nossos pets aguardam amor, cuidado e um lar. Faça a diferença hoje - traga alegria e amor para sua casa, adote
           um companheiro leal.</p>
         <button>
-          <p>Conheça o seu amiguinho</p> <span>&rarr;</span>
+          Conheça o seu amiguinho <span>&rarr;</span>
         </button>
       </div>
       <img class="imgbanner" src="../../public/assets/img/petbanner.png" alt="dogbanner">
@@ -75,15 +75,17 @@
 @media (max-width:1400px) {
   .container {
     .content {
-      .info{
-        .title{
+      .info {
+        .title {
           font: 600 30px/38px var(--title-font) !important;
         }
-        .text_body{
+
+        .text_body {
           font: 400 18px/30px var(--body-font);
         }
-        
+
       }
+
       .imgbanner {
         width: 350px;
       }
@@ -91,69 +93,66 @@
   }
 }
 
-@media (max-width: 1160px){
+@media (max-width: 1160px) {
   .container {
     .content {
+
       // flex-wrap: wrap;
-      .info{
+      .info {
         width: 100%;
-        .title{
-          
-        }
-        .text_body{
-          
-        }
-      
+
+        .title {}
+
+        .text_body {}
+
       }
+
       .imgbanner {
         width: 250px;
-        
+
       }
     }
   }
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   .container {
     .content {
+
       // flex-wrap: wrap;
-      .info{
+      .info {
         width: 100%;
-        .title{
-          font: 600 40px/52px var(--title-font) !important;
-        }
-        .text_body{
-          
-        }
       }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .container {
+    .content {
+      .info {
+        .title {}
+
+        .text_body {}
+
+      }
+
       .imgbanner {
         display: none;
       }
+
     }
+
   }
 }
 
-@media (max-width: 420px) {
-  .container{
-    .content{
-      .info{
-        .title{
-          
-        }
-        .text_body{
-          
-        }
-        
-      }
-    }
-  }
-}
 @media (max-width: 375px) {
-  .container{
-    .content{
+  .container {
+    .content {
       height: 100vh;
-      .info{
-        .title{
+
+      .info {
+        .title {
           font: 600 34px/46px var(--title-font) !important;
         }
       }

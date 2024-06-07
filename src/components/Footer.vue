@@ -97,10 +97,11 @@ export default {
   }
 }
 
-@media (max-width: 479px){
-  .container{
-    .content{
-      padding: 120px 80px;
+@media (max-width: 479px) {
+  .container {
+    .content {
+      gap: 40px;
+      padding: 30px 20px;
     }
   }
 }
