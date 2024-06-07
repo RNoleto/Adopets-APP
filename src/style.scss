@@ -146,16 +146,16 @@ button {
 }
 
 @media(min-width: 900px) and (max-width: 1200px) {
-  .title {
-    font: 600 50px/58px var(--title-font) !important;
-  }
+  // .title {
+  //   font: 600 50px/58px var(--title-font) !important;
+  // }
 
   .text_body {
-    font-size: 18px !important;
+    // font-size: 18px !important;
   }
 
   button {
-    font-size: 14px !important;
+    // font-size: 14px !important;
   }
 }
 
@@ -256,6 +256,20 @@ img {
 textarea {
   width: 100%;
   min-height: 100px;
+}
+
+@media (max-width: 768px) {
+  .content{
+    padding: 60px 80px;
+  }
+  
+}
+
+@media (max-width: 450px) {
+  .content{
+    padding: 30px 20px;
+  }
+  
 }
 
 /*====  CKEDITOR ============================ */

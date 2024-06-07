@@ -37,6 +37,7 @@ export default {
 
   .content {
     display: flex;
+    flex-wrap: wrap;
     padding: 120px 220px;
     gap: 110px;
 
@@ -92,6 +93,14 @@ export default {
         margin-top: 20px;
         color: var(--c4);
       }
+    }
+  }
+}
+
+@media (max-width: 479px){
+  .container{
+    .content{
+      padding: 120px 80px;
     }
   }
 }

@@ -175,11 +175,14 @@ header {
 @media (max-width: 1200px) {
   header {
     nav {
-
+      padding: 34px 80px;
       .menu {
         .link_menu {
           font-size: 12px;
         }
+      }
+      .mobile_menu{
+        right: 0;
       }
     }
   }
@@ -194,6 +197,39 @@ header {
 
       .menu_mobile {
         display: flex;
+      }
+    }
+  }
+}
+
+@media (max-width: 479px){
+  header {
+    nav {
+      
+      .menu {
+        display: none;
+      }
+
+      .menu_mobile {
+        display: flex;
+      }
+    }
+  }
+}
+@media (max-width: 450px){
+  header {
+    nav {
+      padding:30px 20px;
+      .menu {
+        display: none;
+      }
+
+      .menu_mobile {
+        display: flex;
+      }
+
+      .mobile_menu.active{
+        top: 108px;
       }
     }
   }
