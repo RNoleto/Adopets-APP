@@ -216,44 +216,36 @@ export default {
     .featured_post {
       width: 100%;
 
-      .featured_img {}
-
-      .post_infos {
-
-        .title_post {}
-
-        .date_post {}
-
-        .dec {
-          width: 45px;
-          bottom: 10px;
-        }
+      .dec {
+        width: 45px;
+        bottom: 10px;
       }
     }
+  }
 
-    .other_posts {
-      .card_post {
-        img {
-          width: 300px;
-          height: auto;
+  .other_posts {
+    .card_post {
+      img {
+        width: 300px;
+        height: auto;
+      }
+
+      .post_infos {
+        height: 150px;
+
+        &::before {
+          display: none;
         }
 
-        .post_infos {
-          height: 150px;
-
-          &::before {
-            display: none;
-          }
-
-          .dec {
-            width: 40px;
-            bottom: 10px;
-          }
+        .dec {
+          width: 40px;
+          bottom: 10px;
         }
       }
     }
   }
 }
+
 
 @media (max-width: 690px) {
   .posts_galery {
