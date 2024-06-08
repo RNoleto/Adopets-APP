@@ -85,7 +85,7 @@ export default {
 
 .text_body {
   color: var(--c9);
-  width: 500px;
+  max-width: 500px;
 }
 
 .posts_galery {
@@ -208,35 +208,99 @@ export default {
   }
 }
 
-@media (max-width: 450px) {
-  .posts_galery{
+@media (max-width: 960px) {
+  .posts_galery {
+
+    flex-direction: column;
+
+    .featured_post {
+      width: 100%;
+
+      .featured_img {}
+
+      .post_infos {
+
+        .title_post {}
+
+        .date_post {}
+
+        .dec {
+          width: 45px;
+          bottom: 10px;
+        }
+      }
+    }
+
+    .other_posts {
+      .card_post {
+        img {
+          width: 300px;
+          height: auto;
+        }
+
+        .post_infos {
+          height: 150px;
+
+          &::before {
+            display: none;
+          }
+
+          .dec {
+            width: 40px;
+            bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 690px) {
+  .posts_galery {
     display: flex;
     flex-wrap: wrap;
-    .featured_post{
-      .post_infos{
-        .title_post{
+
+    .featured_post {
+      .post_infos {
+        .title_post {
           font: 600 28px/38px var(--title-font);
         }
-        .date_post{
+
+        .date_post {
           font: 600 14px/20px var(--title-font);
         }
-        .dec{
+
+        .dec {
           width: 35px;
           height: auto;
         }
       }
     }
-    .other_posts{
-      .card_post{
-        .post_infos{
-          .title_post{
+
+    .other_posts {
+      display: flex;
+
+      .card_post {
+
+        flex-direction: column;
+
+        img {
+          width: 100%;
+        }
+
+        .post_infos {
+          height: 120px;
+
+          .title_post {
             font: 600 16px/22px var(--title-font);
           }
-          .date_post{
+
+          .date_post {
             margin-top: 8px;
             font: 600 10px/18px var(--title-font);
           }
-          .dec{
+
+          .dec {
             width: 25px;
             height: auto;
             bottom: 20px;

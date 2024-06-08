@@ -241,20 +241,6 @@ img {
   }
 }
 
-@media(max-width: 1200px) {
-  .title {
-    font: 600 30px/38px var(--title-font);
-  }
-
-  .text_body {
-    font: 400 18px/30px var(--body-font);
-  }
-
-  button {
-    font-size: 14px !important;
-  }
-}
-
 @media(max-width: 1000px) {
   .title {
     font: 600 40px/52px var(--title-font) !important;
@@ -298,6 +284,18 @@ textarea {
 @media (max-width: 1200px) {
   .content {
     padding: 34px 80px;
+  }
+
+  .title {
+    font: 600 30px/38px var(--title-font);
+  }
+
+  .text_body {
+    font: 400 18px/30px var(--body-font);
+  }
+
+  button {
+    font-size: 14px !important;
   }
 }
 
