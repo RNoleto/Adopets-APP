@@ -231,6 +231,16 @@ img {
   border-radius: 5px;
 }
 
+@media (max-width: 1400px) {
+  .title {
+    font: 600 30px/38px var(--title-font);
+  }
+
+  .text_body {
+    font: 400 18px/30px var(--body-font);
+  }
+}
+
 @media(max-width: 1200px) {
   .title {
     font: 600 30px/38px var(--title-font);

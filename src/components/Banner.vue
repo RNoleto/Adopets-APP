@@ -75,16 +75,6 @@
 @media (max-width:1400px) {
   .container {
     .content {
-      .info {
-        .title {
-          font: 600 30px/38px var(--title-font) !important;
-        }
-
-        .text_body {
-          font: 400 18px/30px var(--body-font);
-        }
-
-      }
 
       .imgbanner {
         width: 350px;
