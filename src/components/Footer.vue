@@ -38,7 +38,6 @@ export default {
   .content {
     display: flex;
     flex-wrap: wrap;
-    padding: 120px 220px;
     gap: 110px;
 
     .column {
@@ -97,11 +96,55 @@ export default {
   }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 1000px) {
   .container {
     .content {
-      gap: 40px;
-      padding: 30px 20px;
+      justify-content: space-between;
+      gap: 50px;
+
+      .column {
+        .title {
+          font: 400 20px/28px var(--body-font) !important;
+          text-transform: uppercase;
+          color: var(--c5);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 890px) {
+  .container {
+    .content {
+      justify-content: space-between;
+      gap: 50px;
+
+      .column {
+        .title {
+          font: 400 20px/28px var(--body-font) !important;
+          text-transform: uppercase;
+          color: var(--c5);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 710px) {
+  .container {
+    .content {
+      justify-content: center;
+      gap: 50px;
+
+      .column {
+        width: 100%;
+
+        .title {
+          font: 400 20px/28px var(--body-font) !important;
+          text-transform: uppercase;
+          color: var(--c5);
+        }
+      }
     }
   }
 }

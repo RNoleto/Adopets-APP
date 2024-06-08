@@ -300,13 +300,24 @@ textarea {
 }
 
 @media (max-width: 768px) {
+
+  footer.content,
   .content {
     padding: 60px 80px;
   }
 
 }
 
+@media (max-width: 480px) {
+  .content {
+    // padding: 30px 20px;
+    // background-color: pink;
+  }
+}
+
 @media (max-width: 450px) {
+
+  footer.content,
   .content {
     padding: 30px 20px;
   }
