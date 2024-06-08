@@ -96,7 +96,7 @@ export default {
             gap: 40px;
 
             .pet_card {
-                width: 360px;
+                width: 300px;
 
                 .img_animal {
                     object-fit: cover;
@@ -121,11 +121,42 @@ export default {
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 1437px) {
+    .container {
+        .container {
+            .pet_galery {
+                gap: 20px;
+                justify-content: space-between;
+
+
+            }
+        }
+    }
+}
+
+@media (max-width: 1397px) {
+    .container {
+        .container {
+            .pet_galery {
+                gap: 40px;
+                justify-content: flex-start;
+            }
+        }
+    }
+}
+
+@media (max-width: 816px) {
     .container {
         .content {
             .pet_galery {
-                justify-content: center;
+                .pet_card {
+                    width: 100%;
+
+                    .img_animal {
+                        object-position: center;
+                        object-fit: cover;
+                    }
+                }
             }
         }
     }
