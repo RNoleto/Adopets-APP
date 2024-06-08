@@ -77,7 +77,7 @@ export default {
 
   .content {
     .text_body {
-      width: 500px;
+      max-width: 500px;
     }
 
     .pets_galery {
@@ -145,24 +145,93 @@ export default {
     }
   }
 }
-@media (max-width: 450px) {
-  .container{
-    .content{
-      .title{
-        width: max-content;
+
+@media (max-width: 1217px) and (min-width: 1201px) {
+  .container {
+
+    .content {
+
+      .pets_galery {
+        gap: 22px;
+        justify-content: space-between;
+
+      }
+
+    }
+  }
+}
+
+@media (max-width: 936px) {
+  .container {
+    .content {
+      .pets_galery {
+
+        .card {
+          width: 100%;
+
+          .pet_img {
+            width: 60%;
+          }
+
+          .card_infos {
+            width: 70%;
+
+            .info:nth-child(3) {
+              width: 100%;
+            }
+          }
         }
-        .text_body{
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    .content {
+      .pets_galery {
+
+        .card {
+          width: 100%;
+
+          .pet_img {
+            width: 90%;
+          }
+
+          .card_infos {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+@media (max-width: 450px) {
+  .container {
+    .content {
+      .title {
+        width: 100%;
+      }
+
+      .text_body {
         width: auto;
       }
-      .pets_galery{
+
+      .pets_galery {
         gap: 14px;
-        .card{
+
+        .card {
           width: 100%;
-          .pet_img{
+
+          .pet_img {
             width: 300px;
             height: 250px;
           }
-          &_infos{
+
+          &_infos {
             width: 350px;
           }
         }

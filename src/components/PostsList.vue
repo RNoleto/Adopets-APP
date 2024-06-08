@@ -233,15 +233,14 @@ export default {
       .post_infos {
         height: 150px;
 
-        &::before {
-          display: none;
-        }
+
 
         .dec {
           width: 40px;
           bottom: 10px;
         }
       }
+
     }
   }
 }
@@ -278,6 +277,8 @@ export default {
 
         img {
           width: 100%;
+          height: 220px;
+          object-fit: cover;
         }
 
         .post_infos {
@@ -297,6 +298,11 @@ export default {
             height: auto;
             bottom: 20px;
           }
+        }
+
+        .post_infos::before {
+          // opacity: 0;
+          display: none;
         }
       }
     }
