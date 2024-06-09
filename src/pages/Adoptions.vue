@@ -105,12 +105,14 @@ export default {
     }
 
     .text_body {
-        width: 550px;
+        max-width: 550px;
     }
 
     .species {
+        width: 100%;
         margin-top: 20px;
         display: flex;
+        flex-wrap: wrap;
         gap: 20px;
 
         .category.active {
@@ -195,6 +197,7 @@ export default {
                     width: max-content;
                     color: var(--c1);
                     position: relative;
+
                     &::before {
                         position: absolute;
                         content: '';
@@ -223,6 +226,24 @@ export default {
                         align-items: center;
                     }
 
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .content {
+        .animals {
+            .card {
+                width: 100%;
+
+                .img_pet {
+                    width: 100%;
+                }
+
+                .info {
+                    width: 315px;
                 }
             }
         }
