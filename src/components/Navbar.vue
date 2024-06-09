@@ -9,8 +9,8 @@
           <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
         <div class="menu">
-          <router-link to="#">Login</router-link>
-          <router-link to="#">Register</router-link>
+          <a href="#" @click.prevent="showLogin" class="link_menu">Login</a>
+          <a href="#" @click.prevent="showRegister" class="link_menu">Register</a>
         </div>
       </div>
       <div class="menu_mobile" :class="{ active: isNavOpen }" @click="toggleNav">
@@ -20,14 +20,19 @@
         <div v-for="page in filteredPages" :key="page.id" @click="toggleNav">
           <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
+        <a href="#" @click.prevent="showLogin" class="link_menu">Login</a>
+        <a href="#" @click.prevent="showRegister" class="link_menu">Register</a>
       </div>
     </nav>
+    <Login v-if="isLoginVisible" @close="hideLogin" />
+    <Register v-if="isRegisterVisible" @close="hideRegister" />
   </header>
 </template>
 
-
 <script>
 import Cookie from "js-cookie";
+import Login from "../components/Login.vue";
+import Register from "../components/Register.vue";
 
 export default {
   name: "Navbar",
@@ -40,12 +45,17 @@ export default {
         { id: 2, url: "/adoptions", name: "Adoção" },
         { id: 3, url: "/posts", name: "Posts" },
         { id: 4, url: "#", name: "Achados e perdidos" },
-        // { id: 5, url: "/breedsgalery", name: "Galeria de Raças" },
         { id: 6, url: "/userpage", name: "Pagina do usuário" },
         { id: 7, url: "/Dashboard", name: "Dashboard" },
       ],
-      tokenExists: false
+      tokenExists: false,
+      isLoginVisible: false,
+      isRegisterVisible: false
     };
+  },
+  components: {
+    Login,
+    Register,
   },
   computed: {
     filteredPages() {
@@ -70,7 +80,6 @@ export default {
     },
     toggleBodyScroll() {
       if (this.isNavOpen) {
-        // document.body.style.overflow = "hidden";
         document.body.addEventListener("touchmove", this.preventScroll, {
           passive: false
         });
@@ -83,6 +92,18 @@ export default {
     },
     preventScroll(e) {
       e.preventDefault();
+    },
+    showLogin() {
+      this.isLoginVisible = true;
+    },
+    hideLogin() {
+      this.isLoginVisible = false;
+    },
+    showRegister() {
+      this.isRegisterVisible = true;
+    },
+    hideRegister() {
+      this.isRegisterVisible = false;
     }
   }
 };
