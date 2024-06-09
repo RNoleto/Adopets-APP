@@ -98,7 +98,6 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-    height: 100vh;
 
     .title {
         color: var(--c11);
@@ -232,18 +231,38 @@ export default {
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 940px) {
+    .content {
+        .animals {
+            .card {
+                .img_pet {
+                    width: 340px;
+                }
+
+                .info {
+                    width: 320px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
     .content {
         .animals {
             .card {
                 width: 100%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
 
                 .img_pet {
                     width: 100%;
+                    // width: calc(100% + 20px);
                 }
 
                 .info {
-                    width: 315px;
+                    width: calc(100% - 20px);
                 }
             }
         }
