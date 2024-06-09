@@ -8,6 +8,10 @@
         <div v-for="page in filteredPages" :key="page.id">
           <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
+        <div class="menu">
+          <router-link to="#">Login</router-link>
+          <router-link to="#">Register</router-link>
+        </div>
       </div>
       <div class="menu_mobile" :class="{ active: isNavOpen }" @click="toggleNav">
         <span class="hamburger"></span>
@@ -36,11 +40,9 @@ export default {
         { id: 2, url: "/adoptions", name: "Adoção" },
         { id: 3, url: "/posts", name: "Posts" },
         { id: 4, url: "#", name: "Achados e perdidos" },
-        { id: 5, url: "/breedsgalery", name: "Galeria de Raças" },
+        // { id: 5, url: "/breedsgalery", name: "Galeria de Raças" },
         { id: 6, url: "/userpage", name: "Pagina do usuário" },
         { id: 7, url: "/Dashboard", name: "Dashboard" },
-        // { id: 8, url: "/Login", name: 'Login' },
-        // { id: 9, url: "/Register", name: 'Register' },
       ],
       tokenExists: false
     };
@@ -176,12 +178,14 @@ header {
   header {
     nav {
       padding: 34px 80px;
+
       .menu {
         .link_menu {
           font-size: 12px;
         }
       }
-      .mobile_menu{
+
+      .mobile_menu {
         right: 0;
       }
     }
@@ -202,10 +206,10 @@ header {
   }
 }
 
-@media (max-width: 479px){
+@media (max-width: 479px) {
   header {
     nav {
-      
+
       .menu {
         display: none;
       }
@@ -216,10 +220,12 @@ header {
     }
   }
 }
-@media (max-width: 450px){
+
+@media (max-width: 450px) {
   header {
     nav {
-      padding:30px 20px;
+      padding: 30px 20px;
+
       .menu {
         display: none;
       }
@@ -228,7 +234,7 @@ header {
         display: flex;
       }
 
-      .mobile_menu.active{
+      .mobile_menu.active {
         top: 108px;
       }
     }
