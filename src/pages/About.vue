@@ -5,7 +5,7 @@
       <img class="img"
         src="https://media.istockphoto.com/id/1456113976/pt/foto/dog-kiss-and-child-outdoor-with-a-love-hug-care-and-animal-friend-care-for-new-family-puppy.webp?b=1&s=170667a&w=0&k=20&c=2JViQx_BpMokHCOef2Oa-wfD6_twgeVBsRBmlAmn7PM="
         alt="">
-      <p class="text_body">Somos muito mais do que apenas uma plataforma de adoção de animais; somos uma comunidade
+      <p class="text_body">Somos muito mais do que apenas uma plataforma de adoção de animais. Somos uma comunidade
         comprometida com o bem-estar e felicidade dos nossos amigos de quatro patas, e com a promoção da adoção
         responsávelde pets. Acreditamos firmemente que cada patinha merece um lar amoroso e seguro, e é esse princípio
         que orienta cada uma das nossas ações.</p>
