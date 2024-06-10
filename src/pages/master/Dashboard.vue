@@ -34,7 +34,8 @@
       </aside>
       <main class="main-content">
         <!-- Conteúdo principal aqui -->
-        <router-view></router-view>
+        <router-view>
+        </router-view>
       </main>
     </div>
   </div>
@@ -96,7 +97,8 @@ export default {
     background-color: var(--p6);
     color: var(--c2);
     padding: 10px 40px;
-    .title{
+
+    .title {
       font-size: 36px;
     }
   }
@@ -104,7 +106,7 @@ export default {
   .block {
     display: flex;
     height: 100%;
-    
+
     .sidebar {
       font-size: 12px;
       display: flex;
@@ -114,6 +116,7 @@ export default {
       padding: 20px 0px;
       flex: 0 0 150px;
       text-align: center;
+
       .menu {
         font-size: 16px;
         font-weight: 500;
@@ -151,6 +154,7 @@ export default {
         color: var(--c1);
         padding: 5px;
         font-weight: 300;
+
         &:hover,
         &:active {
           background-color: var(--p1);

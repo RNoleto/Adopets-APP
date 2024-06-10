@@ -9,7 +9,9 @@
         <slot name="date">{{ date }}</slot>
       </p>
       <p class="card-description" v-if="$slots.description || description !== 'Default Description'">
-        <slot name="description"><p>{{ description }}</p></slot>
+        <slot name="description">
+          <p class="text_body">{{ description }}</p>
+        </slot>
       </p>
       <div class="card-button" v-if="$slots.button || shouldShowButton">
         <slot name="button">
@@ -64,13 +66,16 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    .text_body{
+
+    .text_body {
       margin-top: 0px;
     }
-    .card_date{
+
+    .card_date {
       font: var(--cardtag-font-composite);
     }
   }
+
   &-button {
     .btn {
       background-color: var(--color-1);
@@ -81,6 +86,7 @@ export default {
       cursor: pointer;
       transition: background-color 0.3s;
       text-align: center;
+
       &:hover {
         background-color: var(--color-2);
       }

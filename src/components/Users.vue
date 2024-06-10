@@ -1,15 +1,26 @@
 <template>
   <p class="title_dashboard">Lista de usuários</p>
-  <!-- <div class="card">
-    <p class="text_body">Total de usuarios criados:</p>
-    <p class="text_body count">{{ totalUsers }}</p>
-  </div> -->
-  <Card :title="'Total de usuários criados'" :description="totalUsers" :showButton="false" />
+  <div class="cards">
+    <Card :description="totalUsers" :showButton="false">
+      <template #card_top>
+        <p class="text_body">Total de usuários criados</p>
+      </template>
+      <template #description>
+        <p class="text_body count">{{ totalUsers }}</p>
+      </template>
+    </Card>
+    <Card #card_top>
+      <p class="text_body">Usuários ativos</p>
+    </Card>
+    <Card #card_top>
+      <p class="text_body">Usuários desativos</p>
+    </Card>
+  </div>
   <div class="container">
-    <div v-for="user in usersList" :key="user.id" class="content">
-      <p class="text">{{ user.name }}</p>
-      <p class="text">{{ user.email }}</p>
-      <p class="text">{{ formatDate(user.created_at) }}</p>
+    <div v-for="user in usersList" :key="user.id" class="content user">
+      <p>{{ user.name }}</p>
+      <p>{{ user.email }}</p>
+      <p>Registrado em: {{ formatDate(user.created_at) }}</p>
     </div>
   </div>
 </template>
@@ -56,35 +67,50 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card{
-  margin-top: 24px;
-  width: max-content;
-  padding: 20px 20px;
+.cards {
   display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-  border: 1px solid var(--p3);
-  box-shadow: 2px 2px 3px rgba($color: #000000, $alpha: 0.1);
-  .text_body{
-    margin: 0px;
-    &.count{
-      font-size: 36px;
-      color: var(--p2);
+  gap: 20px;
+
+  .card {
+    margin-top: 24px;
+    width: 100%;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid var(--p3);
+    box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.1);
+
+    .text_body {
+      margin: 0px;
+
+      &.count {
+        font-size: 36px;
+        color: var(--p2);
+      }
     }
   }
-  
 }
-.container {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
 
-  .content {
-    width: 100%;
-    border: 1px solid #e1e1e1;
-    background-color: #fefefe;
-    border-radius: 3px;
-  }
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.content {
+  margin: 0px;
+}
+
+.content.user {
+  padding: 10px 20px;
+  width: calc(calc(100% / 4) - 8px);
+  border: 1px solid var(--c2);
+  background-color: var(--w);
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 </style>
