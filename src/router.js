@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path: '/userpage',
-    beforeEnter: Guard.auth, //precisa de autenticação
+    // beforeEnter: Guard.auth, //precisa de autenticação
     component: UserPage,
   },
   {
@@ -95,7 +95,7 @@ const routes = [
   {
     path: '/dashboard',
     component: Dashboard,
-    beforeEnter: Guard.auth, //precisa de autenticação
+    // beforeEnter: Guard.auth, //precisa de autenticação
     meta: { hideFooter: true, hideNavBar: true }, //retira o footer e navbar
     children: [
       {

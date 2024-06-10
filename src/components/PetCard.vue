@@ -15,7 +15,7 @@
                             <p class="title">{{ mypet.name }}</p>
                             <p class="text">{{ mypet.sexo }}</p>
                             <p class="text">{{ mypet.birth_day }}</p>
-                            <router-link :to="{ name: 'PetPage', params: { id: mypet.id }}">Página do Pet</router-link>
+                            <router-link :to="{ name: 'PetPage', params: { id: mypet.id }}" class="link">Página do Pet</router-link>
                         </div>
                     </div>
                 </div>
@@ -63,6 +63,14 @@ export default {
                     birth_day: "01/05/2024",
                     sexo: "Macho",
                     img: "https://media.istockphoto.com/id/184337772/pt/foto/que-chamou-me-hamster-an%C3%A3o-de-6-semanas-de-idade.webp?b=1&s=170667a&w=0&k=20&c=KYvcLlei3j6UI7yJ-MPGQMSa0gqNeaSFdwsJoVh0qHg=",
+                },
+                {
+                    id: 5,
+                    name: "Naruto",
+                    specie: "Felina",
+                    birth_day: "02/03/2023",
+                    sexo: "Macho",
+                    img: "https://media.istockphoto.com/id/2148941363/pt/foto/ginger-kitten.jpg?s=2048x2048&w=is&k=20&c=XPIbrTWZqJQkBl7Ay5Aaj8h6vuG2xxqNJVH5HPNQ2YM=",
                 }
             ]
         }
@@ -94,8 +102,11 @@ export default {
 
 <style lang="scss" scoped>
 .container{
+    .title{
+            color: var(--p6);
+        }
     .count{
-        background-color: gray;
+        background-color: var(--c5);
         border-radius: 10px;
         padding: 10px;
         margin: 10px 0px;
@@ -105,7 +116,7 @@ export default {
         flex-wrap: wrap;
         gap: 10px;
         .card{
-            width: 100%;
+            width: calc(calc(100% / 4) - 8px);
             height: 180px;
             overflow: hidden;
             position: relative;
@@ -115,7 +126,7 @@ export default {
             .photo{
                 height: 100%;
                 position: absolute;
-                z-index: -1;
+                // z-index: -1;
                 object-fit: cover;
                 object-position: left center;
             }
@@ -126,6 +137,15 @@ export default {
                 backdrop-filter: blur(2px);
                 .content{
                     padding: 10px;
+                    .title{
+                        color: var(--p3);
+                        width: max-content;
+                        font: 600 24px/32px var(--title-font);
+                    }
+                    .link{
+                        margin-top: 20px;
+                        color: var(--p5);
+                    }
                 }
             }
         }
