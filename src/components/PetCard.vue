@@ -2,9 +2,11 @@
     <div class="container">
         <h3 class="title">Meus Pets</h3>
         <div class="count">
-            <p class="text">Total de pets {{ totalAnimals }}</p>
-            <div v-for="(count, specie) in speciesCount" :key="specie">
-                <p class="text">{{ specie }} : {{ count }}</p>
+            <p class="text count_total">Total de pets: {{ totalAnimals }}</p>
+            <div class="count_species">
+                <div v-for="(count, specie) in speciesCount" :key="specie" class="specie" >
+                    <p class="text">{{ specie }}: {{ count }}</p>
+                </div>
             </div>
         </div>
         <div class="pets">
@@ -103,13 +105,33 @@ export default {
 <style lang="scss" scoped>
 .container{
     .title{
+            font: 600 34px/42px var(--title-font);
             color: var(--p6);
         }
     .count{
-        background-color: var(--c5);
-        border-radius: 10px;
-        padding: 10px;
+        width: 100%;
         margin: 10px 0px;
+
+        &_total{
+            width: max-content;
+            padding: 10px 20px;
+            border: 1px solid var(--p2);
+            background-color: var(--p1);
+            border-radius: 5px;
+            color: var(--c1);
+        }
+        
+        .count_species{
+            display: flex;
+            gap: 12px;
+            .specie{
+                margin-top: 10px;
+                border: 1px solid var(--p2);
+                padding: 10px 20px;
+                border-radius: 5px;
+                color: var(--p5);
+            }
+        }
     }
     .pets{
         display: flex;
