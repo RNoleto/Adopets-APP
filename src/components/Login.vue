@@ -1,16 +1,18 @@
 <template>
   <div class="modal">
     <form @submit.prevent="submit">
-      <div>
-        <label for="email" class="inputTypes">Email:</label>
-        <input type="email" name="email" id="email" v-model="email" class="inputTypes" />
+      <div class="inputTypes">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" v-model="email" />
       </div>
-      <div>
+      <div class="inputTypes">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" v-model="password" class="inputTypes" />
+        <input type="password" name="password" id="password" v-model="password" />
       </div>
-      <button type="submit">Login</button>
-      <button type="button" @click="$emit('close')">Fechar</button>
+      <div class="buttons">
+        <button type="submit">Login</button>
+        <button type="button" @click="$emit('close')" class="close">Fechar</button>
+      </div>
     </form>
   </div>
 </template>
@@ -42,7 +44,6 @@ export default {
         }
       })
         .then(response => {
-          // console.log(response.data);
           //Armazena o token de acesso no cookie
           Cookie.set('_myapp_token', response.data.access_token);
           //Armazena os dados do usuário no local storage
@@ -71,7 +72,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .modal {
   position: fixed;
   top: 0;
@@ -89,5 +90,30 @@ form {
   background: white;
   padding: 20px;
   border-radius: 5px;
+
+  .inputTypes {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+  }
+
+  label {
+    color: var(--color-3);
+  }
+
+  .buttons {
+    display: flex;
+    gap: 20px;
+
+    button {
+      font: 600 14px/14px var(--title-font);
+    }
+
+    button.close {
+      background: none;
+      border: 1px solid var(--p3);
+      color: var(--p1);
+    }
+  }
 }
 </style>
