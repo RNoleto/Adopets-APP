@@ -10,7 +10,7 @@
         </div>
         <div class="menu">
           <a href="#" @click.prevent="showLogin" class="link_menu">Login</a>
-          <a href="#" @click.prevent="showRegister" class="link_menu">Register</a>
+          <a href="#" @click.prevent="showRegister" class="link_menu register">Register</a>
         </div>
       </div>
       <div class="menu_mobile" :class="{ active: isNavOpen }" @click="toggleNav">
@@ -21,7 +21,7 @@
           <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
         <a href="#" @click.prevent="showLogin" class="link_menu">Login</a>
-        <a href="#" @click.prevent="showRegister" class="link_menu">Register</a>
+        <a href="#" @click.prevent="showRegister" class="link_menu register">Register</a>
       </div>
     </nav>
     <Login v-if="isLoginVisible" @close="hideLogin" />
@@ -126,6 +126,20 @@ header {
       gap: 40px;
       color: var(--c2);
 
+      .link_menu {
+        &.register {
+          border: 1px solid var(--p1);
+          padding: 0px 10px;
+          border-radius: 5px;
+
+          &:hover {
+            transition: color 0.3s ease;
+            color: var(--c1);
+            background-color: var(--p4);
+            border-color: var(--p3);
+          }
+        }
+      }
     }
 
     .menu_mobile {
@@ -185,6 +199,26 @@ header {
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.5s ease;
+
+      .link_menu {
+        &.register {
+          text-align: center;
+          border: 1px solid var(--p1);
+          padding: 0px 10px;
+          border-radius: 5px;
+          background-color: var(--p1);
+
+          &:hover {
+            transition: color 0.3s ease;
+            color: var(--c1);
+            background-color: var(--p4);
+            border-color: var(--p3);
+          }
+        }
+
+
+      }
+
 
       &.active {
         opacity: 1;

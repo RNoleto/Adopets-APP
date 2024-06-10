@@ -159,6 +159,10 @@ button {
   position: relative;
   text-decoration: none;
 
+  &.register::after {
+    display: none;
+  }
+
   &:after {
     content: '';
     position: absolute;
