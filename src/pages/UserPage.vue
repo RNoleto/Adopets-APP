@@ -2,7 +2,7 @@
     <div class="content">
         <p class="title">Página do Usuário.</p>
         <div class="user">
-            <p class="text_body">Seja bem vindo {{ user.name }}!</p>
+            <p class="text_body">Seja bem-vindo {{ userStore.user.name }}!</p>
         </div>
         <ul class="menu">
             <li><button @click="setActiveView('myInfos')">Meus dados</button></li>
@@ -11,8 +11,8 @@
         </ul>
         <div class="infos">
             <div v-if="activeView === 'myInfos'" class="myInfos">
-                <p>Nome: {{ user.name }}</p>
-                <p>Email: {{ user.email }}</p>
+                <p>Nome: {{ userStore.user.name }}</p>
+                <p>Email: {{ userStore.user.email }}</p>
             </div>
             <div v-if="activeView === 'myPets'" class="myPets">
                 <PetCard />
@@ -27,8 +27,10 @@
 </template>
 
 <script>
+import { useUserStore } from '../stores/userStore'; // Certifique-se de que o caminho está correto
 import PetCard from '../components/PetCard.vue';
 import AddPetModal from '../components/AddPetModal.vue';
+
 export default {
     components: {
         PetCard,
@@ -36,16 +38,17 @@ export default {
     },
     data() {
         return {
-            user: {
-                id: 1,
-                name: "Ramon Ribeiro Noleto",
-                email: "devnoleto@gmail.com",
-                telefone: "(96) 98140-3089",
-                endereco: "Rua Juvenal Garcia Nº84-B, Centro - Itajaí - SC",
-            },
-            activeView: 'dados',
+            activeView: 'myInfos',
             isAddPetModalOpen: false,
         };
+    },
+    computed: {
+        userStore() {
+            return useUserStore();
+        }
+    },
+    mounted() {
+        this.userStore.initializeUser();
     },
     methods: {
         setActiveView(view) {
@@ -66,7 +69,7 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-    height: 100vh; //Temporario
+    height: 100vh; // Temporário
 
     .title {
         font: 600 32px/40px var(--body-font);
@@ -106,7 +109,8 @@ export default {
                 width: 100%;
             }
         }
-        .myPets{
+
+        .myPets {
             button {
                 font: 500 14px/14px var(--title-font);
             }

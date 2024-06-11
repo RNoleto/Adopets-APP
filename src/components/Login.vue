@@ -21,14 +21,13 @@
 import Cookie from "js-cookie";
 import axios from "axios";
 import Swal from 'sweetalert2';
+import { useUserStore } from '../stores/userStore'; // Certifique-se de que o caminho está correto
 
 export default {
   data() {
     return {
-      formData: {
-        email: '',
-        password: ''
-      }
+      email: '',
+      password: ''
     };
   },
   methods: {
@@ -37,6 +36,7 @@ export default {
         email: this.email,
         password: this.password,
       };
+
       axios.post('login', payload, {
         headers: {
           'Content-Type': 'application/json',
@@ -44,12 +44,18 @@ export default {
         }
       })
         .then(response => {
-          //Armazena o token de acesso no cookie
+          // Armazena o token de acesso no cookie
           Cookie.set('_myapp_token', response.data.access_token);
-          //Armazena os dados do usuário no local storage
-          localStorage.setItem('user', JSON.stringify(response.data.user_name));
-          localStorage.setItem('userId', JSON.stringify(response.data.user_id));
-          //Mostra um alerta com os dados do usuário
+
+          // Usa o store para armazenar os dados do usuário
+          const userStore = useUserStore();
+          userStore.setUser({
+            name: response.data.user_name,
+            id: response.data.user_id,
+            email: response.data.user_email  // Adicione o email
+          });
+
+          // Mostra um alerta com os dados do usuário
           Swal.fire({
             title: 'Login bem-sucedido!',
             text: `Bem-vindo ${response.data.user_name}!`,
