@@ -33,7 +33,14 @@ import Card from './Card.vue';
 export default {
   data() {
     return {
-      usersList: [],
+      usersList: [
+        {
+          id: 1,
+          name: "Ramon Noleto",
+          email: "devnoleto@gmail.com",
+          created_at: "10/06/2024",
+        }
+      ],
     }
   },
   components: {
@@ -72,15 +79,6 @@ export default {
   gap: 20px;
 
   .card {
-    margin-top: 24px;
-    width: 100%;
-    padding: 20px 20px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    border: 1px solid var(--p3);
-    box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.1);
-
     .text_body {
       margin: 0px;
 

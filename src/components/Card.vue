@@ -57,7 +57,12 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  border-radius: 8px;
+  width: 100%;
+  margin-top: 24px;
+  padding: 20px 20px;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid var(--p3);
   overflow: hidden;
   background-color: var(--color-3);
   box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.1);
