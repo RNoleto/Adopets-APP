@@ -13,24 +13,26 @@
             <div v-if="activeView === 'myInfos'" class="myInfos">
                 <p>Nome: {{ user.name }}</p>
                 <p>Email: {{ user.email }}</p>
-                <p>Telefone: {{ user.telefone }}</p>
-                <p>Endereço: {{ user.endereco }}</p>
             </div>
             <div v-if="activeView === 'myPets'">
                 <PetCard />
+                <button @click="openAddPetModal">Adicionar Pet</button>
             </div>
             <div v-if="activeView === 'lostPets'">
                 <p>Pets Perdidos</p>
             </div>
         </div>
+        <AddPetModal :isOpen="isAddPetModalOpen" @close="closeAddPetModal" @add-pet="addPet" />
     </div>
 </template>
 
 <script>
 import PetCard from '../components/PetCard.vue';
+import AddPetModal from '../components/AddPetModal.vue';
 export default {
     components: {
         PetCard,
+        AddPetModal,
     },
     data() {
         return {
@@ -42,11 +44,21 @@ export default {
                 endereco: "Rua Juvenal Garcia Nº84-B, Centro - Itajaí - SC",
             },
             activeView: 'dados',
+            isAddPetModalOpen: false,
         };
     },
     methods: {
         setActiveView(view) {
             this.activeView = view;
+        },
+        openAddPetModal() {
+            this.isAddPetModalOpen = true;
+        },
+        closeAddPetModal() {
+            this.isAddPetModalOpen = false;
+        },
+        addPet(newPet) {
+            console.log('Novo pet adicionado:', newPet);
         }
     }
 }

@@ -1,7 +1,6 @@
 <template>
     <div class="content">
         <div class="container">
-            Informações do Pet Clicado
             <div v-if="selectedPet">
                 <img :src="selectedPet.img" :alt="selectedPet.name" class="photo">
                 <p>{{ selectedPet.name }}</p>
@@ -14,9 +13,9 @@
 </template>
 
 <script>
-export default{
-    data(){
-        return{
+export default {
+    data() {
+        return {
             pet: [
                 {
                     id: 1,
@@ -58,8 +57,8 @@ export default{
     created() {
         this.selectedPetId = parseInt(this.$route.params.id);
     },
-    computed:{
-        selectedPet(){
+    computed: {
+        selectedPet() {
             return this.pet.find(pet => pet.id === this.selectedPetId);
         }
     }
