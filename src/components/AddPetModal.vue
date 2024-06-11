@@ -65,9 +65,9 @@ export default {
   data() {
     return {
       petName: '',
-      selectedGender: '',
+      selectedGender: null,
       selectedSpecies: null,
-      selectedBreeds: '',
+      selectedBreeds: null,
       petBirth: '',
       userId: null,
       ref_id_user: '',
@@ -107,27 +107,25 @@ export default {
     async submitPetForm() {
       try {
         const formData = new FormData();
-        formData.append('animal', this.petName);
-        formData.append('ref_id_specie', this.selectedSpecies);
         formData.append('ref_id_breed', this.selectedBreeds);
+        formData.append('ref_id_specie', this.selectedSpecies);
+        formData.append('animal', this.petName);
 
         const userId = JSON.parse(localStorage.getItem('userId'));
-        formData.append('ref_user_id', userId);
+        formData.append('ref_id_user', userId);
 
         const response = await axios.post("/animals", formData, {
           headers: {
-            'Content-type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data'
           }
         });
 
         if (response.status === 201 || response.status === 200) {
           const animalId = response.data.id;
-          console.log('Dados do animal criado:', response.data.id);
+          console.log("Dados do pet criado:", response.data.id);
         }
 
-        this.$emit('add-pet', newPet);
         this.resetForm();
-        this.closeModal();
       } catch (error) {
         console.log('Erro ao cadastrar novo pet:', error);
       }
@@ -140,7 +138,7 @@ export default {
       this.petBirth = '';
       this.petPhoto = null;
       if (this.$refs.petPhoto) {
-        this.$refs.petPhoto.value = null; // Reset file input
+        this.$refs.petPhoto.value = null;
       }
     },
     handleCancel() {
