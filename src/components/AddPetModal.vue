@@ -8,32 +8,35 @@
           <input type="text" v-model="petName" id="petName" required />
         </div>
 
-        <div class="inputTypes">
-          <label for="petGender">Sexo:</label>
-          <select v-model="selectedGender" required>
-            <option value="" disabled>Selecione</option>
-            <option value="M">Masculino</option>
-            <option value="F">Fêmea</option>
-          </select>
+        <div class="selects">
+          <div class="inputTypes">
+            <label for="petGender">Sexo:</label>
+            <select v-model="selectedGender" required>
+              <option value="" disabled>Selecione</option>
+              <option value="M">Masculino</option>
+              <option value="F">Fêmea</option>
+            </select>
+          </div>
+  
+          <div class="inputTypes">
+            <label for="petSpecie">Espécie</label>
+            <select v-model="selectedSpecies" required>
+              <option value="" disabled>Selecione</option>
+              <option v-for="species in speciesList" :key="species.id" :value="species.id">
+                {{ species.specie }}
+              </option>
+            </select>
+          </div>
+  
+          <div class="inputTypes">
+            <label for="petBreed">Raça:</label>
+            <select v-model="selectedBreeds" required>
+              <option value="" disabled>Selecione</option>
+              <option v-for="breed in breedsList" :key="breed.id" :value="breed.id">{{ breed.breed }}</option>
+            </select>
+          </div>
         </div>
 
-        <div class="inputTypes">
-          <label for="petSpecie">Espécie</label>
-          <select v-model="selectedSpecies" required>
-            <option value="" disabled>Selecione</option>
-            <option v-for="species in speciesList" :key="species.id" :value="species.id">
-              {{ species.specie }}
-            </option>
-          </select>
-        </div>
-
-        <div class="inputTypes">
-          <label for="petBreed">Raça:</label>
-          <select v-model="selectedBreeds" required>
-            <option value="" disabled>Selecione</option>
-            <option v-for="breed in breedsList" :key="breed.id" :value="breed.id">{{ breed.breed }}</option>
-          </select>
-        </div>
 
         <div class="inputTypes">
           <label for="petBirth">Data de Nascimento:</label>
@@ -44,6 +47,23 @@
           <label for="petPhoto">Foto:</label>
           <input type="file" @change="handleFileUpload" id="petPhoto" ref="petPhoto" accept="image/*" required />
         </div>
+
+
+       <fieldset>
+        <legend>Disponível para Adoção?</legend>
+        <div class="options">
+          <div>
+            <input type="radio" id="sim" name="adoption" value="sim">
+            <label for="sim">Sim</label>
+          </div>
+          <div>
+            <input type="radio" id="nao" name="adoption" value="nao">
+            <label for="nao">Não</label>
+          </div>
+        </div>
+       </fieldset>
+
+
         <div class="buttons">
           <button type="submit">Adicionar</button>
           <button type="button" @click="handleCancel">Cancelar</button>
@@ -181,6 +201,12 @@ export default {
     display: flex;
     flex-wrap: wrap;
 
+    .selects{
+      width: 100%;
+      gap: 10px;
+      display: flex;
+    }
+
     .inputTypes {
       margin-top: 10px;
       width: 100%;
@@ -189,13 +215,28 @@ export default {
       select {
         margin-top: 2px;
         width: 100%;
+        height: 28px;
       }
-    }
+      }
+        fieldset{
+          margin-top: 10px;
+          legend{
+            padding: 0px 10px;
+          }
+          .options{
+            gap: 10px;
+            display: flex;
+            padding: 10px;
+          }
+        }
 
     .buttons {
       width: 100%;
       justify-content: space-between;
       display: flex;
+      button{
+        font: 500 14px/14px var(--title-font);
+      }
     }
   }
 }

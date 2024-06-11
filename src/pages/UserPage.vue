@@ -14,7 +14,7 @@
                 <p>Nome: {{ user.name }}</p>
                 <p>Email: {{ user.email }}</p>
             </div>
-            <div v-if="activeView === 'myPets'">
+            <div v-if="activeView === 'myPets'" class="myPets">
                 <PetCard />
                 <button @click="openAddPetModal">Adicionar Pet</button>
             </div>
@@ -104,6 +104,11 @@ export default {
 
             p {
                 width: 100%;
+            }
+        }
+        .myPets{
+            button {
+                font: 500 14px/14px var(--title-font);
             }
         }
     }
