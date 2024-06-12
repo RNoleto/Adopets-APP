@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { useUserStore } from '../stores/userStore'; // Certifique-se de que o caminho está correto
+import { useUserStore } from '../stores/userStore';
 import PetCard from '../components/PetCard.vue';
 import AddPetModal from '../components/AddPetModal.vue';
 

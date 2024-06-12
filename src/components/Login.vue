@@ -21,7 +21,7 @@
 import Cookie from "js-cookie";
 import axios from "axios";
 import Swal from 'sweetalert2';
-import { useUserStore } from '../stores/userStore'; // Certifique-se de que o caminho está correto
+import { useUserStore } from '../stores/userStore';
 
 export default {
   data() {
@@ -52,7 +52,7 @@ export default {
           userStore.setUser({
             name: response.data.user_name,
             id: response.data.user_id,
-            email: response.data.user_email  // Adicione o email
+            email: response.data.user_email
           });
 
           // Mostra um alerta com os dados do usuário

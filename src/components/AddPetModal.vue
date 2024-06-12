@@ -17,7 +17,7 @@
               <option value="F">Fêmea</option>
             </select>
           </div>
-  
+
           <div class="inputTypes">
             <label for="petSpecie">Espécie</label>
             <select v-model="selectedSpecies" required>
@@ -27,7 +27,7 @@
               </option>
             </select>
           </div>
-  
+
           <div class="inputTypes">
             <label for="petBreed">Raça:</label>
             <select v-model="selectedBreeds" required>
@@ -49,19 +49,19 @@
         </div>
 
 
-       <fieldset>
-        <legend>Disponível para Adoção?</legend>
-        <div class="options">
-          <div>
-            <input type="radio" id="sim" name="adoption" value="sim">
-            <label for="sim">Sim</label>
+        <fieldset>
+          <legend>Disponível para Adoção?</legend>
+          <div class="options">
+            <div>
+              <input type="radio" id="sim" name="adoption" value="sim">
+              <label for="sim">Sim</label>
+            </div>
+            <div>
+              <input type="radio" id="nao" name="adoption" value="nao">
+              <label for="nao">Não</label>
+            </div>
           </div>
-          <div>
-            <input type="radio" id="nao" name="adoption" value="nao">
-            <label for="nao">Não</label>
-          </div>
-        </div>
-       </fieldset>
+        </fieldset>
 
 
         <div class="buttons">
@@ -129,7 +129,9 @@ export default {
         const formData = new FormData();
         formData.append('ref_id_breed', this.selectedBreeds);
         formData.append('ref_id_specie', this.selectedSpecies);
-        formData.append('animal', this.petName);
+        formData.append('name', this.petName);
+        formData.append('birth', this.petBirth);
+        formData.append('gender', this.selectedGender);
 
         const userId = JSON.parse(localStorage.getItem('userId'));
         formData.append('ref_id_user', userId);
@@ -201,7 +203,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
 
-    .selects{
+    .selects {
       width: 100%;
       gap: 10px;
       display: flex;
@@ -217,24 +219,28 @@ export default {
         width: 100%;
         height: 28px;
       }
+    }
+
+    fieldset {
+      margin-top: 10px;
+
+      legend {
+        padding: 0px 10px;
       }
-        fieldset{
-          margin-top: 10px;
-          legend{
-            padding: 0px 10px;
-          }
-          .options{
-            gap: 10px;
-            display: flex;
-            padding: 10px;
-          }
-        }
+
+      .options {
+        gap: 10px;
+        display: flex;
+        padding: 10px;
+      }
+    }
 
     .buttons {
       width: 100%;
       justify-content: space-between;
       display: flex;
-      button{
+
+      button {
         font: 500 14px/14px var(--title-font);
       }
     }
