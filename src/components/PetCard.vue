@@ -5,7 +5,7 @@
             <p class="text count_total">Total de pets: {{ totalAnimals }}</p>
             <div class="count_species">
                 <div v-for="(count, specie) in speciesCount" :key="specie" class="specie">
-                    <p class="text">{{ specie }}: {{ count }}</p>
+                    <p class="text">{{ specie.name }}: {{ count }}</p>
                 </div>
             </div>
         </div>
@@ -18,8 +18,7 @@
                         <p class="text">{{ getGender(mypet.gender) }}</p>
                         <p class="text">{{ mypet.birth }}</p>
                         <p class="text">{{ mypet.breedName }}</p>
-                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do
-                            Pet</router-link>
+                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do Pet</router-link>
                     </div>
                 </div>
             </div>
@@ -29,16 +28,16 @@
 
 <script>
 import Swal from 'sweetalert2';
-
 import axios from 'axios';
 
 export default {
     name: 'PetCard',
     data() {
         return {
+            //Conteudo é fake, somente para testar frontend e logica para pegar as informações no backend
             myPets: [
                 {
-                    id: 1 ,
+                    id: 1,
                     status: 0,
                     name: 'Snow',
                     gender: "M",
@@ -48,10 +47,30 @@ export default {
                     ativo: 1,
                 }
             ],
-            breeds:[
+            species: [
                 {
                     id: 1,
+                    specie: "Canina",
+                },
+                {
+                    id: 2,
+                    specie: "Felina",
+                },
+                {
+                    id: 3,
+                    specie: "Roedor",
+                }
+            ],
+            breeds: [
+                {
+                    id: 1,
+                    ref_id_specie: 1,
                     breed: "Poodle",
+                },
+                {
+                    id: 2,
+                    ref_id_specie: 3,
+                    breed: "Hamster",
                 }
             ],
             files: [
@@ -67,6 +86,9 @@ export default {
     },
     mounted() {
         this.loadMyPets();
+        this.loadSpecies();
+        this.loadBreeds();
+        this.loadFiles();
     },
     computed: {
         totalAnimals() {
@@ -75,15 +97,15 @@ export default {
         speciesCount() {
             const count = {};
             this.myPets.forEach(pet => {
-                if (count[pet.specie]) {
-                    count[pet.specie]++;
+                if (count[pet.ref_id_specie]) {
+                    count[pet.ref_id_specie]++;
                 } else {
-                    count[pet.specie] = 1;
+                    count[pet.ref_id_specie] = 1;
                 }
             });
             return count;
         },
-        myPetsWithImages(){
+        myPetsWithImages() {
             return this.myPets.map(pet => {
                 const file = this.files.find(f => f.ref_id_animal === pet.id);
                 const breed = this.breeds.find(b => b.id === pet.ref_id_breed);
@@ -109,7 +131,7 @@ export default {
             const selectedPet = this.myPets.find(pet => pet.id === id);
             this.$router.push({ name: 'PetPage', params: { id }, state: { pet: selectedPet } });
         },
-        getGender(gender){
+        getGender(gender) {
             return gender === "M" ? "Masculino" : "Feminino";
         }
     }

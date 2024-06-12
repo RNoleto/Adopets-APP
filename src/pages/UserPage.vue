@@ -22,7 +22,7 @@
                 <p>Pets Perdidos</p>
             </div>
         </div>
-        <AddPetModal :isOpen="isAddPetModalOpen" @close="closeAddPetModal" @add-pet="addPet" />
+        <!-- <AddPetModal :isOpen="isAddPetModalOpen" @close="closeAddPetModal" @add-pet="addPet" /> -->
     </div>
 </template>
 
