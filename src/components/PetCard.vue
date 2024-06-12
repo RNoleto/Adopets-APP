@@ -127,6 +127,24 @@ export default {
                     console.error('Erro ao carregar meus pets', error);
                 });
         },
+        loadSpecies(){
+            axios.get('/species')
+            .then((response) => {
+                this.species = response.data;
+            })
+            .catch((error) => {
+                console.log('Erro ao carregar especies', error);
+            });
+        },
+        loadBreeds(){
+            axios.get('/breeds')
+            .then((response) => {
+                this.species = response.data;
+            })
+            .catch((error) => {
+                console.log('Erro ao carregar raças', error);
+            });
+        },
         editPet(id) {
             const selectedPet = this.myPets.find(pet => pet.id === id);
             this.$router.push({ name: 'PetPage', params: { id }, state: { pet: selectedPet } });
