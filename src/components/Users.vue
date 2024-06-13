@@ -9,11 +9,21 @@
         <p class="text_body count">{{ totalUsers }}</p>
       </template>
     </Card>
-    <Card #card_top>
-      <p class="text_body">Usuários ativos</p>
+    <Card :description="activeUsers" :showButton="false">
+      <template #card_top>
+        <p class="text_body">Total de usuários ativos</p>
+      </template>
+      <template #description>
+        <p class="text_body count">{{ activeUsers }}</p>
+      </template>
     </Card>
-    <Card #card_top>
-      <p class="text_body">Usuários desativos</p>
+    <Card :description="inactiveUsers" :showButton="false">
+      <template #card_top>
+        <p class="text_body">Total de usuários inativos</p>
+      </template>
+      <template #description>
+        <p class="text_body count">{{ inactiveUsers }}</p>
+      </template>
     </Card>
   </div>
   <div class="container">
@@ -36,9 +46,38 @@ export default {
       usersList: [
         {
           id: 1,
+          ativo: 1,
           name: "Ramon Noleto",
           email: "devnoleto@gmail.com",
-          created_at: "10/06/2024",
+          created_at: "02/05/2024",
+        },
+        {
+          id: 2,
+          ativo: 1,
+          name: "Flávia Noleto",
+          email: "flavia@gmail.com",
+          created_at: "05/05/2024",
+        },
+        {
+          id: 3,
+          ativo: 1,
+          name: "Emmanuel Noleto",
+          email: "emmanuel@gmail.com",
+          created_at: "01/06/2024",
+        },
+        {
+          id: 4,
+          ativo: 0,
+          name: "Anna Julia Noleto",
+          email: "ajnoleto@gmail.com",
+          created_at: "01/06/2024",
+        },
+        {
+          id: 4,
+          ativo: 0,
+          name: "Ruana Noleto",
+          email: "ruananoleto@gmail.com",
+          created_at: "03/06/2024",
         }
       ],
     }
@@ -52,6 +91,14 @@ export default {
   computed: {
     totalUsers() {
       return this.usersList.length;
+    },
+    activeUsers(){
+      const activeUsers = this.usersList.filter(user => user.ativo === 1);
+      return activeUsers.length;
+    },
+    inactiveUsers(){
+      const inactiveUsers = this.usersList.filter(user => user.ativo != 1);
+      return inactiveUsers.length;
     }
   },
   methods: {

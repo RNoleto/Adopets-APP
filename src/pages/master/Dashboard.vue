@@ -118,10 +118,9 @@ export default {
       text-align: center;
 
       .menu {
-        font-size: 16px;
-        font-weight: 500;
+        font: 500 14px/22px var(--title-font);
         padding: 5px 0px;
-        height: 40px;
+        // height: 40px;
         align-content: center;
         display: block;
       }
