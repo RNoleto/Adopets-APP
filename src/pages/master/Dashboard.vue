@@ -5,7 +5,7 @@
         <p class="title">Adopets</p>
       </router-link>
       <!-- Conteúdo do Navbar aqui -->
-      <p class="text">Admin Panel</p>
+      <p class="text_body">Admin Panel</p>
     </nav>
     <div class="block">
       <aside class="sidebar">
@@ -96,10 +96,13 @@ export default {
     width: 100%;
     background-color: var(--p6);
     color: var(--c2);
-    padding: 10px 40px;
+    padding: 20px 40px;
 
     .title {
       font-size: 36px;
+    }
+    .text_body{
+      margin-top: 0px;
     }
   }
 

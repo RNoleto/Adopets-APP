@@ -333,24 +333,23 @@ textarea {
 
 /*====  CKEDITOR ============================ */
 .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
-  display: flex;
-  flex-wrap: wrap !important;
-  font-size: 10px;
-
+  // background-color: pink;
   .ck-button {
-    border: none;
+    &.ck-off{
+      margin-top: 3.9px !important;
+      background-color: pink;
+    }
   }
 }
 
-// .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
-//   // border-color: var(--color-1) !important;
-// }
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+  // border-color: var(--color-1) !important;
+}
 
 .ck-focused {
   border-color: var(--color-1) !important;
 }
 
 .ck.ck-editor__main>.ck-editor__editable {
-  min-height: 50vw;
-  max-height: 20vw;
+  height: 400px;
 }

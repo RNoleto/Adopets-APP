@@ -1,35 +1,37 @@
 <template>
   <form @submit.prevent="submitRaceForm">
-    <div class="inputType">
-      <label for="especie">Espécie</label>
-      <select v-model="selectedSpecies" required>
-        <option value="" disabled>Selecione</option>
-        <option v-for="species in speciesList" :key="species.id" :value="species.id">
-          {{ species.specie }}
-        </option>
-      </select>
-    </div>
-    <div class="inputType">
-      <label for="breed">Raça</label>
-      <input type="text" id="breed" v-model="breed" required />
-    </div>
-    <div class="inputType">
-      <label for="origin">Origem</label>
-      <input type="text" id="origin" v-model="origin" />
-    </div>
-    <div class="inputType">
-      <label for="average_weight">Peso Médio</label>
-      <input type="number" id="average_weight" v-model="average_weight" />
-    </div>
-    <div class="inputType">
-      <label for="lifespan">Expectativa de Vida</label>
-      <input type="number" id="lifespan" v-model="lifespan" />
-    </div>
-    <div class="inputType">
-      <input type="file" id="imageUpload" ref="imageUpload" name="file" multiple />
-    </div>
-    <div>
-      <label for="story">Conte a história dessa Raça</label>
+    <div class="inputs">
+      <div class="inputType">
+        <label for="especie">Espécie:</label>
+        <select v-model="selectedSpecies" required>
+          <option value="" disabled>Selecione</option>
+          <option v-for="species in speciesList" :key="species.id" :value="species.id">
+            {{ species.specie }}
+          </option>
+        </select>
+      </div>
+      <div class="inputType">
+        <label for="breed">Raça:</label>
+        <input type="text" id="breed" v-model="breed" required />
+      </div>
+      <div class="inputType">
+        <label for="origin">Origem:</label>
+        <input type="text" id="origin" v-model="origin" />
+      </div>
+      <div class="inputType">
+        <label for="average_weight">Peso Médio:</label>
+        <input type="number" id="average_weight" v-model="average_weight" />
+      </div>
+      <div class="inputType">
+        <label for="lifespan">Expectativa de Vida:</label>
+        <input type="number" id="lifespan" v-model="lifespan" />
+      </div>
+      </div>
+        <div class="inputType">
+          <input type="file" id="imageUpload" ref="imageUpload" name="file" multiple />
+        </div>
+    <div class="story">
+      <label for="story">Conte a história dessa Raça:</label>
       <ckeditor class="ckeditor" :editor="editor" v-model="story" :config="editorConfig"></ckeditor>
     </div>
     <button type="submit">Cadastrar Raça</button>
@@ -171,12 +173,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ckeditor {
-  max-width: 100%;
-}
-
+.inputs{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  }
+    .inputType{
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+    }
+    #imageUpload{
+      margin: 10px 0px;
+    }
 button {
-  margin-top: 10px;
-  font-size: 12px;
+  font: 500 12px / 16px var(--title-font);
 }
 </style>

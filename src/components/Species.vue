@@ -10,10 +10,10 @@
     </form>
     <!-- Lista de espécies -->
     <div v-if="especies.length" class="speciesList">
-      <h2>Lista de Espécies</h2>
+      <p class="title">Lista de Espécies</p>
       <ul>
-        <li v-for="especie in especies" :key="especie.id">
-          {{ especie.specie }}
+        <li v-for="especie in especies" :key="especie.id" class="specie">
+          <p class="text_body">{{ especie.specie }}</p>
         </li>
       </ul>
     </div>
@@ -36,7 +36,14 @@ export default {
         specie: "",
         userId: null,
       },
-      especies: [],
+      especies: [
+        {
+          specie: 'Canina',
+        },
+        {
+          specie: 'Felina',
+        },
+      ],
       selectedEspecie: null,
     };
   },
@@ -76,16 +83,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-button {
-  font-size: 12px;
+form{
+  width: 250px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--c5);
+  .inputType{
+    display: flex;
+    flex-direction: column;
+    input{
+      margin-top: 2px;
+    }
+  }
+  button {
+    font: 500 12px/16px var(--title-font);
+  }
 }
 
 .speciesList {
-  h2 {
-    font-size: 12px;
+  .title{
+    color: var(--c9);
   }
-
-  margin-top: 10px;
+  margin-top: 32px;
 
   ul {
     margin-top: 10px;
@@ -94,13 +113,16 @@ button {
     justify-content: flex-start;
     gap: 5px;
 
-    li {
+    .specie {
       font-size: 12px;
       flex: 1 1 auto;
       max-width: max-content;
-      border: 1px solid var(--color-1);
-      border-radius: 15px;
+      border: 1px solid var(--c10);
+      border-radius: 5px;
       padding: 3px 6px;
+      .text_body{
+        margin: 0px;
+      }
     }
   }
 }
