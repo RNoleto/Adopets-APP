@@ -69,7 +69,7 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-    height: 100vh; // Temporário
+
 
     .title {
         font: 600 32px/40px var(--body-font);

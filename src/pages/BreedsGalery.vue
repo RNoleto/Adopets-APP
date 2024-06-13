@@ -5,7 +5,7 @@
       <div class="galery">
         <div v-for="(breed, index) in breedsList" :key="index" class="card">
           <h3 class="text">{{ breed.breed }}</h3>
-          <img :src="getBreedImage(breed.id)" alt="imagem aqui">
+          <img :src="getBreedImage(breed.id)" alt="imagem da raça">
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@ export default {
   methods: {
     async loadBreeds() {
       try {
-        const response = await axios.get("breeds");
+        const response = await axios.get("/breeds");
         this.breedsList = response.data;
       } catch (error) {
         console.error("Erro ao carregar Raças", error);
@@ -33,7 +33,7 @@ export default {
     },
     async loadImages() {
       try {
-        const response = await axios.get("files");
+        const response = await axios.get("/files");
         this.images = response.data;
       } catch (error) {
         console.error("Erro ao carregar Imagens", error);
@@ -41,8 +41,8 @@ export default {
     },
     getBreedImage(breedId) {
       const image = this.images.find(img => img.ref_id_breed === breedId);
-      return image ? `${axios.defaults.baseURL.replace('/api', '')}storage/${image.path}` : '';
-
+      console.log('imagem da breed', this.images[0].path);
+      return image ? `${axios.defaults.baseURL.replace('/api', '')}storage/files/${this.images[0].path}` : '';
     },
     async loadAllData() {
       await this.loadBreeds();
@@ -75,12 +75,12 @@ export default {
         width: 110px;
         height: 100px;
         border-radius: 5px;
-        box-shadow: 1px 1px 3px rgba($color: #000000, $alpha: 0.3);
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 
         .text {
           font-weight: 500;
           padding: 5px;
-          background-color: rgba($color: #fff, $alpha: 0.5);
+          background-color: rgba(255, 255, 255, 0.5);
           backdrop-filter: blur(5px);
         }
 

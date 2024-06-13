@@ -18,7 +18,8 @@
                         <p class="text">{{ getGender(mypet.gender) }}</p>
                         <p class="text">{{ mypet.birth }}</p>
                         <p class="text">{{ mypet.breedName }}</p>
-                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do Pet</router-link>
+                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do
+                            Pet</router-link>
                     </div>
                 </div>
             </div>
@@ -35,60 +36,17 @@ export default {
     data() {
         return {
             //Conteudo é fake, somente para testar frontend e logica para pegar as informações no backend
-            myPets: [
-                {
-                    id: 1,
-                    status: 0,
-                    name: 'Snow',
-                    gender: "M",
-                    birth: "18/08/2019",
-                    ref_id_specie: 1,
-                    ref_id_breed: 1,
-                    ativo: 1,
-                }
-            ],
-            species: [
-                {
-                    id: 1,
-                    specie: "Canina",
-                },
-                {
-                    id: 2,
-                    specie: "Felina",
-                },
-                {
-                    id: 3,
-                    specie: "Roedor",
-                }
-            ],
-            breeds: [
-                {
-                    id: 1,
-                    ref_id_specie: 1,
-                    breed: "Poodle",
-                },
-                {
-                    id: 2,
-                    ref_id_specie: 3,
-                    breed: "Hamster",
-                }
-            ],
-            files: [
-                {
-                    id: 1,
-                    name: 'Snow.jpg',
-                    ref_id_breed: 1,
-                    ref_id_animal: 1,
-                    path: 'https://images.unsplash.com/photo-1581562324420-eff2f5aaa4b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cG9vZGxlfGVufDB8fDB8fHww',
-                }
-            ],
+            myPets: [],
+            species: [],
+            breeds: [],
+            files: [],
         }
     },
     mounted() {
         this.loadMyPets();
         this.loadSpecies();
         this.loadBreeds();
-        this.loadFiles();
+        // this.loadFiles();
     },
     computed: {
         totalAnimals() {
@@ -127,23 +85,23 @@ export default {
                     console.error('Erro ao carregar meus pets', error);
                 });
         },
-        loadSpecies(){
+        loadSpecies() {
             axios.get('/species')
-            .then((response) => {
-                this.species = response.data;
-            })
-            .catch((error) => {
-                console.log('Erro ao carregar especies', error);
-            });
+                .then((response) => {
+                    this.species = response.data;
+                })
+                .catch((error) => {
+                    console.log('Erro ao carregar especies', error);
+                });
         },
-        loadBreeds(){
+        loadBreeds() {
             axios.get('/breeds')
-            .then((response) => {
-                this.species = response.data;
-            })
-            .catch((error) => {
-                console.log('Erro ao carregar raças', error);
-            });
+                .then((response) => {
+                    this.breeds = response.data;
+                })
+                .catch((error) => {
+                    console.log('Erro ao carregar raças', error);
+                });
         },
         editPet(id) {
             const selectedPet = this.myPets.find(pet => pet.id === id);
