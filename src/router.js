@@ -29,6 +29,9 @@ import Users from './components/Users.vue';
 import Species from './components/Species.vue';
 import Races from './components/Races.vue';
 
+//Ajuste de novas rotas
+import AllResumeDash from './components/Dashboard/AllResumeDash.vue';
+
 const routes = [
   {
     path: '/',
@@ -95,9 +98,15 @@ const routes = [
   {
     path: '/dashboard',
     component: Dashboard,
+    redirect: '/resume',
     // beforeEnter: Guard.auth, //precisa de autenticação
     meta: { hideFooter: true, hideNavBar: true }, //retira o footer e navbar
     children: [
+      {
+        name: 'AllResumeDash',
+        path: '/resume',
+        component: AllResumeDash
+      },
       {
         name: 'users',
         path: '/users',

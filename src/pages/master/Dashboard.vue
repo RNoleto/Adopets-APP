@@ -9,7 +9,7 @@
     </nav>
     <div class="block">
       <aside class="sidebar">
-        <!-- Conteúdo da barra lateral aqui -->
+        <!-- Conteúdo da barra lateral aqui -->         
         <div @click="toggleAccordion(1)" class="accordion" :class="{ 'active': accordions[1] }">
           <span class="menu">Usuários</span>
           <div v-if="accordions[1]" class="submenu">
@@ -19,10 +19,10 @@
         <div @click="toggleAccordion(2)" class="accordion" :class="{ 'active': accordions[2] }">
           <span class="menu">Animais</span>
           <div v-if="accordions[2]" class="submenu">
-            <router-link class="link" to="/ResumeAnimal">Resumo Animal</router-link>
+            <router-link class="link" to="/ResumeAnimal">Lista</router-link>
             <router-link class="link" to="/Species">Espécies</router-link>
             <router-link class="link" to="/Races">Raças</router-link>
-            <router-link class="link" to="#">Disponiveis para adoção</router-link>
+            <router-link class="link" to="#">Adoção</router-link>
           </div>
         </div>
         <div @click="toggleAccordion(3)" class="accordion" :class="{ 'active': accordions[3] }">
@@ -44,12 +44,18 @@
 <script>
 import { ref } from 'vue';
 
+//Componente de Resumos
+import AllResumeDash from '../../components/Dashboard/AllResumeDash.vue';
+
+//Informações de Usuários
 import Users from '../../components/Users.vue';
 
+//Informações de animais
 import ResumeAnimal from '../ResumeAnimal.vue';
 import Species from '../../components/Species.vue';
 import Races from '../../components/Races.vue';
 
+//Informações de Posts
 
 export default {
   name: 'NewDashboard',
@@ -75,6 +81,7 @@ export default {
     };
   },
   components: {
+    AllResumeDash,
     ResumeAnimal,
     Species,
     Races,
@@ -117,13 +124,13 @@ export default {
       background-color: var(--p5);
       color: var(--c2);
       padding: 20px 0px;
-      flex: 0 0 150px;
+      flex: 0 0 200px;
       text-align: center;
 
       .menu {
         font: 500 14px/22px var(--title-font);
         padding: 5px 0px;
-        // height: 40px;
+        height: 40px;
         align-content: center;
         display: block;
       }
@@ -148,7 +155,7 @@ export default {
       display: flex;
       flex-direction: column;
       background-color: var(--p6);
-
+      
       .link {
         border-bottom: 1px solid var(--p3);
         background-color: var(--p3);
@@ -156,6 +163,7 @@ export default {
         color: var(--c1);
         padding: 5px;
         font-weight: 300;
+        border-bottom: 1px solid var(--c7);
 
         &:hover,
         &:active {

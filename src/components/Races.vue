@@ -31,7 +31,7 @@
           <input type="file" id="imageUpload" ref="imageUpload" name="file" multiple />
         </div>
     <div class="story">
-      <label for="story">Conte a história dessa Raça:</label>
+      <label class="text_body" for="story">Conte a história dessa Raça:</label>
       <ckeditor class="ckeditor" :editor="editor" v-model="story" :config="editorConfig"></ckeditor>
     </div>
     <button type="submit">Cadastrar Raça</button>
@@ -53,9 +53,9 @@ export default {
   },
   data() {
     return {
+      speciesList: [],
       breedsList: [],
       accordionOpen: false,
-      speciesList: [],
       selectedSpecies: null,
       breed: "",
       origin: "",
@@ -176,17 +176,25 @@ export default {
 .inputs{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 10px;
   }
     .inputType{
+      width: 200px;
       display: flex;
       flex-direction: column;
       margin-top: 10px;
     }
     #imageUpload{
+      width: 300px;
       margin: 10px 0px;
     }
 button {
   font: 500 12px / 16px var(--title-font);
+}
+.story{
+  .text_body{
+    color: var(--c9);
+  }
 }
 </style>

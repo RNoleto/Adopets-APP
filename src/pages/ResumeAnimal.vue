@@ -30,8 +30,7 @@
     <div class="pet" v-for="animal in AnimalsWithDetails" :key="animal.id">
       <p class="title">{{ animal.name }}</p>
       <div class="pet_infos">
-        <p class="text_body">Espécie: {{ animal.specie }}</p>
-        <p class="text_body">Raça: {{ animal.breed }}</p>
+        <p class="text_body">{{ animal.specie }} - {{ animal.breed }}</p>
       </div>
     </div>
   </div>

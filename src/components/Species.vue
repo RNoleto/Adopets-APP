@@ -122,6 +122,7 @@ form{
       padding: 3px 6px;
       .text_body{
         margin: 0px;
+        color: var(--p4);
       }
     }
   }
