@@ -17,6 +17,7 @@ import PetPage from './pages/PetPage.vue';
 import PetAdoption from './pages/PetAdoption.vue';
 import Post from './pages/Post.vue';
 import PetLost from './pages/PetLost.vue';
+import DetalhesRaca from './pages/DetalhesRaca.vue';
 
 import Dashboard from './pages/master/Dashboard.vue';
 
@@ -74,6 +75,12 @@ const routes = [
   {
     path: '/breedsgalery',
     component: BreedsGalery
+  },
+  {
+    path: '/raca/:id',
+    name: 'DetalhesRaca',
+    component: DetalhesRaca,
+    props: true
   },
   {
     path: '/login',
