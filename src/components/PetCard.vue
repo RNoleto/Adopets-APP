@@ -35,7 +35,6 @@ export default {
     name: 'PetCard',
     data() {
         return {
-            //Conteudo é fake, somente para testar frontend e logica para pegar as informações no backend
             myPets: [],
             species: [],
             breeds: [],
@@ -46,7 +45,7 @@ export default {
         this.loadMyPets();
         this.loadSpecies();
         this.loadBreeds();
-        // this.loadFiles();
+        this.loadFiles();
     },
     computed: {
         totalAnimals() {
@@ -65,7 +64,7 @@ export default {
         },
         myPetsWithImages() {
             return this.myPets.map(pet => {
-                const file = this.files.find(f => f.ref_id_animal === pet.id);
+                const file = Array.isArray(this.files) ? this.files.find(f => f.ref_id_animal === pet.id) : null;
                 const breed = this.breeds.find(b => b.id === pet.ref_id_breed);
                 return {
                     ...pet,
@@ -102,6 +101,16 @@ export default {
                 .catch((error) => {
                     console.log('Erro ao carregar raças', error);
                 });
+        },
+        loadFiles() {
+            axios.get('/files')
+                .then((response) => {
+                    console.log(response.data);
+                    this.files = response.data;
+                })
+                .catch((error) => {
+                    console.log('Erro ao carregar arquivos', error);
+                })
         },
         editPet(id) {
             const selectedPet = this.myPets.find(pet => pet.id === id);

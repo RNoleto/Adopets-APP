@@ -43,144 +43,144 @@ export default {
   data() {
     return {
       SpeciesList: [
-        {
-          id: 1,
-          specie: "Canina",
-        },
-        {
-          id: 2,
-          specie: "Felina",
-        },
-        {
-          id: 3,
-          specie: "Roedor",
-        },
-        {
-          id: 4,
-          specie: "Aves",
-        },
-        {
-          id: 5,
-          specie: "Peixes",
-        }
+        // {
+        //   id: 1,
+        //   specie: "Canina",
+        // },
+        // {
+        //   id: 2,
+        //   specie: "Felina",
+        // },
+        // {
+        //   id: 3,
+        //   specie: "Roedor",
+        // },
+        // {
+        //   id: 4,
+        //   specie: "Aves",
+        // },
+        // {
+        //   id: 5,
+        //   specie: "Peixes",
+        // }
       ],
       BreedList: [
-        {
-          id: 1,
-          ref_id_specie: 1,
-          breed: "Poodle"
-        },
-        {
-          id: 2,
-          ref_id_specie: 1,
-          breed: "Bulldog"
-        },
-        {
-          id: 3,
-          ref_id_specie: 2,
-          breed: "Persa"
-        },
-        {
-          id: 4,
-          ref_id_specie: 2,
-          breed: "Siamês"
-        },
-        {
-          id: 5,
-          ref_id_specie: 3,
-          breed: "Hamster Sírio"
-        },
-        {
-          id: 6,
-          ref_id_specie: 3,
-          breed: "Porquinho da Índia"
-        },
-        {
-          id: 7,
-          ref_id_specie: 4,
-          breed: "Canário"
-        },
-        {
-          id: 8,
-          ref_id_specie: 4,
-          breed: "Papagaio"
-        },
-        {
-          id: 9,
-          ref_id_specie: 5,
-          breed: "Betta"
-        },
-        {
-          id: 10,
-          ref_id_specie: 5,
-          breed: "Goldfish"
-        }
+        // {
+        //   id: 1,
+        //   ref_id_specie: 1,
+        //   breed: "Poodle"
+        // },
+        // {
+        //   id: 2,
+        //   ref_id_specie: 1,
+        //   breed: "Bulldog"
+        // },
+        // {
+        //   id: 3,
+        //   ref_id_specie: 2,
+        //   breed: "Persa"
+        // },
+        // {
+        //   id: 4,
+        //   ref_id_specie: 2,
+        //   breed: "Siamês"
+        // },
+        // {
+        //   id: 5,
+        //   ref_id_specie: 3,
+        //   breed: "Hamster Sírio"
+        // },
+        // {
+        //   id: 6,
+        //   ref_id_specie: 3,
+        //   breed: "Porquinho da Índia"
+        // },
+        // {
+        //   id: 7,
+        //   ref_id_specie: 4,
+        //   breed: "Canário"
+        // },
+        // {
+        //   id: 8,
+        //   ref_id_specie: 4,
+        //   breed: "Papagaio"
+        // },
+        // {
+        //   id: 9,
+        //   ref_id_specie: 5,
+        //   breed: "Betta"
+        // },
+        // {
+        //   id: 10,
+        //   ref_id_specie: 5,
+        //   breed: "Goldfish"
+        // }
       ],
       Animals: [
-        {
-          id: 1,
-          ref_id_specie: 1,
-          ref_id_breed: 1,
-          name: "Snow",
-        },
-        {
-          id: 2,
-          ref_id_specie: 1,
-          ref_id_breed: 2,
-          name: "Buddy",
-        },
-        {
-          id: 3,
-          ref_id_specie: 2,
-          ref_id_breed: 3,
-          name: "Mingau",
-        },
-        {
-          id: 4,
-          ref_id_specie: 2,
-          ref_id_breed: 4,
-          name: "Luna",
-        },
-        {
-          id: 5,
-          ref_id_specie: 3,
-          ref_id_breed: 5,
-          name: "Nibbles",
-        },
-        {
-          id: 6,
-          ref_id_specie: 3,
-          ref_id_breed: 6,
-          name: "Cocoa",
-        },
-        {
-          id: 7,
-          ref_id_specie: 4,
-          ref_id_breed: 7,
-          name: "Tweety",
-        },
-        {
-          id: 8,
-          ref_id_specie: 4,
-          ref_id_breed: 8,
-          name: "Polly",
-        },
-        {
-          id: 9,
-          ref_id_specie: 5,
-          ref_id_breed: 9,
-          name: "Flash",
-        },
-        {
-          id: 10,
-          ref_id_specie: 5,
-          ref_id_breed: 10,
-          name: "Goldie",
-        }
+        // {
+        //   id: 1,
+        //   ref_id_specie: 1,
+        //   ref_id_breed: 1,
+        //   name: "Snow",
+        // },
+        // {
+        //   id: 2,
+        //   ref_id_specie: 1,
+        //   ref_id_breed: 2,
+        //   name: "Buddy",
+        // },
+        // {
+        //   id: 3,
+        //   ref_id_specie: 2,
+        //   ref_id_breed: 3,
+        //   name: "Mingau",
+        // },
+        // {
+        //   id: 4,
+        //   ref_id_specie: 2,
+        //   ref_id_breed: 4,
+        //   name: "Luna",
+        // },
+        // {
+        //   id: 5,
+        //   ref_id_specie: 3,
+        //   ref_id_breed: 5,
+        //   name: "Nibbles",
+        // },
+        // {
+        //   id: 6,
+        //   ref_id_specie: 3,
+        //   ref_id_breed: 6,
+        //   name: "Cocoa",
+        // },
+        // {
+        //   id: 7,
+        //   ref_id_specie: 4,
+        //   ref_id_breed: 7,
+        //   name: "Tweety",
+        // },
+        // {
+        //   id: 8,
+        //   ref_id_specie: 4,
+        //   ref_id_breed: 8,
+        //   name: "Polly",
+        // },
+        // {
+        //   id: 9,
+        //   ref_id_specie: 5,
+        //   ref_id_breed: 9,
+        //   name: "Flash",
+        // },
+        // {
+        //   id: 10,
+        //   ref_id_specie: 5,
+        //   ref_id_breed: 10,
+        //   name: "Goldie",
+        // }
       ],
     }
   },
-  components:{
+  components: {
     Card,
   },
   mounted() {
@@ -195,10 +195,10 @@ export default {
     totalBreeds() {
       return this.BreedList.length;
     },
-    totalAnimals(){
+    totalAnimals() {
       return this.Animals.length;
     },
-    AnimalsWithDetails(){
+    AnimalsWithDetails() {
       return this.Animals.map(animal => {
         const specie = this.SpeciesList.find(specie => specie.id === animal.ref_id_specie);
         const breed = this.BreedList.find(breed => breed.id === animal.ref_id_breed);
@@ -231,19 +231,19 @@ export default {
           console.log('Erro ao carregar dados de raças', error)
         })
     },
-    loadAnimals(){
-      
+    loadAnimals() {
+
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.cards{
+.cards {
   display: flex;
   gap: 20px;
 
-  .card{
+  .card {
     .text_body {
       margin: 0px;
 
@@ -254,28 +254,31 @@ export default {
     }
   }
 }
-.list{
+
+.list {
   margin-top: 24px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px ;
-  .pet{
+  gap: 10px;
+
+  .pet {
     width: calc(calc(100%/5) - 8px);
     // width: 100%;
     padding: 10px;
     border: 1px solid var(--p1);
     border-radius: 5px;
     box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.1);
-    .title{
-      font: 600 20px/28px var(--title-font) ;
+
+    .title {
+      font: 600 20px/28px var(--title-font);
       color: var(--p3);
     }
-    .text_body{
+
+    .text_body {
       margin-top: 0px;
       font: 400 12px/24px var(--body-font);
     }
   }
 }
-
 </style>
