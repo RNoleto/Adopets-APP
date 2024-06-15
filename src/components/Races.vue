@@ -26,10 +26,10 @@
         <label for="lifespan">Expectativa de Vida:</label>
         <input type="number" id="lifespan" v-model="lifespan" />
       </div>
-      </div>
-        <div class="inputType">
-          <input type="file" id="imageUpload" ref="imageUpload" name="file" multiple />
-        </div>
+    </div>
+    <div class="inputType">
+      <input type="file" id="imageUpload" ref="imageUpload" name="file" multiple />
+    </div>
     <div class="story">
       <label class="text_body" for="story">Conte a história dessa Raça:</label>
       <ckeditor class="ckeditor" :editor="editor" v-model="story" :config="editorConfig"></ckeditor>
@@ -65,7 +65,7 @@ export default {
       ref_id_user: '',
       editorConfig: {
         // plugins: [Bold, Italic],
-        toolbar: ['bold', 'italic', 'link', 'bulletedList', 'numberedList', 'imageUpload'],
+        toolbar: ['bold', 'italic', 'link', 'bulletedList', 'numberedList'],
         ckfinder: {
           uploadUrl: '../public/assets/img/breeds',
           options: {
@@ -173,27 +173,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.inputs{
+.inputs {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
-  }
-    .inputType{
-      width: 200px;
-      display: flex;
-      flex-direction: column;
-      margin-top: 10px;
-    }
-    #imageUpload{
-      width: 300px;
-      margin: 10px 0px;
-    }
+}
+
+.inputType {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+#imageUpload {
+  width: 300px;
+  margin: 10px 0px;
+}
+
 button {
   font: 500 12px / 16px var(--title-font);
 }
-.story{
-  .text_body{
+
+.story {
+  .text_body {
     color: var(--c9);
   }
 }

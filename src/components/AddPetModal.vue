@@ -75,6 +75,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
   props: {
     isOpen: {
@@ -93,7 +94,8 @@ export default {
       ref_id_user: '',
       petPhoto: null,
       speciesList: [],
-      breedsList: []
+      breedsList: [],
+      availableForAdoption: 1, // padrão para disponível para adoção
     };
   },
   mounted() {
@@ -132,9 +134,9 @@ export default {
         formData.append('name', this.petName);
         formData.append('birth', this.petBirth);
         formData.append('gender', this.selectedGender);
-
-        const userId = JSON.parse(localStorage.getItem('userId'));
-        formData.append('ref_id_user', userId);
+        formData.append('ref_id_user', JSON.parse(localStorage.getItem('userId')));
+        formData.append('available_for_adoption', this.availableForAdoption);
+        formData.append('photo', this.petPhoto); // adicionar a foto do pet
 
         const response = await axios.post("/animals", formData, {
           headers: {
@@ -159,6 +161,7 @@ export default {
       this.selectedBreeds = '';
       this.petBirth = '';
       this.petPhoto = null;
+      this.availableForAdoption = 1; // resetar para disponível para adoção
       if (this.$refs.petPhoto) {
         this.$refs.petPhoto.value = null;
       }
@@ -171,7 +174,7 @@ export default {
       this.$emit('close');
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

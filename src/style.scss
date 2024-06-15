@@ -315,13 +315,6 @@ textarea {
 
 }
 
-@media (max-width: 480px) {
-  .content {
-    // padding: 30px 20px;
-    // background-color: pink;
-  }
-}
-
 @media (max-width: 450px) {
 
   footer.content,
@@ -333,9 +326,10 @@ textarea {
 
 /*====  CKEDITOR ============================ */
 .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
-  // background-color: pink;
   .ck-button {
-    &.ck-off{
+
+    &.ck-off,
+    &.ck-on {
       margin-top: 3.9px !important;
     }
   }
@@ -346,7 +340,7 @@ textarea {
 }
 
 .ck-focused {
-  border-color: var(--color-1) !important;
+  // border-color: var(--color-1) !important;
 }
 
 .ck.ck-editor__main>.ck-editor__editable {
