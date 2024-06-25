@@ -5,7 +5,7 @@
             <p class="text count_total">Total de pets: {{ totalAnimals }}</p>
             <div class="count_species">
                 <div v-for="(count, specie) in speciesCount" :key="specie" class="specie">
-                    <p class="text">{{ specie.name }}: {{ count }}</p>
+                    <p class="text">{{ getSpecieName(specie) }}: {{ count }}</p>
                 </div>
             </div>
         </div>
@@ -18,8 +18,7 @@
                         <p class="text">{{ getGender(mypet.gender) }}</p>
                         <p class="text">{{ mypet.birth }}</p>
                         <p class="text">{{ mypet.breedName }}</p>
-                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do
-                            Pet</router-link>
+                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do Pet</router-link>
                     </div>
                 </div>
             </div>
@@ -38,14 +37,13 @@ export default {
             myPets: [],
             species: [],
             breeds: [],
-            files: [],
+            images: [], // will hold the blob URLs
         }
     },
     mounted() {
         this.loadMyPets();
         this.loadSpecies();
         this.loadBreeds();
-        this.loadFiles();
     },
     computed: {
         totalAnimals() {
@@ -64,11 +62,11 @@ export default {
         },
         myPetsWithImages() {
             return this.myPets.map(pet => {
-                const file = Array.isArray(this.files) ? this.files.find(f => f.ref_id_animal === pet.id) : null;
                 const breed = this.breeds.find(b => b.id === pet.ref_id_breed);
+                const img = this.images[pet.id] || 'https://via.placeholder.com/150';
                 return {
                     ...pet,
-                    img: file ? file.path : 'https://via.placeholder.com/150',
+                    img,
                     breedName: breed ? breed.breed : 'Unknown'
                 };
             });
@@ -79,6 +77,7 @@ export default {
             axios.get('/animals')
                 .then((response) => {
                     this.myPets = response.data;
+                    this.loadImages();
                 })
                 .catch((error) => {
                     console.error('Erro ao carregar meus pets', error);
@@ -90,7 +89,7 @@ export default {
                     this.species = response.data;
                 })
                 .catch((error) => {
-                    console.log('Erro ao carregar especies', error);
+                    console.log('Erro ao carregar espécies', error);
                 });
         },
         loadBreeds() {
@@ -102,15 +101,19 @@ export default {
                     console.log('Erro ao carregar raças', error);
                 });
         },
-        loadFiles() {
-            axios.get('/files')
-                .then((response) => {
-                    console.log(response.data);
-                    this.files = response.data;
-                })
-                .catch((error) => {
-                    console.log('Erro ao carregar arquivos', error);
-                })
+        async loadImages() {
+            const imagePromises = this.myPets.map(async (pet) => {
+                try {
+                    const response = await axios.get(`/files/${pet.id}`, { responseType: 'blob' });
+                    const blob = new Blob([response.data]);
+                    this.images[pet.id] = URL.createObjectURL(blob);
+                } catch (error) {
+                    console.error(`Erro ao carregar imagem do pet com ID ${pet.id}`, error);
+                    this.images[pet.id] = 'https://via.placeholder.com/150';
+                }
+            });
+
+            await Promise.all(imagePromises);
         },
         editPet(id) {
             const selectedPet = this.myPets.find(pet => pet.id === id);
@@ -118,6 +121,10 @@ export default {
         },
         getGender(gender) {
             return gender === "M" ? "Masculino" : "Feminino";
+        },
+        getSpecieName(specieId) {
+            const specie = this.species.find(s => s.id === specieId);
+            return specie ? specie.name : 'Unknown';
         }
     }
 }
