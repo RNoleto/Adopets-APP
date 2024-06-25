@@ -3,11 +3,6 @@
         <h3 class="title">Meus Pets</h3>
         <div class="count">
             <p class="text count_total">Total de pets: {{ totalAnimals }}</p>
-            <div class="count_species">
-                <div v-for="(count, specie) in speciesCount" :key="specie" class="specie">
-                    <p class="text">{{ getSpecieName(specie) }}: {{ count }}</p>
-                </div>
-            </div>
         </div>
         <div class="pets">
             <div v-for="(mypet, index) in myPetsWithImages" :key="index" class="card">
@@ -18,7 +13,8 @@
                         <p class="text">{{ getGender(mypet.gender) }}</p>
                         <p class="text">{{ mypet.birth }}</p>
                         <p class="text">{{ mypet.breedName }}</p>
-                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do Pet</router-link>
+                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do
+                            Pet</router-link>
                     </div>
                 </div>
             </div>
@@ -35,30 +31,17 @@ export default {
     data() {
         return {
             myPets: [],
-            species: [],
             breeds: [],
-            images: [], // will hold the blob URLs
+            images: [],
         }
     },
     mounted() {
         this.loadMyPets();
-        this.loadSpecies();
         this.loadBreeds();
     },
     computed: {
         totalAnimals() {
             return this.myPets.length;
-        },
-        speciesCount() {
-            const count = {};
-            this.myPets.forEach(pet => {
-                if (count[pet.ref_id_specie]) {
-                    count[pet.ref_id_specie]++;
-                } else {
-                    count[pet.ref_id_specie] = 1;
-                }
-            });
-            return count;
         },
         myPetsWithImages() {
             return this.myPets.map(pet => {
@@ -81,15 +64,6 @@ export default {
                 })
                 .catch((error) => {
                     console.error('Erro ao carregar meus pets', error);
-                });
-        },
-        loadSpecies() {
-            axios.get('/species')
-                .then((response) => {
-                    this.species = response.data;
-                })
-                .catch((error) => {
-                    console.log('Erro ao carregar espécies', error);
                 });
         },
         loadBreeds() {
@@ -124,7 +98,8 @@ export default {
         },
         getSpecieName(specieId) {
             const specie = this.species.find(s => s.id === specieId);
-            return specie ? specie.name : 'Unknown';
+            console.log(specie);
+            return specie ? specie.specie : 'Especie não encontrada';
         }
     }
 }

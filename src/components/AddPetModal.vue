@@ -44,8 +44,8 @@
         </div>
 
         <div class="inputTypes">
-          <label for="petPhoto">Foto:</label>
-          <input type="file" @change="handleFileUpload" id="petPhoto" ref="petPhoto" accept="image/*" required />
+          <label for="imageUpload">Foto:</label>
+          <input type="file" @change="handleFileUpload" id="imageUpload" ref="imageUpload" accept="image/*" required />
         </div>
 
 
@@ -92,7 +92,7 @@ export default {
       petBirth: '',
       userId: null,
       ref_id_user: '',
-      petPhoto: null,
+      imageUpload: null,
       speciesList: [],
       breedsList: [],
       availableForAdoption: 1, // padrão para disponível para adoção
@@ -124,7 +124,7 @@ export default {
         });
     },
     handleFileUpload(event) {
-      this.petPhoto = event.target.files[0];
+      this.imageUpload = event.target.files[0];
     },
     async submitPetForm() {
       try {
@@ -147,11 +147,30 @@ export default {
         if (response.status === 201 || response.status === 200) {
           const animalId = response.data.id;
           console.log("Dados do pet criado:", response.data.id);
+          await this.uploadImages(animalId);
         }
 
         this.resetForm();
       } catch (error) {
         console.log('Erro ao cadastrar novo pet:', error);
+      }
+    },
+    async uploadImages(animalId){
+      try {
+        const formData = new FormData();
+        const imageUploadInput = this.$refs.imageUpload;
+        const imageFiles = imageUploadInput.files;
+
+        for (let i = 0; i < imageFiles.length; i++){
+          formData.append('file', imageFiles[i]);
+          formData.append('ref_id_animal', animalId);
+        }
+
+        const response = await axios.post('/animalsimage', formData);
+
+        console.log("Resposta do upload de imagens:", response.data);
+      } catch (error){
+        console.log('Erro ao enviar imagens:', error);
       }
     },
     resetForm() {
