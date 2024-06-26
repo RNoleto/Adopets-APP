@@ -11,7 +11,8 @@
                     <div class="content">
                         <p class="title">{{ mypet.name }}</p>
                         <p class="text">{{ getGender(mypet.gender) }}</p>
-                        <p class="text">{{ mypet.birth }}</p>
+                        <p class="text">{{ formatDate(mypet.birth) }}</p>
+                        <!-- <p class="text">{{ mypet.birth }}</p> -->
                         <p class="text">{{ mypet.breedName }}</p>
                         <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do
                             Pet</router-link>
@@ -100,6 +101,10 @@ export default {
             const specie = this.species.find(s => s.id === specieId);
             console.log(specie);
             return specie ? specie.specie : 'Especie não encontrada';
+        },
+        formatDate(birth){
+            const [year, month, day] = birth.split('-');
+            return `${day}/${month}/${year}`;            
         }
     }
 }
@@ -145,7 +150,7 @@ export default {
         gap: 10px;
 
         .card {
-            width: calc(calc(100% / 4) - 8px);
+            width: calc(calc(100% / 3) - 7px);
             height: 180px;
             overflow: hidden;
             position: relative;
@@ -156,7 +161,6 @@ export default {
             .photo {
                 height: 100%;
                 position: absolute;
-                // z-index: -1;
                 object-fit: cover;
                 object-position: left center;
             }
