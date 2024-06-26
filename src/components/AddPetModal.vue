@@ -37,7 +37,6 @@
           </div>
         </div>
 
-
         <div class="inputTypes">
           <label for="petBirth">Data de Nascimento:</label>
           <input type="date" v-model="petBirth" id="petBirth" required />
@@ -48,21 +47,19 @@
           <input type="file" @change="handleFileUpload" id="imageUpload" ref="imageUpload" accept="image/*" required />
         </div>
 
-
         <fieldset>
           <legend>Disponível para Adoção?</legend>
           <div class="options">
             <div>
-              <input type="radio" id="sim" name="adoption" value="sim">
+              <input type="radio" id="sim" name="adoption" value="sim" v-model="availableForAdoption">
               <label for="sim">Sim</label>
             </div>
             <div>
-              <input type="radio" id="nao" name="adoption" value="nao">
+              <input type="radio" id="nao" name="adoption" value="nao" v-model="availableForAdoption">
               <label for="nao">Não</label>
             </div>
           </div>
         </fieldset>
-
 
         <div class="buttons">
           <button type="submit">Adicionar</button>
@@ -75,6 +72,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   props: {
@@ -90,12 +88,10 @@ export default {
       selectedSpecies: null,
       selectedBreeds: null,
       petBirth: '',
-      userId: null,
-      ref_id_user: '',
       imageUpload: null,
       speciesList: [],
       breedsList: [],
-      availableForAdoption: 1,
+      availableForAdoption: 'sim'
     };
   },
   mounted() {
@@ -135,8 +131,8 @@ export default {
         formData.append('birth', this.petBirth);
         formData.append('gender', this.selectedGender);
         formData.append('ref_id_user', JSON.parse(localStorage.getItem('userId')));
-        formData.append('available_for_adoption', this.availableForAdoption);
-        formData.append('photo', this.petPhoto); // adicionar a foto do pet
+        formData.append('available_for_adoption', this.availableForAdoption === 'sim' ? 1 : 0);
+        formData.append('photo', this.imageUpload);
 
         const response = await axios.post("/animals", formData, {
           headers: {
@@ -146,13 +142,25 @@ export default {
 
         if (response.status === 201 || response.status === 200) {
           const animalId = response.data.id;
-          console.log("Dados do pet criado:", response.data.id);
           await this.uploadImages(animalId);
+          Swal.fire({
+            title: 'Pet criado com sucesso!',
+            text: `Cadastro de ${this.petName} criado.`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.resetForm();
+            this.$emit('petAdded');
+            this.closeModal();
+          });
         }
-
-        this.resetForm();
       } catch (error) {
-        console.log('Erro ao cadastrar novo pet:', error);
+        Swal.fire({
+            title: 'Erro ao cadastrar Pet!',
+            text: 'Não foi possível cadastrar o Pet, tente novamente mais tarde.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
       }
     },
     async uploadImages(animalId) {
@@ -175,14 +183,14 @@ export default {
     },
     resetForm() {
       this.petName = '';
-      this.selectedGender = '';
-      this.selectedSpecies = '';
-      this.selectedBreeds = '';
+      this.selectedGender = null;
+      this.selectedSpecies = null;
+      this.selectedBreeds = null;
       this.petBirth = '';
-      this.petPhoto = null;
-      this.availableForAdoption = 1;
-      if (this.$refs.petPhoto) {
-        this.$refs.petPhoto.value = null;
+      this.imageUpload = null;
+      this.availableForAdoption = 'sim';
+      if (this.$refs.imageUpload) {
+        this.$refs.imageUpload.value = null;
       }
     },
     handleCancel() {
@@ -195,6 +203,7 @@ export default {
   }
 };
 </script>
+
 
 <style lang="scss" scoped>
 .modal-overlay {
@@ -217,6 +226,7 @@ export default {
   border: 1px solid var(--c2);
 
   .title {
+    font: 600 32px / 40px var(--body-font);
     color: var(--p5);
   }
 

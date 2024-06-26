@@ -124,7 +124,7 @@ header {
 
     .menu {
       display: flex;
-      gap: 40px;
+      gap: 30px;
       color: var(--c2);
 
       .link_menu {
