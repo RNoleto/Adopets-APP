@@ -44,7 +44,7 @@ import axios from "axios";
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-
+import Swal from "sweetalert2";
 
 export default {
   name: "Race",
@@ -130,14 +130,22 @@ export default {
 
         if (response.status === 201 || response.status === 200) {
           const breedId = response.data.id;
-          console.log("Dados da raça criada:", response.data.id);
-          // Envio das imagens com o ref_id_breed correto
+          Swal.fire({
+            title: 'Raça criada com sucesso!',
+            text: `Raça ${response.data.breed} criado.`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
           await this.uploadImages(breedId);
         }
-
         this.resetForm();
       } catch (error) {
-        console.error('Erro ao criar nova raça:', error);
+        Swal.fire({
+          title: 'Erro ao criar raça!',
+          text: `${error}`,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     },
     async uploadImages(breedId) {
