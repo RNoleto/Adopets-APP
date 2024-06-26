@@ -78,7 +78,7 @@ export default {
         async loadImages() {
             const imagePromises = this.myPets.map(async (pet) => {
                 try {
-                    const response = await axios.get(`/files/${pet.id}`, { responseType: 'blob' });
+                    const response = await axios.get(`/animalsimage/${pet.id}`, { responseType: 'blob' });
                     const blob = new Blob([response.data]);
                     this.images[pet.id] = URL.createObjectURL(blob);
                 } catch (error) {

@@ -95,7 +95,7 @@ export default {
       imageUpload: null,
       speciesList: [],
       breedsList: [],
-      availableForAdoption: 1, // padrão para disponível para adoção
+      availableForAdoption: 1,
     };
   },
   mounted() {
@@ -155,13 +155,13 @@ export default {
         console.log('Erro ao cadastrar novo pet:', error);
       }
     },
-    async uploadImages(animalId){
+    async uploadImages(animalId) {
       try {
         const formData = new FormData();
         const imageUploadInput = this.$refs.imageUpload;
         const imageFiles = imageUploadInput.files;
 
-        for (let i = 0; i < imageFiles.length; i++){
+        for (let i = 0; i < imageFiles.length; i++) {
           formData.append('file', imageFiles[i]);
           formData.append('ref_id_animal', animalId);
         }
@@ -169,7 +169,7 @@ export default {
         const response = await axios.post('/animalsimage', formData);
 
         console.log("Resposta do upload de imagens:", response.data);
-      } catch (error){
+      } catch (error) {
         console.log('Erro ao enviar imagens:', error);
       }
     },
@@ -180,7 +180,7 @@ export default {
       this.selectedBreeds = '';
       this.petBirth = '';
       this.petPhoto = null;
-      this.availableForAdoption = 1; // resetar para disponível para adoção
+      this.availableForAdoption = 1;
       if (this.$refs.petPhoto) {
         this.$refs.petPhoto.value = null;
       }
