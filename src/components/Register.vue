@@ -23,6 +23,8 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
+
 export default {
   data() {
     return {
@@ -38,10 +40,20 @@ export default {
       axios
         .post("/register", this.formData)
         .then((response) => {
-          window.alert(`Cadastro de ${this.formData.name} feito com sucesso!`);
+          Swal.fire({
+            title: 'Cadastro realizado com sucesso!',
+            text: `Cadastro de ${this.formData.name} realizado!`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
         })
         .catch((error) => {
-          console.error("Erro ao cadastrar usuário:", error.response.data);
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Falha ao registrar conta. Verifique os dados fornecidos e tente novamente.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         });
     },
   },
