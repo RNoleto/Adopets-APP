@@ -20,20 +20,12 @@
 
           <div class="inputTypes">
             <label for="petSpecie">Espécie</label>
-            <select v-model="selectedSpecies" required>
-              <option value="" disabled>Selecione</option>
-              <option v-for="species in speciesList" :key="species.id" :value="species.id">
-                {{ species.specie }}
-              </option>
-            </select>
+            <input type="text" v-model="petSpecie" id="petSpecie" required>
           </div>
 
           <div class="inputTypes">
             <label for="petBreed">Raça:</label>
-            <select v-model="selectedBreeds" required>
-              <option value="" disabled>Selecione</option>
-              <option v-for="breed in breedsList" :key="breed.id" :value="breed.id">{{ breed.breed }}</option>
-            </select>
+            <input type="text" v-model="petBreed" id="petBreed" required>
           </div>
         </div>
 
@@ -85,48 +77,22 @@ export default {
     return {
       petName: '',
       selectedGender: null,
-      selectedSpecies: null,
-      selectedBreeds: null,
+      petSpecie: '',
+      petBreed: '',
       petBirth: '',
       imageUpload: null,
-      speciesList: [],
-      breedsList: [],
       availableForAdoption: 'sim'
     };
   },
-  mounted() {
-    this.loadSpecies();
-    this.loadBreeds();
-  },
   methods: {
-    loadSpecies() {
-      axios
-        .get("/species")
-        .then((response) => {
-          this.speciesList = response.data;
-        })
-        .catch((error) => {
-          console.error("Erro ao carregar as espécies", error);
-        });
-    },
-    loadBreeds() {
-      axios
-        .get('/breeds')
-        .then((response) => {
-          this.breedsList = response.data;
-        })
-        .catch((error) => {
-          console.error('Erro ao carregar as raças', error);
-        });
-    },
     handleFileUpload(event) {
       this.imageUpload = event.target.files[0];
     },
     async submitPetForm() {
       try {
         const formData = new FormData();
-        formData.append('ref_id_breed', this.selectedBreeds);
-        formData.append('ref_id_specie', this.selectedSpecies);
+        formData.append('breed', this.petBreed);
+        formData.append('specie', this.petSpecie);
         formData.append('name', this.petName);
         formData.append('birth', this.petBirth);
         formData.append('gender', this.selectedGender);
@@ -156,11 +122,11 @@ export default {
         }
       } catch (error) {
         Swal.fire({
-            title: 'Erro ao cadastrar Pet!',
-            text: 'Não foi possível cadastrar o Pet, tente novamente mais tarde.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
+          title: 'Erro ao cadastrar Pet!',
+          text: 'Não foi possível cadastrar o Pet, tente novamente mais tarde.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     },
     async uploadImages(animalId) {
@@ -184,8 +150,8 @@ export default {
     resetForm() {
       this.petName = '';
       this.selectedGender = null;
-      this.selectedSpecies = null;
-      this.selectedBreeds = null;
+      this.petSpecies = '';
+      this.petBreed = '';
       this.petBirth = '';
       this.imageUpload = null;
       this.availableForAdoption = 'sim';

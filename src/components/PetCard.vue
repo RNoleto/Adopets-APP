@@ -12,8 +12,7 @@
                         <p class="title">{{ mypet.name }}</p>
                         <p class="text">{{ getGender(mypet.gender) }}</p>
                         <p class="text">{{ formatDate(mypet.birth) }}</p>
-                        <!-- <p class="text">{{ mypet.birth }}</p> -->
-                        <p class="text">{{ mypet.breedName }}</p>
+                        <p class="text">{{ mypet.breed }}</p>
                         <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do
                             Pet</router-link>
                     </div>
@@ -32,13 +31,11 @@ export default {
     data() {
         return {
             myPets: [],
-            breeds: [],
             images: [],
         }
     },
     mounted() {
         this.loadMyPets();
-        this.loadBreeds();
     },
     computed: {
         totalAnimals() {
@@ -46,12 +43,11 @@ export default {
         },
         myPetsWithImages() {
             return this.myPets.map(pet => {
-                const breed = this.breeds.find(b => b.id === pet.ref_id_breed);
+                const breed = this.myPets.find(b => b.id === pet.id);
                 const img = this.images[pet.id] || 'https://via.placeholder.com/150';
                 return {
                     ...pet,
                     img,
-                    breedName: breed ? breed.breed : 'Unknown'
                 };
             });
         }
@@ -65,15 +61,6 @@ export default {
                 })
                 .catch((error) => {
                     console.error('Erro ao carregar meus pets', error);
-                });
-        },
-        loadBreeds() {
-            axios.get('/breeds')
-                .then((response) => {
-                    this.breeds = response.data;
-                })
-                .catch((error) => {
-                    console.log('Erro ao carregar raças', error);
                 });
         },
         async loadImages() {
@@ -102,9 +89,9 @@ export default {
             console.log(specie);
             return specie ? specie.specie : 'Especie não encontrada';
         },
-        formatDate(birth){
+        formatDate(birth) {
             const [year, month, day] = birth.split('-');
-            return `${day}/${month}/${year}`;            
+            return `${day}/${month}/${year}`;
         }
     }
 }
