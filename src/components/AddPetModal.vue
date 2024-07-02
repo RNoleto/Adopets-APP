@@ -149,7 +149,7 @@ export default {
 
         const response = await axios.post('/animalsimage', formData);
 
-        console.log("Resposta do upload de imagens:", response.data);
+        // console.log("Resposta do upload de imagens:", response.data);
       } catch (error) {
         console.log('Erro ao enviar imagens:', error);
       }
