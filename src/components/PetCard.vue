@@ -43,7 +43,7 @@ export default {
         },
         myPetsWithImages() {
             return this.myPets.map(pet => {
-                const breed = this.myPets.find(b => b.id === pet.id);
+                // const breed = this.myPets.find(b => b.id === pet.id);
                 const img = this.images[pet.id] || 'https://via.placeholder.com/150';
                 return {
                     ...pet,
