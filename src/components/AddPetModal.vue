@@ -85,7 +85,7 @@ export default {
       petSpecie: '',
       petBreed: '',
       petBirth: '',
-      chipNumber: null,
+      chipNumber: '',
       imageUpload: null,
       availableForAdoption: 'nao'
     };
@@ -160,7 +160,7 @@ export default {
       this.petSpecie = '';
       this.petBreed = '';
       this.petBirth = '';
-      this.chipNumber = null;
+      this.chipNumber = '';
       this.imageUpload = null;
       this.availableForAdoption = 'nao';
       if (this.$refs.imageUpload) {
