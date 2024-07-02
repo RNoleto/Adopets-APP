@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import axios from 'axios'; // Importando o axios
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -7,6 +8,7 @@ export const useUserStore = defineStore('user', {
       name: '',
       email: ''
     },
+    pets: [] // Adicionando o estado de pets
   }),
   actions: {
     initializeUser() {
@@ -32,6 +34,14 @@ export const useUserStore = defineStore('user', {
       localStorage.removeItem('user');
       localStorage.removeItem('userId');
       localStorage.removeItem('userEmail');
+    },
+    async fetchPets() {
+      try {
+        const response = await axios.get(`/animals?userId=${this.user.id}`);
+        this.pets = response.data;
+      } catch (error) {
+        console.error('Erro ao buscar pets:', error);
+      }
     }
   },
 });

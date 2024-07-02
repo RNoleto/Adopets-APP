@@ -30,6 +30,11 @@
         </div>
 
         <div class="inputTypes">
+          <label for="chipNumber">Nº do Chip</label>
+          <input type="number" v-model="chipNumber" id="chipNumber">
+        </div>
+
+        <div class="inputTypes">
           <label for="petBirth">Data de Nascimento:</label>
           <input type="date" v-model="petBirth" id="petBirth" required />
         </div>
@@ -80,8 +85,9 @@ export default {
       petSpecie: '',
       petBreed: '',
       petBirth: '',
+      chipNumber: null,
       imageUpload: null,
-      availableForAdoption: 'sim'
+      availableForAdoption: 'nao'
     };
   },
   methods: {
@@ -96,6 +102,7 @@ export default {
         formData.append('name', this.petName);
         formData.append('birth', this.petBirth);
         formData.append('gender', this.selectedGender);
+        formData.append('chip_number', this.chipNumber);
         formData.append('ref_id_user', JSON.parse(localStorage.getItem('userId')));
         formData.append('available_for_adoption', this.availableForAdoption === 'sim' ? 1 : 0);
         formData.append('photo', this.imageUpload);
@@ -150,11 +157,12 @@ export default {
     resetForm() {
       this.petName = '';
       this.selectedGender = null;
-      this.petSpecies = '';
+      this.petSpecie = '';
       this.petBreed = '';
       this.petBirth = '';
+      this.chipNumber = null;
       this.imageUpload = null;
-      this.availableForAdoption = 'sim';
+      this.availableForAdoption = 'nao';
       if (this.$refs.imageUpload) {
         this.$refs.imageUpload.value = null;
       }

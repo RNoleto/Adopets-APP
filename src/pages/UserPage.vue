@@ -1,70 +1,88 @@
 <template>
     <div class="content">
-        <p class="title">Página do Usuário.</p>
-        <div class="user">
-            <p class="text_body">Seja bem-vindo {{ userStore.user.name }}!</p>
+      <p class="title">Página do Usuário.</p>
+      <div class="user">
+        <p class="text_body">Seja bem-vindo {{ userStore.user.name }}!</p>
+      </div>
+      <ul class="menu">
+        <li><button @click="setActiveView('myInfos')">Meus dados</button></li>
+        <li><button @click="setActiveView('myPets')">Meus Pets</button></li>
+        <li><button @click="setActiveView('lostPets')">Pets Perdidos</button></li>
+      </ul>
+      <div class="infos">
+        <div v-if="activeView === 'myInfos'" class="myInfos">
+          <p>Nome: {{ userStore.user.name }}</p>
+          <p>Email: {{ userStore.user.email }}</p>
         </div>
-        <ul class="menu">
-            <li><button @click="setActiveView('myInfos')">Meus dados</button></li>
-            <li><button @click="setActiveView('myPets')">Meus Pets</button></li>
-            <li><button @click="setActiveView('lostPets')">Pets Perdidos</button></li>
-        </ul>
-        <div class="infos">
-            <div v-if="activeView === 'myInfos'" class="myInfos">
-                <p>Nome: {{ userStore.user.name }}</p>
-                <p>Email: {{ userStore.user.email }}</p>
-            </div>
-            <div v-if="activeView === 'myPets'" class="myPets">
-                <PetCard />
-                <button @click="openAddPetModal">Adicionar Pet</button>
-            </div>
-            <div v-if="activeView === 'lostPets'">
-                <p>Pets Perdidos</p>
-            </div>
+        <div v-if="activeView === 'myPets'" class="myPets">
+          <PetCard :pets="userStore.pets" :images="images" />
+          <button @click="openAddPetModal">Adicionar Pet</button>
         </div>
-        <AddPetModal :isOpen="isAddPetModalOpen" @close="closeAddPetModal" @add-pet="addPet" />
+        <div v-if="activeView === 'lostPets'">
+          <p>Pets Perdidos</p>
+        </div>
+      </div>
+      <AddPetModal :isOpen="isAddPetModalOpen" @close="closeAddPetModal" @petAdded="fetchPets" />
     </div>
-</template>
-
-<script>
-import { useUserStore } from '../stores/userStore';
-import PetCard from '../components/PetCard.vue';
-import AddPetModal from '../components/AddPetModal.vue';
-
-export default {
+  </template>
+  
+  <script>
+  import { useUserStore } from '../stores/userStore';
+  import PetCard from '../components/PetCard.vue';
+  import AddPetModal from '../components/AddPetModal.vue';
+  
+  export default {
     components: {
-        PetCard,
-        AddPetModal,
+      PetCard,
+      AddPetModal,
     },
     data() {
-        return {
-            activeView: 'myInfos',
-            isAddPetModalOpen: false,
-        };
+      return {
+        activeView: 'myInfos',
+        isAddPetModalOpen: false,
+        images: {}, // Armazenar imagens dos pets
+      };
     },
     computed: {
-        userStore() {
-            return useUserStore();
-        }
+      userStore() {
+        return useUserStore();
+      }
     },
     mounted() {
-        this.userStore.initializeUser();
+      this.userStore.initializeUser();
+      this.fetchPets();
     },
     methods: {
-        setActiveView(view) {
-            this.activeView = view;
-        },
-        openAddPetModal() {
-            this.isAddPetModalOpen = true;
-        },
-        closeAddPetModal() {
-            this.isAddPetModalOpen = false;
-        },
-        addPet(newPet) {
-            console.log('Novo pet adicionado:', newPet);
-        }
+      setActiveView(view) {
+        this.activeView = view;
+      },
+      openAddPetModal() {
+        this.isAddPetModalOpen = true;
+      },
+      closeAddPetModal() {
+        this.isAddPetModalOpen = false;
+      },
+      async fetchPets() {
+        await this.userStore.fetchPets();
+        this.loadImages();
+      },
+      async loadImages() {
+        const pets = this.userStore.pets;
+        const imagePromises = pets.map(async (pet) => {
+          try {
+            const response = await axios.get(`/animalsimage/${pet.id}`, { responseType: 'blob' });
+            const blob = new Blob([response.data]);
+            this.images[pet.id] = URL.createObjectURL(blob);
+          } catch (error) {
+            // console.error(`Erro ao carregar imagem do pet com ID ${pet.id}`, error);
+            this.images[pet.id] = 'https://via.placeholder.com/150';
+          }
+        });
+  
+        await Promise.all(imagePromises);
+      }
     }
-}
+  }
 </script>
 
 <style lang="scss" scoped>
