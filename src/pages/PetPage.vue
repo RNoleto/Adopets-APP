@@ -7,6 +7,7 @@
                 <img :src="imgSrc" :alt="pet.name">
                 <p>{{ pet.name }}</p>
                 <p>{{ pet.breed }}</p>
+                <p>{{ formatDate(pet.birth) }}</p>
             </div>
             <div v-else>
                 Nenhum pet Selecionado aqui.
@@ -51,6 +52,10 @@ export default {
             } catch (error) {
                 console.log('Erro ao carregar a imagem do pet:', error);
             }
+        },
+        formatDate(birth) {
+            const [year, month, day] = birth.split('-');
+            return `${day}/${month}/${year}`;
         }
     }
 }
