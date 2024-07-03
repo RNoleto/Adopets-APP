@@ -31,9 +31,9 @@
                                     </td>
                                 </template>
                                 <template v-else>
-                                    <td>{{ vaccine.name }}</td>
-                                    <td>{{ vaccine.local }}</td>
-                                    <td>{{ formatDate(vaccine.date) }}</td>
+                                    <td><p class="text_body">{{ vaccine.name }}</p></td>
+                                    <td><p class="text_body">{{ vaccine.local }}</p></td>
+                                    <td><p class="text_body">{{ formatDate(vaccine.date) }}</p></td>
                                     <td class="buttons">
                                         <button @click="editVaccine(index)">Editar</button>
                                         <button @click="deleteVaccine(vaccine.id, index)">Excluir</button>
@@ -163,7 +163,7 @@ export default {
     .petImg{
         height: 350px;
         object-fit: cover;
-        object-position: center;
+        object-position: top;
     }
     .title {
         color: var(--p3);
