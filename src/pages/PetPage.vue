@@ -2,7 +2,7 @@
     <div class="content">
         <div class="container">
             <div v-if="pet">
-                <img :src="imgSrc" :alt="pet.name">
+                <img :src="imgSrc" :alt="pet.name" class="petImg">
                 <p class="title">{{ pet.name }}</p>
                 <p class="text_body">Raça: {{ pet.breed }}</p>
                 <p class="text_body">Sexo: {{ getGender(pet.gender) }}</p>
@@ -16,13 +16,30 @@
                                 <th>Vacina</th>
                                 <th>Local</th>
                                 <th>Data</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="vaccine in vaccines" :key="vaccine.id">
-                                <td>{{ vaccine.name }}</td>
-                                <td>{{ vaccine.local }}</td>
-                                <td>{{ formatDate(vaccine.date) }}</td>
+                            <tr v-for="(vaccine, index) in vaccines" :key="vaccine.id || index">
+                                <template v-if="editIndex === index">
+                                    <td><input v-model="vaccine.name" placeholder="Nome da Vacina"></td>
+                                    <td><input v-model="vaccine.local" placeholder="Local"></td>
+                                    <td><input type="date" v-model="vaccine.date"></td>
+                                    <td class="buttons">
+                                        <button @click="saveVaccine(index)">Salvar</button>
+                                        <button @click="cancelEdit">Cancelar</button>
+                                    </td>
+                                </template>
+                                <template v-else>
+                                    <td>{{ vaccine.name }}</td>
+                                    <td>{{ vaccine.local }}</td>
+                                    <td>{{ formatDate(vaccine.date) }}</td>
+                                    <td class="buttons">
+                                        <button @click="editVaccine(index)">Editar</button>
+                                        <button @click="deleteVaccine(vaccine.id, index)">Excluir</button>
+                                    </td>
+                                    
+                                </template>
                             </tr>
                         </tbody>
                     </table>
@@ -30,25 +47,8 @@
                 <div v-else>
                     <p>Nenhuma vacina registrada para este pet.</p>
                 </div>
-                <!-- Formulário de cadastro de vacina -->
-                <div class="vaccine-form">
-                    <h3>Cadastrar Nova Vacina</h3>
-                    <form @submit.prevent="addVaccine">
-                        <div>
-                            <label for="vaccine-name">Nome da Vacina:</label>
-                            <input type="text" v-model="newVaccine.name" id="vaccine-name" required>
-                        </div>
-                        <div>
-                            <label for="vaccine-local">Local:</label>
-                            <input type="text" v-model="newVaccine.local" id="vaccine-local" required>
-                        </div>
-                        <div>
-                            <label for="vaccine-date">Data:</label>
-                            <input type="date" v-model="newVaccine.date" id="vaccine-date" required>
-                        </div>
-                        <button type="submit">Cadastrar</button>
-                    </form>
-                </div>
+                <!-- Botão para adicionar nova vacina -->
+                <button @click="addNewVaccine">Adicionar Vacina</button>
             </div>
             <div v-else>
                 Nenhum pet Selecionado aqui.
@@ -71,7 +71,8 @@ export default {
                 name: '',
                 local: '',
                 date: ''
-            }
+            },
+            editIndex: null
         }
     },
     async created(){
@@ -108,23 +109,49 @@ export default {
                 console.log('Erro ao carregar informações de vacina do pet:', error);
             }
         },
-        formatDate(birth) {
-            const [year, month, day] = birth.split('-');
+        formatDate(date) {
+            if(!date) return 'Data não disponível';
+            const [year, month, day] = date.split('-');
             return `${day}/${month}/${year}`;
         },
         getGender(gender) {
             return gender === "M" ? "Masculino" : "Feminino";
         },
-        async addVaccine(){
+        addNewVaccine() {
+            this.vaccines.push({ name: '', local: '', date: '', id: null });
+            this.editIndex = this.vaccines.length - 1;
+        },
+        editVaccine(index) {
+            this.editIndex = index;
+        },
+        cancelEdit() {
+            if (this.vaccines[this.editIndex].id === null) {
+                this.vaccines.pop();
+            }
+            this.editIndex = null;
+        },
+        async saveVaccine(index) {
+            try {
+                const vaccine = { ...this.vaccines[index], ref_id_animal: this.$route.params.id };
+                let response;
+                if (vaccine.id === null) {
+                    response = await axios.post('/vaccines', vaccine);
+                    this.vaccines[index] = response.data;
+                } else {
+                    response = await axios.put(`/vaccines/${vaccine.id}`, vaccine);
+                    this.vaccines[index] = response.data;
+                }
+                this.editIndex = null;
+            } catch (error) {
+                console.log('Erro ao salvar a vacina:', error);
+            }
+        },
+        async deleteVaccine(id, index){
             try{
-                const vaccine = { ...this.newVaccine, ref_id_animal: this.$route.params.id};
-                const response = await axios.post('/vaccines', vaccine);
-                this.vaccines.push(response.data);
-                this.newVaccine.name = '';
-                this.newVaccine.local = '';
-                this.newVaccine.date = '';
+                await axios.delete(`/vaccines/${id}`);
+                this.vaccines.splice(index, 1);
             }catch(error){
-                console.log('Erro ao cadastrar a vacina:', error);
+                console.log('Erro ao deletar a vacina:', error);
             }
         }
     }
@@ -133,6 +160,11 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+    .petImg{
+        height: 350px;
+        object-fit: cover;
+        object-position: center;
+    }
     .title {
         color: var(--p3);
     }
@@ -150,12 +182,21 @@ export default {
             width: 100%;
             border-collapse: collapse;
             margin-top: 8px;
-    
             th,
             td {
                 border: 1px solid var(--c4);
                 padding: 8px;
                 text-align: left;
+            }
+            
+            .buttons{
+             display: flex;
+             gap: 18px;
+             button{
+                padding: 2px 10px;
+                font-size: 10px;
+                margin: 0px !important;
+             }
             }
     
             th {
