@@ -30,6 +30,25 @@
                 <div v-else>
                     <p>Nenhuma vacina registrada para este pet.</p>
                 </div>
+                <!-- Formulário de cadastro de vacina -->
+                <div class="vaccine-form">
+                    <h3>Cadastrar Nova Vacina</h3>
+                    <form @submit.prevent="addVaccine">
+                        <div>
+                            <label for="vaccine-name">Nome da Vacina:</label>
+                            <input type="text" v-model="newVaccine.name" id="vaccine-name" required>
+                        </div>
+                        <div>
+                            <label for="vaccine-local">Local:</label>
+                            <input type="text" v-model="newVaccine.local" id="vaccine-local" required>
+                        </div>
+                        <div>
+                            <label for="vaccine-date">Data:</label>
+                            <input type="date" v-model="newVaccine.date" id="vaccine-date" required>
+                        </div>
+                        <button type="submit">Cadastrar</button>
+                    </form>
+                </div>
             </div>
             <div v-else>
                 Nenhum pet Selecionado aqui.
@@ -48,6 +67,11 @@ export default {
             selectedPetId: 0,
             imgSrc: null,
             vaccines: [],
+            newVaccine: {
+                name: '',
+                local: '',
+                date: ''
+            }
         }
     },
     async created(){
@@ -90,6 +114,18 @@ export default {
         },
         getGender(gender) {
             return gender === "M" ? "Masculino" : "Feminino";
+        },
+        async addVaccine(){
+            try{
+                const vaccine = { ...this.newVaccine, ref_id_animal: this.$route.params.id};
+                const response = await axios.post('/vaccines', vaccine);
+                this.vaccines.push(response.data);
+                this.newVaccine.name = '';
+                this.newVaccine.local = '';
+                this.newVaccine.date = '';
+            }catch(error){
+                console.log('Erro ao cadastrar a vacina:', error);
+            }
         }
     }
 }
