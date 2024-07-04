@@ -2,11 +2,17 @@
     <div class="content">
         <div class="container">
             <div v-if="pet">
-                <img :src="imgSrc" :alt="pet.name" class="petImg">
-                <p class="title">{{ pet.name }}</p>
-                <p class="text_body">Raça: {{ pet.breed }}</p>
-                <p class="text_body">Sexo: {{ getGender(pet.gender) }}</p>
-                <p class="text_body">Data de Nascimento: {{ formatDate(pet.birth) }}</p>
+                <div class="infos">
+                    <img :src="imgSrc" :alt="pet.name" class="petImg">
+                    <div class="petDetails">
+                        <p class="title">{{ pet.name }}</p>
+                        <p class="text_body">Raça: {{ pet.breed }}</p>
+                        <p class="text_body">Sexo: {{ getGender(pet.gender) }}</p>
+                        <p class="text_body">Chip: {{ getChip(pet.chip_number) }}</p>
+                        <p class="text_body">Adoção: {{ getAdoption(pet.status) }}</p>
+                        <p class="text_body">Data de Nascimento: {{ formatDate(pet.birth) }}</p>
+                    </div>
+                </div>
                 <!-- Informações de vacina -->
                 <div v-if="vaccines.length" class="vaccines">
                     <p class="text_body">Vacinas</p>
@@ -21,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(vaccine, index) in vaccines" :key="vaccine.id || index">
-                                <template v-if="editIndex === index">
+                                <template v-if="editVaccineIndex === index">
                                     <td><input v-model="vaccine.name" placeholder="Nome da Vacina"></td>
                                     <td><input v-model="vaccine.local" placeholder="Local"></td>
                                     <td><input type="date" v-model="vaccine.date"></td>
@@ -38,14 +44,13 @@
                                         <button @click="editVaccine(index)">Editar</button>
                                         <button @click="deleteVaccine(vaccine.id, index)">Excluir</button>
                                     </td>
-                                    
                                 </template>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div v-else>
-                    <p>Nenhuma vacina registrada para este pet.</p>
+                    <p class="text_body">Nenhuma vacina registrada para este pet.</p>
                 </div>
                 <!-- Botão para adicionar nova vacina -->
                 <button @click="addNewVaccine">Adicionar Vacina</button>
@@ -53,6 +58,44 @@
             <div v-else>
                 Nenhum pet Selecionado aqui.
             </div>
+            <!-- Informações de medicamentos vermifugos/antipulgas e etc -->
+            <div v-if="medicines.length" class="medicines">
+                <p class="text_body">Medicamentos</p>
+                <table>
+                    <thead>
+                        <th>Nome</th>
+                        <th>Medicamento</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(medicine, index) in medicines" :key="medicine.id || index">
+                            <template v-if="editMedicineIndex === index">
+                                <td><input v-model="medicine.name" placeholder="Nome da Vacina"></td>
+                                    <td><input v-model="medicine.medicine" placeholder="Vermifugo, antipulga e etc..."></td>
+                                    <td><input type="date" v-model="medicine.date"></td>
+                                <td class="buttons">
+                                        <button @click="saveMedicine(index)">Salvar</button>
+                                        <button @click="cancelEdit">Cancelar</button>
+                                </td>
+                            </template>
+                            <template v-else>
+                                <td><p class="text_body">{{ medicine.name }}</p></td>
+                                    <td><p class="text_body">{{ medicine.medicine }}</p></td>
+                                    <td><p class="text_body">{{ formatDate(medicine.date) }}</p></td>
+                                    <td class="buttons">
+                                        <button @click="editMedicine(index)">Editar</button>
+                                        <button @click="deleteMedicine(medicine.id, index)">Excluir</button>
+                                    </td>
+                            </template>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div v-else>
+                <p class="text_body">Nenhum medicamento registrado para esse pet.</p>
+            </div>
+            <button @click="addNewMedicine">Adicionar Medicamento</button>
         </div>
     </div>
 </template>
@@ -72,7 +115,14 @@ export default {
                 local: '',
                 date: ''
             },
-            editIndex: null
+            medicines:[],
+            newMedicine: {
+                name: '',
+                medicine: '',
+                date: ''
+            },
+            editVaccineIndex: null,
+            editMedicineIndex: null,
         }
     },
     async created(){
@@ -114,21 +164,31 @@ export default {
             const [year, month, day] = date.split('-');
             return `${day}/${month}/${year}`;
         },
+        getChip(chip){
+            return chip === '' || chip === null ? "Não informado" : chip ;
+        },
+        getAdoption(status){
+            return status === 0 ? 'Indisponível' : 'Disponível';
+        },
         getGender(gender) {
             return gender === "M" ? "Masculino" : "Feminino";
         },
         addNewVaccine() {
             this.vaccines.push({ name: '', local: '', date: '', id: null });
-            this.editIndex = this.vaccines.length - 1;
+            this.editVaccineIndex = this.vaccines.length - 1;
         },
         editVaccine(index) {
-            this.editIndex = index;
+            this.editVaccineIndex = index;
         },
         cancelEdit() {
-            if (this.vaccines[this.editIndex].id === null) {
+            if (this.vaccines[this.editVaccineIndex].id === null) {
                 this.vaccines.pop();
             }
-            this.editIndex = null;
+            this.editVaccineIndex = null;
+        },
+        addNewMedicine(){
+            this.medicines.push({ name: '', medicine: '', date: '', id: null});
+            this.editMedicineIndex = this.medicines.length - 1;
         },
         async saveVaccine(index) {
             try {
@@ -141,7 +201,7 @@ export default {
                     response = await axios.put(`/vaccines/${vaccine.id}`, vaccine);
                     this.vaccines[index] = response.data;
                 }
-                this.editIndex = null;
+                this.editVaccineIndex = null;
             } catch (error) {
                 console.log('Erro ao salvar a vacina:', error);
             }
@@ -160,23 +220,32 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-    .petImg{
-        height: 350px;
-        object-fit: cover;
-        object-position: top;
-    }
-    .title {
-        color: var(--p3);
+    .infos{
+        display: flex;
+        gap: 18px;
+        .petImg{
+            width: 500px;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .petDetails{
+            align-content: center;
+            .title {
+                color: var(--p3);
+            }
+        }
     }
 
     .text_body {
         margin-top: 0px;
     }
-    .vaccines{
+    .vaccines,
+    .medicines{
         margin-top: 10px;
         .text_body{
-            text-align: center;
             color: var(--p3);
+        }        
+        td .text_body{
+            text-align: center;
         }
         table {
             width: 100%;
