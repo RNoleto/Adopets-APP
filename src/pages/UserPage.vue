@@ -11,6 +11,7 @@
     </ul>
     <div class="infos">
       <div v-if="authStore.isAuthenticated && activeView === 'myInfos'" class="myInfos">
+        <p>Id: {{ authStore.user.id }}</p>
         <p>Nome: {{ authStore.user.name }}</p>
         <p>Email: {{ authStore.user.email }}</p>
       </div>

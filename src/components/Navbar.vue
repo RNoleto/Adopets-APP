@@ -2,7 +2,7 @@
   <header>
     <nav class="content">
       <div>
-        <router-link to="/" @click="toggleNav" class="logo">Adopets</router-link>
+        <router-link to="/" class="logo">Adopets</router-link>
       </div>
       <div class="menu">
         <div v-for="page in filteredPages" :key="page.id">
