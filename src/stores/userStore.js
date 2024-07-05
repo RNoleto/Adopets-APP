@@ -19,7 +19,6 @@ export const useUserStore = defineStore('user', {
       try {
         const response = await axios.get(`/users/${userId}/animals`);
         this.pets = response.data;
-        console.log("Pets informados pelo userStore:", this.pets);
       } catch (error) {
         console.error('Erro ao buscar pets:', error);
       }
