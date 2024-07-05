@@ -37,9 +37,15 @@
                                     </td>
                                 </template>
                                 <template v-else>
-                                    <td><p class="text_body">{{ vaccine.name }}</p></td>
-                                    <td><p class="text_body">{{ vaccine.local }}</p></td>
-                                    <td><p class="text_body">{{ formatDate(vaccine.date) }}</p></td>
+                                    <td>
+                                        <p class="text_body">{{ vaccine.name }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text_body">{{ vaccine.local }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text_body">{{ formatDate(vaccine.date) }}</p>
+                                    </td>
                                     <td class="buttons">
                                         <button @click="editVaccine(index)">Editar</button>
                                         <button @click="deleteVaccine(vaccine.id, index)">Excluir</button>
@@ -72,21 +78,27 @@
                         <tr v-for="(medicine, index) in medicines" :key="medicine.id || index">
                             <template v-if="editMedicineIndex === index">
                                 <td><input v-model="medicine.name" placeholder="Nome da Vacina"></td>
-                                    <td><input v-model="medicine.medicine" placeholder="Vermifugo, antipulga e etc..."></td>
-                                    <td><input type="date" v-model="medicine.date"></td>
+                                <td><input v-model="medicine.medicine" placeholder="Vermifugo, antipulga e etc..."></td>
+                                <td><input type="date" v-model="medicine.date"></td>
                                 <td class="buttons">
-                                        <button @click="saveMedicine(index)">Salvar</button>
-                                        <button @click="cancelEdit">Cancelar</button>
+                                    <button @click="saveMedicine(index)">Salvar</button>
+                                    <button @click="cancelEdit">Cancelar</button>
                                 </td>
                             </template>
                             <template v-else>
-                                <td><p class="text_body">{{ medicine.name }}</p></td>
-                                    <td><p class="text_body">{{ medicine.medicine }}</p></td>
-                                    <td><p class="text_body">{{ formatDate(medicine.date) }}</p></td>
-                                    <td class="buttons">
-                                        <button @click="editMedicine(index)">Editar</button>
-                                        <button @click="deleteMedicine(medicine.id, index)">Excluir</button>
-                                    </td>
+                                <td>
+                                    <p class="text_body">{{ medicine.name }}</p>
+                                </td>
+                                <td>
+                                    <p class="text_body">{{ medicine.medicine }}</p>
+                                </td>
+                                <td>
+                                    <p class="text_body">{{ formatDate(medicine.date) }}</p>
+                                </td>
+                                <td class="buttons">
+                                    <button @click="editMedicine(index)">Editar</button>
+                                    <button @click="deleteMedicine(medicine.id, index)">Excluir</button>
+                                </td>
                             </template>
                         </tr>
                     </tbody>
@@ -115,7 +127,7 @@ export default {
                 local: '',
                 date: ''
             },
-            medicines:[],
+            medicines: [],
             newMedicine: {
                 name: '',
                 medicine: '',
@@ -125,49 +137,58 @@ export default {
             editMedicineIndex: null,
         }
     },
-    async created(){
+    async created() {
         const petId = this.$route.params.id;
         await this.fetchPetDetails(petId);
-        if(this.pet) {
+        if (this.pet) {
             await this.fetchPetImage(petId);
             await this.fetchPetVaccines(petId);
+            await this.fetchPetMedicines(petId);
         }
     },
-    methods:{
-        async fetchPetDetails(petId){
-            try{
+    methods: {
+        async fetchPetDetails(petId) {
+            try {
                 const response = await axios.get(`/animals/${petId}`);
                 this.pet = response.data;
-            } catch (error){
+            } catch (error) {
                 console.log('Erro ao carregar os detalhes do pet', error);
             }
         },
-        async fetchPetImage(petId){
+        async fetchPetImage(petId) {
             try {
-                const response = await axios.get(`/animalsimage/${petId}`, { responseType: 'blob'});
+                const response = await axios.get(`/animalsimage/${petId}`, { responseType: 'blob' });
                 const url = URL.createObjectURL(response.data);
                 this.imgSrc = url;
             } catch (error) {
                 console.log('Erro ao carregar a imagem do pet:', error);
             }
         },
-        async fetchPetVaccines(petId){
-            try{
+        async fetchPetVaccines(petId) {
+            try {
                 const response = await axios.get(`/vaccines/pet/${petId}`);
                 this.vaccines = response.data;
-            }catch(error){
+            } catch (error) {
                 console.log('Erro ao carregar informações de vacina do pet:', error);
             }
         },
+        async fetchPetMedicines(petId) {
+            try {
+                const response = await axios.get(`/medicines/pet/${petId}`);
+                this.medicines = response.data;
+            } catch (error) {
+                console.log('Erro ao carregar informações de medicamentos do pet:', error);
+            }
+        },
         formatDate(date) {
-            if(!date) return 'Data não disponível';
+            if (!date) return 'Data não disponível';
             const [year, month, day] = date.split('-');
             return `${day}/${month}/${year}`;
         },
-        getChip(chip){
-            return chip === '' || chip === null ? "Não informado" : chip ;
+        getChip(chip) {
+            return chip === '' || chip === null ? "Não informado" : chip;
         },
-        getAdoption(status){
+        getAdoption(status) {
             return status === 0 ? 'Indisponível' : 'Disponível';
         },
         getGender(gender) {
@@ -186,8 +207,11 @@ export default {
             }
             this.editVaccineIndex = null;
         },
-        addNewMedicine(){
-            this.medicines.push({ name: '', medicine: '', date: '', id: null});
+        editMedicine(index) {
+            this.editMedicineIndex = index;
+        },
+        addNewMedicine() {
+            this.medicines.push({ name: '', medicine: '', date: '', id: null });
             this.editMedicineIndex = this.medicines.length - 1;
         },
         async saveVaccine(index) {
@@ -206,29 +230,48 @@ export default {
                 console.log('Erro ao salvar a vacina:', error);
             }
         },
-        async deleteVaccine(id, index){
-            try{
+        async deleteVaccine(id, index) {
+            try {
                 await axios.delete(`/vaccines/${id}`);
                 this.vaccines.splice(index, 1);
-            }catch(error){
+            } catch (error) {
                 console.log('Erro ao deletar a vacina:', error);
             }
-        }
+        },
+        async saveMedicine(index) {
+            try {
+                const medicine = { ...this.medicines[index], ref_id_animal: this.$route.params.id };
+                let response;
+                if (medicine.id === null) {
+                    response = await axios.post('/medicines', medicine);
+                    this.medicines[index] = response.data;
+                } else {
+                    response = await axios.put(`/medicines/${medicine.id}`, medicine);
+                    this.medicines[index] = response.data;
+                }
+                this.editMedicineIndex = null;
+            } catch (error) {
+                console.log('Erro ao salvar a medicamento:', error);
+            }
+        },
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
-    .infos{
+    .infos {
         display: flex;
         gap: 18px;
-        .petImg{
+
+        .petImg {
             width: 500px;
             box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
-        .petDetails{
+
+        .petDetails {
             align-content: center;
+
             .title {
                 color: var(--p3);
             }
@@ -238,36 +281,42 @@ export default {
     .text_body {
         margin-top: 0px;
     }
+
     .vaccines,
-    .medicines{
+    .medicines {
         margin-top: 10px;
-        .text_body{
+
+        .text_body {
             color: var(--p3);
-        }        
-        td .text_body{
+        }
+
+        td .text_body {
             text-align: center;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 8px;
+
             th,
             td {
                 border: 1px solid var(--c4);
                 padding: 8px;
                 text-align: left;
             }
-            
-            .buttons{
-             display: flex;
-             gap: 18px;
-             button{
-                padding: 2px 10px;
-                font-size: 10px;
-                margin: 0px !important;
-             }
+
+            .buttons {
+                display: flex;
+                gap: 18px;
+
+                button {
+                    padding: 2px 10px;
+                    font-size: 10px;
+                    margin: 0px !important;
+                }
             }
-    
+
             th {
                 color: var(--p5);
                 background-color: var(--c5);
