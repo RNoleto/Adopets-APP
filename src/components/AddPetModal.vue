@@ -104,7 +104,7 @@ export default {
         formData.append('gender', this.selectedGender);
         formData.append('chip_number', this.chipNumber);
         formData.append('ref_id_user', JSON.parse(localStorage.getItem('userId')));
-        formData.append('available_for_adoption', this.availableForAdoption === 'sim' ? 1 : 0);
+        formData.append('status', this.availableForAdoption === 'sim' ? 1 : 0);
         formData.append('photo', this.imageUpload);
 
         const response = await axios.post("/animals", formData, {
@@ -115,6 +115,7 @@ export default {
 
         if (response.status === 201 || response.status === 200) {
           const animalId = response.data.id;
+          console.log("dados do pet", response.data);
           await this.uploadImages(animalId);
           Swal.fire({
             title: 'Pet criado com sucesso!',
@@ -128,6 +129,7 @@ export default {
           });
         }
       } catch (error) {
+        console.log('Erro ao cadastrar pet:', error);
         Swal.fire({
           title: 'Erro ao cadastrar Pet!',
           text: 'Não foi possível cadastrar o Pet, tente novamente mais tarde.',

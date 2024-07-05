@@ -2,148 +2,39 @@
     <div class="content">
         <div class="container">
             <div v-if="pet">
-                <div class="infos">
-                    <img :src="imgSrc" :alt="pet.name" class="petImg">
-                    <div class="petDetails">
-                        <p class="title">{{ pet.name }}</p>
-                        <p class="text_body">Raça: {{ pet.breed }}</p>
-                        <p class="text_body">Sexo: {{ getGender(pet.gender) }}</p>
-                        <p class="text_body">Chip: {{ getChip(pet.chip_number) }}</p>
-                        <p class="text_body">Adoção: {{ getAdoption(pet.status) }}</p>
-                        <p class="text_body">Data de Nascimento: {{ formatDate(pet.birth) }}</p>
-                    </div>
-                </div>
-                <!-- Informações de vacina -->
-                <div v-if="vaccines.length" class="vaccines">
-                    <p class="text_body">Vacinas</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Vacina</th>
-                                <th>Local</th>
-                                <th>Data</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(vaccine, index) in vaccines" :key="vaccine.id || index">
-                                <template v-if="editVaccineIndex === index">
-                                    <td><input v-model="vaccine.name" placeholder="Nome da Vacina"></td>
-                                    <td><input v-model="vaccine.local" placeholder="Local"></td>
-                                    <td><input type="date" v-model="vaccine.date"></td>
-                                    <td class="buttons">
-                                        <button @click="saveVaccine(index)">Salvar</button>
-                                        <button @click="cancelEdit">Cancelar</button>
-                                    </td>
-                                </template>
-                                <template v-else>
-                                    <td>
-                                        <p class="text_body">{{ vaccine.name }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text_body">{{ vaccine.local }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text_body">{{ formatDate(vaccine.date) }}</p>
-                                    </td>
-                                    <td class="buttons">
-                                        <button @click="editVaccine(index)">Editar</button>
-                                        <button @click="deleteVaccine(vaccine.id, index)">Excluir</button>
-                                    </td>
-                                </template>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div v-else>
-                    <p class="text_body">Nenhuma vacina registrada para este pet.</p>
-                </div>
-                <!-- Botão para adicionar nova vacina -->
-                <button @click="addNewVaccine">Adicionar Vacina</button>
+                <PetDetails :pet="pet" :imgSrc="imgSrc" />
+                <Section title="Vacinas" :items="vaccines" :editIndex="editVaccineIndex" @add="addNewVaccine" @save="saveVaccine" @edit="editVaccine" @cancelEdit="cancelEdit" @delete="deleteVaccine" />
+                <Section title="Medicamentos" :items="medicines" :editIndex="editMedicineIndex" @add="addNewMedicine" @save="saveMedicine" @edit="editMedicine" @cancelEdit="cancelMedicineEdit" @delete="deleteMedicine" />
             </div>
             <div v-else>
                 Nenhum pet Selecionado aqui.
             </div>
-            <!-- Informações de medicamentos vermifugos/antipulgas e etc -->
-            <div v-if="medicines.length" class="medicines">
-                <p class="text_body">Medicamentos</p>
-                <table>
-                    <thead>
-                        <th>Nome</th>
-                        <th>Medicamento</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(medicine, index) in medicines" :key="medicine.id || index">
-                            <template v-if="editMedicineIndex === index">
-                                <td><input v-model="medicine.name" placeholder="Nome da Vacina"></td>
-                                <td><input v-model="medicine.medicine" placeholder="Vermifugo, antipulga e etc..."></td>
-                                <td><input type="date" v-model="medicine.date"></td>
-                                <td class="buttons">
-                                    <button @click="saveMedicine(index)">Salvar</button>
-                                    <button @click="cancelMedicineEdit">Cancelar</button>
-                                </td>
-                            </template>
-                            <template v-else>
-                                <td>
-                                    <p class="text_body">{{ medicine.name }}</p>
-                                </td>
-                                <td>
-                                    <p class="text_body">{{ medicine.medicine }}</p>
-                                </td>
-                                <td>
-                                    <p class="text_body">{{ formatDate(medicine.date) }}</p>
-                                </td>
-                                <td class="buttons">
-                                    <button @click="editMedicine(index)">Editar</button>
-                                    <button @click="deleteMedicine(medicine.id, index)">Excluir</button>
-                                </td>
-                            </template>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div v-else>
-                <p class="text_body">Nenhum medicamento registrado para esse pet.</p>
-            </div>
-            <button @click="addNewMedicine">Adicionar Medicamento</button>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import PetDetails from './../components/PetDetail.vue';
+import Section from './../components/Section.vue';
 
 export default {
+    components: { PetDetails, Section },
     data() {
         return {
-            pet: [],
-            selectedPetId: 0,
+            pet: null,
             imgSrc: null,
             vaccines: [],
-            newVaccine: {
-                name: '',
-                local: '',
-                date: ''
-            },
             medicines: [],
-            newMedicine: {
-                name: '',
-                medicine: '',
-                date: ''
-            },
             editVaccineIndex: null,
             editMedicineIndex: null,
-        }
+        };
     },
     async created() {
         const petId = this.$route.params.id;
         await this.fetchPetDetails(petId);
         if (this.pet) {
-            await this.fetchPetImage(petId);
-            await this.fetchPetVaccines(petId);
-            await this.fetchPetMedicines(petId);
+            await Promise.all([this.fetchPetImage(petId), this.fetchPetVaccines(petId), this.fetchPetMedicines(petId)]);
         }
     },
     methods: {
@@ -152,16 +43,15 @@ export default {
                 const response = await axios.get(`/animals/${petId}`);
                 this.pet = response.data;
             } catch (error) {
-                console.log('Erro ao carregar os detalhes do pet', error);
+                console.error('Erro ao carregar os detalhes do pet', error);
             }
         },
         async fetchPetImage(petId) {
             try {
                 const response = await axios.get(`/animalsimage/${petId}`, { responseType: 'blob' });
-                const url = URL.createObjectURL(response.data);
-                this.imgSrc = url;
+                this.imgSrc = URL.createObjectURL(response.data);
             } catch (error) {
-                console.log('Erro ao carregar a imagem do pet:', error);
+                console.error('Erro ao carregar a imagem do pet:', error);
             }
         },
         async fetchPetVaccines(petId) {
@@ -169,7 +59,7 @@ export default {
                 const response = await axios.get(`/vaccines/pet/${petId}`);
                 this.vaccines = response.data;
             } catch (error) {
-                console.log('Erro ao carregar informações de vacina do pet:', error);
+                console.error('Erro ao carregar informações de vacina do pet:', error);
             }
         },
         async fetchPetMedicines(petId) {
@@ -177,7 +67,7 @@ export default {
                 const response = await axios.get(`/medicines/pet/${petId}`);
                 this.medicines = response.data;
             } catch (error) {
-                console.log('Erro ao carregar informações de medicamentos do pet:', error);
+                console.error('Erro ao carregar informações de medicamentos do pet:', error);
             }
         },
         formatDate(date) {
@@ -185,14 +75,29 @@ export default {
             const [year, month, day] = date.split('-');
             return `${day}/${month}/${year}`;
         },
-        getChip(chip) {
-            return chip === '' || chip === null ? "Não informado" : chip;
+        async saveItem(index, item, endpoint, list, editIndexSetter) {
+            try {
+                const data = { ...list[index], ref_id_animal: this.$route.params.id };
+                let response;
+                if (data.id === null) {
+                    response = await axios.post(endpoint, data);
+                    list[index] = response.data;
+                } else {
+                    response = await axios.put(`${endpoint}/${data.id}`, data);
+                    list[index] = response.data;
+                }
+                editIndexSetter(null);
+            } catch (error) {
+                console.error(`Erro ao salvar ${item}:`, error);
+            }
         },
-        getAdoption(status) {
-            return status === 0 ? 'Indisponível' : 'Disponível';
-        },
-        getGender(gender) {
-            return gender === "M" ? "Masculino" : "Feminino";
+        async deleteItem(id, index, endpoint, list) {
+            try {
+                await axios.delete(`${endpoint}/${id}`);
+                list.splice(index, 1);
+            } catch (error) {
+                console.error(`Erro ao deletar ${item}:`, error);
+            }
         },
         addNewVaccine() {
             this.vaccines.push({ name: '', local: '', date: '', id: null });
@@ -207,69 +112,33 @@ export default {
             }
             this.editVaccineIndex = null;
         },
-        cancelMedicineEdit(){
-            if (this.medicines[this.editMedicineIndex].id === null){
-                this.medicine.pop();
-            }
-            this.editMedicineIndex = null;
+        async saveVaccine(index) {
+            this.saveItem(index, 'vacina', '/vaccines', this.vaccines, (index) => (this.editVaccineIndex = index));
         },
-        editMedicine(index) {
-            this.editMedicineIndex = index;
+        async deleteVaccine(id, index) {
+            this.deleteItem(id, index, '/vaccines', this.vaccines);
         },
         addNewMedicine() {
             this.medicines.push({ name: '', medicine: '', date: '', id: null });
             this.editMedicineIndex = this.medicines.length - 1;
         },
-        async saveVaccine(index) {
-            try {
-                const vaccine = { ...this.vaccines[index], ref_id_animal: this.$route.params.id };
-                let response;
-                if (vaccine.id === null) {
-                    response = await axios.post('/vaccines', vaccine);
-                    this.vaccines[index] = response.data;
-                } else {
-                    response = await axios.put(`/vaccines/${vaccine.id}`, vaccine);
-                    this.vaccines[index] = response.data;
-                }
-                this.editVaccineIndex = null;
-            } catch (error) {
-                console.log('Erro ao salvar a vacina:', error);
-            }
+        editMedicine(index) {
+            this.editMedicineIndex = index;
         },
-        async deleteVaccine(id, index) {
-            try {
-                await axios.delete(`/vaccines/${id}`);
-                this.vaccines.splice(index, 1);
-            } catch (error) {
-                console.log('Erro ao deletar a vacina:', error);
+        cancelMedicineEdit() {
+            if (this.medicines[this.editMedicineIndex].id === null) {
+                this.medicines.pop();
             }
+            this.editMedicineIndex = null;
         },
         async saveMedicine(index) {
-            try {
-                const medicine = { ...this.medicines[index], ref_id_animal: this.$route.params.id };
-                let response;
-                if (medicine.id === null) {
-                    response = await axios.post('/medicines', medicine);
-                    this.medicines[index] = response.data;
-                } else {
-                    response = await axios.put(`/medicines/${medicine.id}`, medicine);
-                    this.medicines[index] = response.data;
-                }
-                this.editMedicineIndex = null;
-            } catch (error) {
-                console.log('Erro ao salvar a medicamento:', error);
-            }
+            this.saveItem(index, 'medicamento', '/medicines', this.medicines, (index) => (this.editMedicineIndex = index));
         },
-        async deleteMedicine(id, index){
-            try{
-                await axios.delete(`/medicines/${id}`);
-                this.medicines.splice(index, 1);
-            } catch (error){
-                console.log('Erro ao deletar o medicamento', error);
-            }
+        async deleteMedicine(id, index) {
+            this.deleteItem(id, index, '/medicines', this.medicines);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -320,23 +189,11 @@ export default {
                 text-align: left;
             }
 
-            .buttons {
-                display: flex;
-                gap: 18px;
-
-                button {
-                    padding: 2px 10px;
-                    font-size: 10px;
-                    margin: 0px !important;
-                }
-            }
-
             th {
                 color: var(--p5);
                 background-color: var(--c5);
             }
         }
     }
-
 }
 </style>
