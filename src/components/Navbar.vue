@@ -8,9 +8,12 @@
         <div v-for="page in filteredPages" :key="page.id">
           <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
-        <div class="menu">
+        <div class="menu" v-if="!isAuthenticated">
           <a href="#" @click.prevent="showLogin" class="link_menu">Login</a>
           <a href="#" @click.prevent="showRegister" class="link_menu register">Register</a>
+        </div>
+        <div class="menu" v-else>
+          <a href="#" @click.prevent="logout" class="link_menu">Logout</a>
         </div>
       </div>
       <div class="menu_mobile" :class="{ active: isNavOpen }" @click="toggleNav">
@@ -20,8 +23,13 @@
         <div v-for="page in filteredPages" :key="page.id" @click="toggleNav">
           <router-link :to="page.url" class="link_menu">{{ page.name }}</router-link>
         </div>
-        <a href="#" @click.prevent="showLogin" class="link_menu">Login</a>
-        <a href="#" @click.prevent="showRegister" class="link_menu register">Register</a>
+        <div v-if="!isAuthenticated">
+          <a href="#" @click.prevent="showLogin" class="link_menu">Login</a>
+          <a href="#" @click.prevent="showRegister" class="link_menu register">Register</a>
+        </div>
+        <div v-else>
+          <a href="#" @click.prevent="logout" class="link_menu">Logout</a>
+        </div>
       </div>
     </nav>
     <Login v-if="isLoginVisible" @close="hideLogin" />
@@ -33,6 +41,7 @@
 import Cookie from "js-cookie";
 import Login from "../components/Login.vue";
 import Register from "../components/Register.vue";
+import { useAuthStore } from '../stores/authStore';
 
 export default {
   name: "Navbar",
@@ -45,11 +54,9 @@ export default {
         { id: 2, url: "/adoptions", name: "Adoção" },
         { id: 3, url: "/posts", name: "Posts" },
         { id: 4, url: '/breedsgalery', name: "Galeria de Raças" },
-        // { id: 4, url: "#", name: "Achados e perdidos" },
         { id: 6, url: "/userpage", name: "Pagina do usuário" },
         { id: 7, url: "/Dashboard", name: "Dashboard" },
       ],
-      tokenExists: false,
       isLoginVisible: false,
       isRegisterVisible: false
     };
@@ -62,17 +69,15 @@ export default {
     filteredPages() {
       return this.pages.filter(page => {
         if (page.url === '/Dashboard' || page.url === '/userpage') {
-          return this.tokenExists;
+          return this.isAuthenticated;
         }
         return true;
       });
     },
     isAuthenticated() {
-      return this.$store.state.auth.isAuthenticated;
+      const authStore = useAuthStore();
+      return authStore.isAuthenticated;
     }
-  },
-  mounted() {
-    this.tokenExists = Cookie.get("_myapp_token") !== undefined;
   },
   methods: {
     toggleNav() {
@@ -105,11 +110,15 @@ export default {
     },
     hideRegister() {
       this.isRegisterVisible = false;
+    },
+    logout() {
+      const authStore = useAuthStore();
+      authStore.logout();
+      this.$router.push('/');
     }
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 header {

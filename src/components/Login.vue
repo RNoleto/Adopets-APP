@@ -21,7 +21,7 @@
 import Cookie from "js-cookie";
 import axios from "axios";
 import Swal from 'sweetalert2';
-import { useUserStore } from '../stores/userStore';
+import { useAuthStore } from '../stores/authStore';
 
 export default {
   data() {
@@ -48,8 +48,8 @@ export default {
           Cookie.set('_myapp_token', response.data.access_token);
 
           // Usa o store para armazenar os dados do usuário
-          const userStore = useUserStore();
-          userStore.setUser({
+          const authStore = useAuthStore();
+          authStore.login({
             name: response.data.user_name,
             id: response.data.user_id,
             email: response.data.user_email
@@ -62,6 +62,7 @@ export default {
             icon: 'success',
             confirmButtonText: 'OK'
           }).then(() => {
+            this.$emit('close'); // Emitir evento para fechar modal de login
             this.$router.push('/');
           });
         })
