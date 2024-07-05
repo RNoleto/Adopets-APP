@@ -1,101 +1,71 @@
 <template>
     <div class="container">
-        <h3 class="title">Meus Pets</h3>
-        <div class="count">
-            <p class="text count_total">Total de pets: {{ totalAnimals }}</p>
-        </div>
-        <div class="pets">
-            <div v-for="(mypet, index) in myPetsWithImages" :key="index" class="card">
-                <img :src="mypet.img" :alt="mypet.name" class="photo">
-                <div class="infos">
-                    <div class="content">
-                        <p class="title">{{ mypet.name }}</p>
-                        <p class="text">{{ getGender(mypet.gender) }}</p>
-                        <p class="text">{{ formatDate(mypet.birth) }}</p>
-                        <p class="text">{{ mypet.breed }}</p>
-                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do
-                            Pet</router-link>
-                    </div>
-                </div>
+      <h3 class="title">Meus Pets</h3>
+      <div class="count">
+        <p class="text count_total">Total de pets: {{ totalAnimals }}</p>
+      </div>
+      <div class="pets">
+        <div v-for="(mypet, index) in myPetsWithImages" :key="index" class="card">
+          <img :src="mypet.img" :alt="mypet.name" class="photo">
+          <div class="infos">
+            <div class="content">
+              <p class="title">{{ mypet.name }}</p>
+              <p class="text">{{ getGender(mypet.gender) }}</p>
+              <p class="text">{{ formatDate(mypet.birth) }}</p>
+              <p class="text">{{ mypet.breed }}</p>
+              <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do Pet</router-link>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</template>
-
-<script>
-import Swal from 'sweetalert2';
-import axios from 'axios';
-
-export default {
+  </template>
+  
+  <script>
+  import { computed } from 'vue';
+  import { useUserStore } from '@/stores/userStore';
+  
+  export default {
     name: 'PetCard',
-    data() {
-        return {
-            myPets: [],
-            images: [],
-        }
+    setup() {
+      const userStore = useUserStore();
+  
+      // Carregar os pets ao montar o componente
+      const loadMyPets = async () => {
+        await userStore.fetchPets();
+      };
+  
+      // Computar total de animais
+      const totalAnimals = computed(() => userStore.pets.length);
+  
+      // Computar pets com imagens
+      const myPetsWithImages = computed(() => {
+        return userStore.pets.map(pet => ({
+          ...pet,
+          img: `https://via.placeholder.com/150`, // Substitua pelo caminho real da imagem
+        }));
+      });
+  
+      // Métodos de formatação e manipulação de dados
+      const getGender = (gender) => {
+        return gender === 'M' ? 'Masculino' : 'Feminino';
+      };
+  
+      const formatDate = (birth) => {
+        const [year, month, day] = birth.split('-');
+        return `${day}/${month}/${year}`;
+      };
+  
+      return {
+        loadMyPets,
+        totalAnimals,
+        myPetsWithImages,
+        getGender,
+        formatDate
+      };
     },
-    mounted() {
-        this.loadMyPets();
-    },
-    computed: {
-        totalAnimals() {
-            return this.myPets.length;
-        },
-        myPetsWithImages() {
-            return this.myPets.map(pet => {
-                // const breed = this.myPets.find(b => b.id === pet.id);
-                const img = this.images[pet.id] || 'https://via.placeholder.com/150';
-                return {
-                    ...pet,
-                    img,
-                };
-            });
-        }
-    },
-    methods: {
-        loadMyPets() {
-            axios.get('/animals')
-                .then((response) => {
-                    this.myPets = response.data;
-                    this.loadImages();
-                })
-                .catch((error) => {
-                    console.error('Erro ao carregar meus pets', error);
-                });
-        },
-        async loadImages() {
-            const imagePromises = this.myPets.map(async (pet) => {
-                try {
-                    const response = await axios.get(`/animalsimage/${pet.id}`, { responseType: 'blob' });
-                    const blob = new Blob([response.data]);
-                    this.images[pet.id] = URL.createObjectURL(blob);
-                } catch (error) {
-                    console.error(`Erro ao carregar imagem do pet com ID ${pet.id}`, error);
-                    this.images[pet.id] = 'https://via.placeholder.com/150';
-                }
-            });
-
-            await Promise.all(imagePromises);
-        },
-        editPet(id) {
-            const selectedPet = this.myPets.find(pet => pet.id === id);
-            this.$router.push({ name: 'PetPage', params: { id }, state: { pet: selectedPet } });
-        },
-        getGender(gender) {
-            return gender === "M" ? "Masculino" : "Feminino";
-        },
-        getSpecieName(specieId) {
-            const specie = this.species.find(s => s.id === specieId);
-            console.log(specie);
-            return specie ? specie.specie : 'Especie não encontrada';
-        },
-        formatDate(birth) {
-            const [year, month, day] = birth.split('-');
-            return `${day}/${month}/${year}`;
-        }
-    }
-}
-</script>
+  };
+  </script>
 
 <style lang="scss" scoped>
 .container {
