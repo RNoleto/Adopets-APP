@@ -115,7 +115,6 @@ export default {
 
         if (response.status === 201 || response.status === 200) {
           const animalId = response.data.id;
-          console.log("dados do pet", response.data);
           await this.uploadImages(animalId);
           Swal.fire({
             title: 'Pet criado com sucesso!',
@@ -129,7 +128,6 @@ export default {
           });
         }
       } catch (error) {
-        console.log('Erro ao cadastrar pet:', error);
         Swal.fire({
           title: 'Erro ao cadastrar Pet!',
           text: 'Não foi possível cadastrar o Pet, tente novamente mais tarde.',
@@ -148,10 +146,7 @@ export default {
           formData.append('file', imageFiles[i]);
           formData.append('ref_id_animal', animalId);
         }
-
         const response = await axios.post('/animalsimage', formData);
-
-        // console.log("Resposta do upload de imagens:", response.data);
       } catch (error) {
         console.log('Erro ao enviar imagens:', error);
       }
