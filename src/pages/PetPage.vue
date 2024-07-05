@@ -82,7 +82,7 @@
                                 <td><input type="date" v-model="medicine.date"></td>
                                 <td class="buttons">
                                     <button @click="saveMedicine(index)">Salvar</button>
-                                    <button @click="cancelEdit">Cancelar</button>
+                                    <button @click="cancelMedicineEdit">Cancelar</button>
                                 </td>
                             </template>
                             <template v-else>
@@ -207,6 +207,12 @@ export default {
             }
             this.editVaccineIndex = null;
         },
+        cancelMedicineEdit(){
+            if (this.medicines[this.editMedicineIndex].id === null){
+                this.medicine.pop();
+            }
+            this.editMedicineIndex = null;
+        },
         editMedicine(index) {
             this.editMedicineIndex = index;
         },
@@ -254,6 +260,14 @@ export default {
                 console.log('Erro ao salvar a medicamento:', error);
             }
         },
+        async deleteMedicine(id, index){
+            try{
+                await axios.delete(`/medicines/${id}`);
+                this.medicines.splice(index, 1);
+            } catch (error){
+                console.log('Erro ao deletar o medicamento', error);
+            }
+        }
     }
 }
 </script>
