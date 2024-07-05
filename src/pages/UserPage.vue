@@ -1,88 +1,94 @@
 <template>
-    <div class="content">
-      <p class="title">Página do Usuário.</p>
-      <div class="user">
-        <p class="text_body">Seja bem-vindo {{ userStore.user.name }}!</p>
-      </div>
-      <ul class="menu">
-        <li><button @click="setActiveView('myInfos')">Meus dados</button></li>
-        <li><button @click="setActiveView('myPets')">Meus Pets</button></li>
-        <li><button @click="setActiveView('lostPets')">Pets Perdidos</button></li>
-      </ul>
-      <div class="infos">
-        <div v-if="activeView === 'myInfos'" class="myInfos">
-          <p>Nome: {{ userStore.user.name }}</p>
-          <p>Email: {{ userStore.user.email }}</p>
-        </div>
-        <div v-if="activeView === 'myPets'" class="myPets">
-          <PetCard :pets="userStore.pets" :images="images" />
-          <button @click="openAddPetModal">Adicionar Pet</button>
-        </div>
-        <div v-if="activeView === 'lostPets'">
-          <p>Pets Perdidos</p>
-        </div>
-      </div>
-      <AddPetModal :isOpen="isAddPetModalOpen" @close="closeAddPetModal" @petAdded="fetchPets" />
+  <div class="content">
+    <p class="title">Página do Usuário.</p>
+    <div class="user" v-if="authStore.isAuthenticated">
+      <p class="text_body">Seja bem-vindo {{ authStore.user.name }}!</p>
     </div>
-  </template>
-  
-  <script>
-  import { useUserStore } from '../stores/userStore';
-  import PetCard from '../components/PetCard.vue';
-  import AddPetModal from '../components/AddPetModal.vue';
-  
-  export default {
-    components: {
-      PetCard,
-      AddPetModal,
+    <ul class="menu">
+      <li><button @click="setActiveView('myInfos')">Meus dados</button></li>
+      <li><button @click="setActiveView('myPets')">Meus Pets</button></li>
+      <li><button @click="setActiveView('lostPets')">Pets Perdidos</button></li>
+    </ul>
+    <div class="infos">
+      <div v-if="authStore.isAuthenticated && activeView === 'myInfos'" class="myInfos">
+        <p>Nome: {{ authStore.user.name }}</p>
+        <p>Email: {{ authStore.user.email }}</p>
+      </div>
+      <div v-if="authStore.isAuthenticated && activeView === 'myPets'" class="myPets">
+        <PetCard :pets="userStore.pets" :images="images" />
+        <button @click="openAddPetModal">Adicionar Pet</button>
+      </div>
+      <div v-if="authStore.isAuthenticated && activeView === 'lostPets'" class="lostPets">
+        <p>Pets Perdidos</p>
+      </div>
+    </div>
+    <AddPetModal :isOpen="isAddPetModalOpen" @close="closeAddPetModal" @petAdded="fetchPets" />
+  </div>
+</template>
+
+<script>
+import { useAuthStore } from '../stores/authStore';
+import { useUserStore } from '../stores/userStore';
+import axios from 'axios';
+import PetCard from '../components/PetCard.vue';
+import AddPetModal from '../components/AddPetModal.vue';
+
+export default {
+  components: {
+    PetCard,
+    AddPetModal,
+  },
+  data() {
+    return {
+      activeView: 'myInfos',
+      isAddPetModalOpen: false,
+      images: {},
+    };
+  },
+  computed: {
+    authStore() {
+      return useAuthStore();
     },
-    data() {
-      return {
-        activeView: 'myInfos',
-        isAddPetModalOpen: false,
-        images: {}, // Armazenar imagens dos pets
-      };
+    userStore() {
+      return useUserStore();
+    }
+  },
+  mounted() {
+    if (this.authStore.isAuthenticated) {
+      this.userStore.fetchPets();
+      this.loadImages();
+    }
+  },
+  methods: {
+    setActiveView(view) {
+      this.activeView = view;
     },
-    computed: {
-      userStore() {
-        return useUserStore();
-      }
+    openAddPetModal() {
+      this.isAddPetModalOpen = true;
     },
-    mounted() {
-      this.userStore.initializeUser();
-      this.fetchPets();
+    closeAddPetModal() {
+      this.isAddPetModalOpen = false;
     },
-    methods: {
-      setActiveView(view) {
-        this.activeView = view;
-      },
-      openAddPetModal() {
-        this.isAddPetModalOpen = true;
-      },
-      closeAddPetModal() {
-        this.isAddPetModalOpen = false;
-      },
-      async fetchPets() {
-        await this.userStore.fetchPets();
-        this.loadImages();
-      },
-      async loadImages() {
-        const pets = this.userStore.pets;
-        const imagePromises = pets.map(async (pet) => {
-          try {
-            const response = await axios.get(`/animalsimage/${pet.id}`, { responseType: 'blob' });
-            const blob = new Blob([response.data]);
-            this.images[pet.id] = URL.createObjectURL(blob);
-          } catch (error) {
-            // console.error(`Erro ao carregar imagem do pet com ID ${pet.id}`, error);
-            this.images[pet.id] = 'https://via.placeholder.com/150';
-          }
-        });
-  
-        await Promise.all(imagePromises);
-      }
+    async fetchPets() {
+      await this.userStore.fetchPets();
+      this.loadImages();
+    },
+    async loadImages() {
+      const pets = this.userStore.pets;
+      const imagePromises = pets.map(async (pet) => {
+        try {
+          const response = await axios.get(`/animalsimage/${pet.id}`, { responseType: 'blob' });
+          const blob = new Blob([response.data]);
+          this.images[pet.id] = URL.createObjectURL(blob);
+        } catch (error) {
+          this.images[pet.id] = 'https://via.placeholder.com/150';
+        }
+      });
+
+      await Promise.all(imagePromises);
     }
   }
+};
 </script>
 
 <style lang="scss" scoped>
