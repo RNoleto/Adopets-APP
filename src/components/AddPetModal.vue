@@ -103,7 +103,7 @@ export default {
         formData.append('birth', this.petBirth);
         formData.append('gender', this.selectedGender);
         formData.append('chip_number', this.chipNumber);
-        formData.append('ref_id_user', JSON.parse(localStorage.getItem('userId')));
+        formData.append('ref_id_user', JSON.parse(localStorage.getItem('user_id')));
         formData.append('status', this.availableForAdoption === 'sim' ? 1 : 0);
         formData.append('photo', this.imageUpload);
 

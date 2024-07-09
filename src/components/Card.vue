@@ -46,9 +46,9 @@ export default {
   },
   computed: {
     shouldShowButton() {
-      console.log("URL in shouldShowButton:", this.url);
+      // console.log("URL in shouldShowButton:", this.url);
       const result = Boolean(this.url);
-      console.log("Result in shouldShowButton:", result);
+      // console.log("Result in shouldShowButton:", result);
       return result;
     },
   },
