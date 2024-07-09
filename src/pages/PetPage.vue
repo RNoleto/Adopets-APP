@@ -59,7 +59,12 @@ export default {
                 const response = await axios.get(`/vaccines/pet/${petId}`);
                 this.vaccines = response.data;
             } catch (error) {
-                console.error('Erro ao carregar informações de vacina do pet:', error);
+                if(error.response && error.response.status === 404){
+                    console.warn('Nenhuma vacina encontrada para este pet.');
+                    this.vaccines = [];
+                } else {
+                    console.error('Erro ao carregar informações de vacina do pet:', error);
+                }
             }
         },
         async fetchPetMedicines(petId) {
@@ -67,7 +72,12 @@ export default {
                 const response = await axios.get(`/medicines/pet/${petId}`);
                 this.medicines = response.data;
             } catch (error) {
-                console.error('Erro ao carregar informações de medicamentos do pet:', error);
+                if(error.response && error.response.status === 404){
+                    console.warn('Nenhum medicamento encontrado para este pet.');
+                    this.medicines = [];
+                }else {
+                    console.error('Erro ao carregar informações de medicamentos do pet:', error);
+                }
             }
         },
         formatDate(date) {
