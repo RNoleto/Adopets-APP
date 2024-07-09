@@ -21,7 +21,7 @@ export const useUserStore = defineStore('user', {
         this.pets = response.data;
       } catch (error) {
         if(error.response && error.response.status === 404){
-          console.warn('Nenhum pet encontrado para este usuário..')
+          console.warn('Nenhum pet encontrado para este usuário.')
           this.pets = [];
         } else {
           console.error('Erro ao buscar pets:', error);
