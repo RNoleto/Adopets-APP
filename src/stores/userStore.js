@@ -20,7 +20,12 @@ export const useUserStore = defineStore('user', {
         const response = await axios.get(`/users/${userId}/animals`);
         this.pets = response.data;
       } catch (error) {
-        console.error('Erro ao buscar pets:', error);
+        if(error.response && error.response.status === 404){
+          console.warn('Nenhum pet encontrado para este usuário.')
+          this.pets = [];
+        } else {
+          console.error('Erro ao buscar pets:', error);
+        }
       }
     },
     async fetchPetImage(petId){
