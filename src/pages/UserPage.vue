@@ -10,16 +10,16 @@
       <li><button @click="setActiveView('lostPets')">Pets Perdidos</button></li>
     </ul>
     <div class="infos">
-      <div v-if="authStore.isAuthenticated && activeView === 'myInfos'" class="myInfos">
+      <div v-if="authStore.user && activeView === 'myInfos'" class="myInfos">
         <p>Id: {{ authStore.user.id }}</p>
         <p>Nome: {{ authStore.user.name }}</p>
         <p>Email: {{ authStore.user.email }}</p>
       </div>
-      <div v-if="authStore.isAuthenticated && activeView === 'myPets'" class="myPets">
+      <div v-if="authStore.user && activeView === 'myPets'" class="myPets">
         <PetCard :pets="userStore.pets" :images="images" />
         <button @click="openAddPetModal">Adicionar Pet</button>
       </div>
-      <div v-if="authStore.isAuthenticated && activeView === 'lostPets'" class="lostPets">
+      <div v-if="authStore.user && activeView === 'lostPets'" class="lostPets">
         <p>Pets Perdidos</p>
       </div>
     </div>

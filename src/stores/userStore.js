@@ -1,11 +1,11 @@
-// userStore.js
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { useAuthStore } from './authStore'; // Importe o authStore aqui
+import { useAuthStore } from './authStore';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    pets: []
+    pets: [],
+    user: null
   }),
   actions: {
     async fetchPets() {
@@ -22,6 +22,12 @@ export const useUserStore = defineStore('user', {
       } catch (error) {
         console.error('Erro ao buscar pets:', error);
       }
+    },
+    setUser(user) {
+      this.user = user;
+    },
+    clearUser() {
+      this.user = null;
     }
-  },
+  }
 });

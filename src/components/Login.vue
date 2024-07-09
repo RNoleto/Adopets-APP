@@ -31,53 +31,62 @@ export default {
     };
   },
   methods: {
-    submit() {
+    async submit() {
       const payload = {
         email: this.email,
         password: this.password,
       };
 
-      axios.post('login', payload, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access': 'application/json',
-        }
-      })
-        .then(response => {
-          // Armazena o token de acesso no cookie
-          Cookie.set('_myapp_token', response.data.access_token);
-
-          // Usa o store para armazenar os dados do usuário
-          const authStore = useAuthStore();
-          authStore.login({
-            name: response.data.user_name,
-            id: response.data.user_id,
-            email: response.data.user_email
-          });
-
-          // Mostra um alerta com os dados do usuário
-          Swal.fire({
-            title: 'Login bem-sucedido!',
-            text: `Bem-vindo ${response.data.user_name}!`,
-            icon: 'success',
-            confirmButtonText: 'OK'
-          }).then(() => {
-            this.$emit('close'); // Emitir evento para fechar modal de login
-            this.$router.push('/');
-          });
-        })
-        .catch(error => {
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Falha ao fazer login. Verifique suas credenciais e tente novamente.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
+      try {
+        const response = await axios.post('login', payload, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access': 'application/json',
+          }
         });
+
+        // Armazena o token de acesso no cookie
+        Cookie.set('_myapp_token', response.data.access_token);
+
+        // Dados do usuário
+        const user = {
+          id: response.data.user_id,
+          name: response.data.user_name,
+          email: response.data.user_email,
+        };
+
+        // Usa o store para armazenar os dados do usuário
+        const authStore = useAuthStore();
+        authStore.login(user);
+
+        // Armazena os dados do usuário no localStorage
+        localStorage.setItem('user_id', user.id);
+        localStorage.setItem('user_name', user.name);
+        localStorage.setItem('user_email', user.email);
+
+        // Mostra um alerta com os dados do usuário
+        await Swal.fire({
+          title: 'Login bem-sucedido!',
+          text: `Bem-vindo ${user.name}!`,
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+
+        this.$emit('close'); // Emitir evento para fechar modal de login
+        this.$router.push('/');
+      } catch (error) {
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Falha ao fazer login. Verifique suas credenciais e tente novamente.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
     }
   },
 };
 </script>
+
 
 <style lang="scss" scoped>
 .modal {
