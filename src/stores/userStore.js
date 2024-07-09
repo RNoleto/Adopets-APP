@@ -23,6 +23,21 @@ export const useUserStore = defineStore('user', {
         console.error('Erro ao buscar pets:', error);
       }
     },
+    async fetchPetImage(petId){
+      try{
+        const response = await axios.get(`/animalsimage/${petId}`, { responseType: 'blob'});
+        return URL.createObjectURL(response.data);
+      } catch(error){
+        console.log('Erro ao carregar a imagem do pet:', error);
+        return 'https://via.placeholder.com/150';
+      }
+    },
+    async fetchPetsWithImages(){
+      await this.fetchPets();
+      for(const pet of this.pets){
+        pet.imgSrc = await this.fetchPetImage(pet.id);
+      }
+    },
     setUser(user) {
       this.user = user;
     },

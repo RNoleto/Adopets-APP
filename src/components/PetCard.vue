@@ -1,72 +1,71 @@
 <template>
     <div class="container">
-        <h3 class="title">Meus Pets</h3>
-        <div class="count">
-            <p class="text count_total">Total de pets: {{ totalAnimals }}</p>
-        </div>
-        <div class="pets">
-            <div v-for="(mypet, index) in myPetsWithImages" :key="index" class="card">
-                <img :src="mypet.img" :alt="mypet.name" class="photo">
-                <div class="infos">
-                    <div class="content">
-                        <p class="title">{{ mypet.name }}</p>
-                        <p class="text">{{ getGender(mypet.gender) }}</p>
-                        <p class="text">{{ formatDate(mypet.birth) }}</p>
-                        <p class="text">{{ mypet.breed }}</p>
-                        <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do
-                            Pet</router-link>
-                    </div>
-                </div>
+      <h3 class="title">Meus Pets</h3>
+      <div class="count">
+        <p class="text count_total">Total de pets: {{ totalAnimals }}</p>
+      </div>
+      <div class="pets">
+        <div v-for="(mypet, index) in myPetsWithImages" :key="index" class="card">
+          <img :src="mypet.imgSrc" :alt="mypet.name" class="photo">
+          <div class="infos">
+            <div class="content">
+              <p class="title">{{ mypet.name }}</p>
+              <p class="text">{{ getGender(mypet.gender) }}</p>
+              <p class="text">{{ formatDate(mypet.birth) }}</p>
+              <p class="text">{{ mypet.breed }}</p>
+              <router-link :to="{ name: 'PetPage', params: { id: mypet.id } }" class="link">Página do Pet</router-link>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</template>
-
-<script>
-import { computed } from 'vue';
-import { useUserStore } from '@/stores/userStore';
-
-export default {
+  </template>
+  
+  <script>
+  import { computed, onMounted } from 'vue';
+  import { useUserStore } from '@/stores/userStore';
+  
+  export default {
     name: 'PetCard',
     setup() {
-        const userStore = useUserStore();
-
-        // Carregar os pets ao montar o componente
-        const loadMyPets = async () => {
-            await userStore.fetchPets();
-        };
-
-        // Computar total de animais
-        const totalAnimals = computed(() => userStore.pets.length);
-
-        // Computar pets com imagens
-        const myPetsWithImages = computed(() => {
-            return userStore.pets.map(pet => ({
-                ...pet,
-                img: `https://via.placeholder.com/150`, // Substitua pelo caminho real da imagem
-            }));
-        });
-
-        // Métodos de formatação e manipulação de dados
-        const getGender = (gender) => {
-            return gender === 'M' ? 'Masculino' : 'Feminino';
-        };
-
-        const formatDate = (birth) => {
-            const [year, month, day] = birth.split('-');
-            return `${day}/${month}/${year}`;
-        };
-
-        return {
-            loadMyPets,
-            totalAnimals,
-            myPetsWithImages,
-            getGender,
-            formatDate
-        };
+      const userStore = useUserStore();
+  
+      // Carregar os pets ao montar o componente
+      const loadMyPets = async () => {
+        await userStore.fetchPetsWithImages();
+      };
+  
+      // Computar total de animais
+      const totalAnimals = computed(() => userStore.pets.length);
+  
+      // Computar pets com imagens
+      const myPetsWithImages = computed(() => userStore.pets);
+  
+      // Métodos de formatação e manipulação de dados
+      const getGender = (gender) => {
+        return gender === 'M' ? 'Masculino' : 'Feminino';
+      };
+  
+      const formatDate = (birth) => {
+        const [year, month, day] = birth.split('-');
+        return `${day}/${month}/${year}`;
+      };
+  
+      onMounted(() => {
+        loadMyPets();
+      });
+  
+      return {
+        loadMyPets,
+        totalAnimals,
+        myPetsWithImages,
+        getGender,
+        formatDate
+      };
     },
-};
-</script>
+  };
+  </script>
+  
 
 <style lang="scss" scoped>
 .container {
