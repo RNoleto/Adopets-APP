@@ -8,7 +8,10 @@
             <p class="text_body">Nº Chip: {{ getChip(pet.chip_number) }}</p>
             <p class="text_body">Adoção: {{ getAdoption(pet.status) }}</p>
             <p class="text_body">Data de Nascimento: {{ formatDate(pet.birth) }}</p>
-            <button @click="editPet">Editar</button>
+            <div class="buttons">
+                <button @click="editPet">Editar</button>
+                <button @click="confirmDeletePet">Excluir</button>
+            </div>
         </div>
         <div class="petDetails" v-else>
             <form @submit.prevent="updatePet">
@@ -40,6 +43,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { useUserStore } from '../stores/userStore';
 
 export default {
@@ -93,6 +97,38 @@ export default {
             } catch (error) {
                 console.error('Erro ao atualizar pet:', error);
             }
+        },
+        confirmDeletePet(){
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: `Deseja realmente excluir o pet ${this.pet.name}?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if(result.isConfirmed){
+                    this.deletePet();
+                }
+            })
+        },
+        async deletePet(){
+            try{
+                await axios.delete(`/animals/${this.pet.id}`);
+                Swal.fire({
+                    title: 'Pet deletado com sucesso!',
+                    text: `${this.pet.name} foi deletado da sua lista de pets.`,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    this.$router.go(-1);
+                });
+            }catch(error){
+                console.error('Erro ao deletar pet:', error);
+                alert('Erro ao deletar pet. Tente novamente mais tarde.');
+            }
         }
     },
     watch: {
@@ -120,11 +156,17 @@ export default {
     .petDetails {
         align-content: center;
         width: 100%;
-
-        button{
-            font: var(--button-font-composite);
-            padding: 8px 16px;
-        }
+        
+        .buttons{
+            display: flex;
+            gap: 32px;
+            button {
+                    font: var(--button-font-composite);
+                    padding: 8px 16px;
+                    width: max-content;
+                    align-self: flex-start;
+                }
+            }
 
         .title {
             color: var(--p3);
@@ -145,17 +187,7 @@ export default {
                     flex: 1;
                     margin-left: 10px;
                 }
-            }
-
-            .buttons{
-                justify-content: space-between;
-                display: flex;
-                button {
-                    width: max-content;
-                    align-self: flex-start;
-                }
-            }
-        
+            }      
 
         }
     }
