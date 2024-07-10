@@ -11,9 +11,9 @@
     </ul>
     <div class="infos">
       <div v-if="authStore.user && activeView === 'myInfos'" class="myInfos">
-        <p>Id: {{ authStore.user.id }}</p>
-        <p>Nome: {{ authStore.user.name }}</p>
-        <p>Email: {{ authStore.user.email }}</p>
+        <!-- <p>Id: {{ authStore.user.id }}</p> -->
+        <p class="text_body">Nome: {{ authStore.user.name }}</p>
+        <p class="text_body">Email: {{ authStore.user.email }}</p>
       </div>
       <div v-if="authStore.user && activeView === 'myPets'" class="myPets">
         <PetCard :pets="userStore.pets" :images="images" />
@@ -127,11 +127,11 @@ export default {
 
         .myInfos {
             display: flex;
+            flex-direction: column;
             flex-wrap: wrap;
             gap: 10px;
-
-            p {
-                width: 100%;
+            .text_body{
+              margin: 0px;
             }
         }
 

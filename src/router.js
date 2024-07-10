@@ -40,12 +40,13 @@ const routes = [
   },
   {
     path: '/userpage',
-    // beforeEnter: Guard.auth, //precisa de autenticação
+    beforeEnter: Guard.auth, //precisa de autenticação
     component: UserPage,
   },
   {
     name: 'PetPage',
     path: '/petpage/:id',
+    beforeEnter: Guard.auth, //precisa de autenticação
     component: PetPage,
   },
   {

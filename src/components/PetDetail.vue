@@ -145,17 +145,20 @@ export default {
 
 <style lang="scss" scoped>
 .infos {
+    width: 100%;
     display: flex;
     gap: 18px;
 
     .petImg {
-        width: 500px;
+        max-width: 600px !important;
+        max-height: 400px !important;
+        object-fit: cover;
         box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     .petDetails {
         align-content: center;
-        width: 100%;
+        width: 800px;
         
         .buttons{
             display: flex;
