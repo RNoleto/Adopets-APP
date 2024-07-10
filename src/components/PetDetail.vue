@@ -5,7 +5,7 @@
             <p class="title">{{ pet.name }}</p>
             <p class="text_body">Raça: {{ pet.breed }}</p>
             <p class="text_body">Sexo: {{ getGender(pet.gender) }}</p>
-            <p class="text_body">Nº Chip: {{ getChip(pet.chip_number) }}</p>
+            <p class="text_body">Nº Chip: {{ getChip(this.pet.chip_number) }}</p>
             <p class="text_body">Adoção: {{ getAdoption(pet.status) }}</p>
             <p class="text_body">Data de Nascimento: {{ formatDate(pet.birth) }}</p>
             <div class="buttons">
@@ -138,25 +138,26 @@ export default {
             const imgRotate = -90;
             const imgData = this.imgSrc;
 
-            doc.setFillColor(240, 240, 240);
-            doc.rect(10, 10, 190, 100, 'F');
+            doc.setFillColor(11, 148, 228);
+            doc.rect(10, 10, 190, 80, 'F');
 
-            doc.setFontSize(22);
-            doc.setTextColor(40, 40, 40);
-            doc.text(this.pet.name, 20, 30);
-
-            doc.setFontSize(16);
             if (imgData) {
-                doc.addImage(imgData, 'JPEG', 20, 0, imgWidth, imgHeight, "", "", imgRotate);
+                doc.addImage(imgData, 'JPEG', 20, -40, imgWidth, imgHeight, "", "", imgRotate);
             }
-            doc.text(`Raça: ${this.pet.breed}`, 75, 50);
-            doc.text(`Sexo: ${this.getGender(this.pet.gender)}`, 75, 60);
-            doc.text(`Nº Chip: ${this.getChip(this.pet.chip_number)}`, 75, 70);
-            doc.text(`Adoção: ${this.getAdoption(this.pet.status)}`, 75, 80);
-            doc.text(`Data de Nascimento: ${this.formatDate(this.pet.birth)}`, 75, 90);
+            doc.setTextColor(222, 222, 222);
+            doc.setFontSize(22);
+            doc.text(this.pet.name, 85, 30);
+            doc.setTextColor(40, 40, 40);
+            doc.setFontSize(12);
+            doc.text(`Raça: ${this.pet.breed}`, 85, 40);
+            doc.text(`Sexo: ${this.getGender(this.pet.gender)}`, 120, 40);
+            doc.text(`Nº Chip: ${this.getChip(this.pet.chip_number)}`, 85, 50);
+            doc.text(`Adoção: ${this.getAdoption(this.pet.status)}`, 85, 60);
+            doc.text(`Data de Nascimento: ${this.formatDate(this.pet.birth)}`, 85, 70);
 
-
-            doc.save(`${this.pet.name}_carteirinha.pdf`);
+            // Abre o PDF em uma nova aba
+            const pdfUrl = doc.output('bloburl');
+            window.open(pdfUrl, '_blank');
         }
     },
     watch: {
