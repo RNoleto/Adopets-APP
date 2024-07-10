@@ -48,6 +48,12 @@ export const useUserStore = defineStore('user', {
     },
     clearUser() {
       this.user = null;
+    },
+    updatePet(updatedPet){
+      const index = this.pets.findIndex(pet => pet.id === updatedPet.id);
+      if(index !== -1){
+        this.pets[index] = updatedPet;
+      }
     }
   }
 });

@@ -2,7 +2,7 @@
     <div class="content">
         <div class="container">
             <div v-if="pet">
-                <PetDetails :pet="pet" :imgSrc="imgSrc" />
+                <PetDetails :pet="pet" :imgSrc="imgSrc" @update-pet="handlePetUpdate" />
                 <Section title="Vacinas" :items="vaccines" :editIndex="editVaccineIndex" @add="addNewVaccine" @save="saveVaccine" @edit="editVaccine" @cancelEdit="cancelEdit" @delete="deleteVaccine" />
                 <Section title="Medicamentos" :items="medicines" :editIndex="editMedicineIndex" @add="addNewMedicine" @save="saveMedicine" @edit="editMedicine" @cancelEdit="cancelMedicineEdit" @delete="deleteMedicine" />
             </div>
@@ -80,10 +80,9 @@ export default {
                 }
             }
         },
-        formatDate(date) {
-            if (!date) return 'Data não disponível';
-            const [year, month, day] = date.split('-');
-            return `${day}/${month}/${year}`;
+        handlePetUpdate(updatedPet) {
+            this.pet = updatedPet;
+            this.fetchPetImage(updatedPet.id); // Atualize a imagem caso ela tenha mudado
         },
         async saveItem(index, item, endpoint, list, editIndexSetter) {
             try {
