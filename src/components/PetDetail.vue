@@ -21,8 +21,8 @@
                 <label>Raça: <input v-model="editForm.breed" required /></label>
                 <label>Sexo:
                     <select v-model="editForm.gender" required>
-                        <option value="M">Masculino</option>
-                        <option value="F">Feminino</option>
+                        <option value="M">Macho</option>
+                        <option value="F">Fêmea</option>
                     </select>
                 </label>
                 <label>Nº Chip: <input v-model="editForm.chip_number" /></label>
@@ -41,12 +41,7 @@
         </div>
         <!-- Modal da Carteirinha -->
         <Modal :visible="isModalVisible" @close="isModalVisible = false">
-            <PetVaccineCard :pet="pet" :imgSrc="imgSrc">
-                <template>
-                    <div>
-                        <p>Adopets</p>
-                    </div>
-                </template>
+            <PetVaccineCard :pet="pet" :imgSrc="imgSrc" :responsibleName="responsibleName">
                 <img :src="imgSrc" alt="Imagem do Pet" class="cardImg" />
                 <div class="cardInfo">
                     <p class="petName">{{ pet.name }}</p>
@@ -87,6 +82,7 @@ export default {
         return {
             isEditing: false,
             isModalVisible: false,
+            responsibleName: '',
             editForm: {
                 name: this.pet.name,
                 gender: this.pet.gender,
@@ -101,7 +97,18 @@ export default {
     },
     methods: {
         showModal() {
+            this.fetchResponsibleName();
             this.isModalVisible = true;
+        },
+        async fetchResponsibleName() {
+            try {
+                const userStore = useUserStore();
+                const userId = this.pet.ref_id_user;
+                const response = await axios.get(`/users/${userId}`);
+                this.responsibleName = response.data.name;
+            } catch (error) {
+                console.error('Erro ao buscar o nome do responsável:', error);
+            }
         },
         formatDate(date) {
             if (!date) return 'Data não disponível';

@@ -13,7 +13,7 @@
             <label for="petGender">Sexo:</label>
             <select v-model="selectedGender" required>
               <option value="" disabled>Selecione</option>
-              <option value="M">Masculino</option>
+              <option value="M">Macho</option>
               <option value="F">Fêmea</option>
             </select>
           </div>
