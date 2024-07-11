@@ -5,6 +5,7 @@
                 <PetDetails :pet="pet" :imgSrc="imgSrc" @update-pet="handlePetUpdate" />
                 <Section title="Vacinas" :items="vaccines" :editIndex="editVaccineIndex" @add="addNewVaccine" @save="saveVaccine" @edit="editVaccine" @cancelEdit="cancelEdit" @delete="deleteVaccine" />
                 <Section title="Medicamentos" :items="medicines" :editIndex="editMedicineIndex" @add="addNewMedicine" @save="saveMedicine" @edit="editMedicine" @cancelEdit="cancelMedicineEdit" @delete="deleteMedicine" />
+                <button v-if="vaccines.length > 0 || medicines.length > 0" @click="generatePDF">Imprimir Ficha</button>
             </div>
             <div v-else>
                 Nenhum pet Selecionado aqui.
@@ -17,6 +18,9 @@
 import axios from 'axios';
 import PetDetails from './../components/PetDetail.vue';
 import Section from './../components/Section.vue';
+
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 export default {
     components: { PetDetails, Section },
@@ -145,6 +149,53 @@ export default {
         },
         async deleteMedicine(id, index) {
             this.deleteItem(id, index, '/medicines', this.medicines);
+        },
+        formatDate(date) {
+            if (!date) return 'Data não disponível';
+            const [year, month, day] = date.split('-');
+            return `${day}/${month}/${year}`;
+        },
+        getGender(gender) {
+            return gender === "M" ? "Macho" : "Femea";
+        },
+        generatePDF() {
+            const doc = new jsPDF();
+
+            doc.setFontSize(18);
+            doc.text('Carteirinha Pet', 14, 22);
+
+            doc.setFontSize(12);
+            doc.text(`Nome: ${this.pet.name}`, 14, 32);
+            doc.text(`Espécie: ${this.pet.specie}`, 14, 40);
+            doc.text(`Raça: ${this.pet.breed}`, 14, 48);
+            doc.text(`Sexo: ${this.getGender(this.pet.gender)}`, 14, 56);
+            doc.text(`Data de Nascimento: ${this.formatDate(this.pet.birth)}`, 14, 64);
+            doc.text(`Nº Chip: ${this.pet.chip_number}`, 14, 74);
+
+            let finalY = 74;
+
+            // Tabela de Vacinas
+            if (this.vaccines.length > 0) {
+                doc.text('Vacinas', 14, finalY + 10);
+                doc.autoTable({
+                    startY: finalY + 18,
+                    head: [['Nome', 'Local', 'Data']],
+                    body: this.vaccines.map(vaccine => [vaccine.name, vaccine.local, this.formatDate(vaccine.date)])
+                });
+                finalY = doc.autoTable.previous.finalY;
+            }
+
+            // Tabela de Medicamentos
+            if (this.medicines.length > 0) {
+                doc.text('Medicamentos', 14, finalY + 10);
+                doc.autoTable({
+                    startY: finalY + 18,
+                    head: [['Nome', 'Medicamento', 'Data']],
+                    body: this.medicines.map(medicine => [medicine.name, medicine.medicine, this.formatDate(medicine.date)])
+                });
+            }
+
+            doc.output('dataurlnewwindow');
         }
     }
 };

@@ -41,7 +41,7 @@
         </div>
         <!-- Modal da Carteirinha -->
         <Modal :visible="isModalVisible" @close="isModalVisible = false">
-            <PetVaccineCard :pet="pet" :imgSrc="imgSrc" :responsibleName="responsibleName">
+            <PetIdentity :pet="pet" :imgSrc="imgSrc" :responsibleName="responsibleName">
                 <img :src="imgSrc" alt="Imagem do Pet" class="cardImg" />
                 <div class="cardInfo">
                     <p class="petName">{{ pet.name }}</p>
@@ -55,7 +55,7 @@
                         <p class="petTag">Nascimento: <span>{{ formatDate(pet.birth) }}</span></p>
                     </div>
                 </div>
-            </PetVaccineCard>
+            </PetIdentity>
         </Modal>
     </div>
 </template>
@@ -67,12 +67,12 @@ import jsPDF from 'jspdf';
 import { useUserStore } from '../stores/userStore';
 
 import Modal from './Modal.vue';
-import PetVaccineCard from './PetIdentity.vue';
+import PetIdentity from './PetIdentity.vue';
 
 export default {
     components: {
         Modal,
-        PetVaccineCard
+        PetIdentity
     },
     props: {
         pet: Object,
