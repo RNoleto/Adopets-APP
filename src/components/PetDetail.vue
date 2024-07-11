@@ -9,7 +9,8 @@
             <p class="text_body">Adoção: {{ getAdoption(pet.status) }}</p>
             <p class="text_body">Data de Nascimento: {{ formatDate(pet.birth) }}</p>
             <div class="buttons">
-                <button @click="generatePDF">Carteirinha</button>
+                <!-- <button @click="generatePDF">Carteirinha</button> -->
+                <button @click="showModal">Identidade Pet</button>
                 <button @click="editPet">Editar</button>
                 <button @click="confirmDeletePet">Excluir</button>
             </div>
@@ -18,14 +19,14 @@
             <form @submit.prevent="updatePet">
                 <label>Nome: <input v-model="editForm.name" required /></label>
                 <label>Raça: <input v-model="editForm.breed" required /></label>
-                <label>Sexo: 
+                <label>Sexo:
                     <select v-model="editForm.gender" required>
                         <option value="M">Masculino</option>
                         <option value="F">Feminino</option>
                     </select>
                 </label>
                 <label>Nº Chip: <input v-model="editForm.chip_number" /></label>
-                <label>Adoção: 
+                <label>Adoção:
                     <select v-model="editForm.status" required>
                         <option value="0">Indisponível</option>
                         <option value="1">Disponível</option>
@@ -38,6 +39,29 @@
                 </div>
             </form>
         </div>
+        <!-- Modal da Carteirinha -->
+        <Modal :visible="isModalVisible" @close="isModalVisible = false">
+            <PetVaccineCard :pet="pet" :imgSrc="imgSrc">
+                <template>
+                    <div>
+                        <p>Adopets</p>
+                    </div>
+                </template>
+                <img :src="imgSrc" alt="Imagem do Pet" class="cardImg" />
+                <div class="cardInfo">
+                    <p class="petName">{{ pet.name }}</p>
+                    <div class="row">
+                        <p class="petTag">Especie: <span>{{ pet.specie }}</span></p>
+                        <p class="petTag">Raça: <span>{{ pet.breed }}</span></p>
+                        <p class="petTag">Sexo: <span>{{ getGender(pet.gender) }}</span></p>
+                    </div>
+                    <div class="row">
+                        <p class="petTag">Chip: <span>{{ getChip(pet.chip_number) }}</span></p>
+                        <p class="petTag">Nascimento: <span>{{ formatDate(pet.birth) }}</span></p>
+                    </div>
+                </div>
+            </PetVaccineCard>
+        </Modal>
     </div>
 </template>
 
@@ -47,7 +71,14 @@ import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import { useUserStore } from '../stores/userStore';
 
+import Modal from './Modal.vue';
+import PetVaccineCard from './PetIdentity.vue';
+
 export default {
+    components: {
+        Modal,
+        PetVaccineCard
+    },
     props: {
         pet: Object,
         imgSrc: String
@@ -55,6 +86,7 @@ export default {
     data() {
         return {
             isEditing: false,
+            isModalVisible: false,
             editForm: {
                 name: this.pet.name,
                 gender: this.pet.gender,
@@ -68,6 +100,9 @@ export default {
         };
     },
     methods: {
+        showModal() {
+            this.isModalVisible = true;
+        },
         formatDate(date) {
             if (!date) return 'Data não disponível';
             const [year, month, day] = date.split('-');
@@ -80,7 +115,7 @@ export default {
             return status === 0 ? 'Indisponível' : 'Disponível';
         },
         getGender(gender) {
-            return gender === "M" ? "Masculino" : "Feminino";
+            return gender === "M" ? "Macho" : "Femea";
         },
         editPet() {
             this.isEditing = true;
@@ -99,7 +134,7 @@ export default {
                 console.error('Erro ao atualizar pet:', error);
             }
         },
-        confirmDeletePet(){
+        confirmDeletePet() {
             Swal.fire({
                 title: 'Tem certeza?',
                 text: `Deseja realmente excluir o pet ${this.pet.name}?`,
@@ -110,13 +145,13 @@ export default {
                 confirmButtonText: 'Sim, excluir!',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
-                if(result.isConfirmed){
+                if (result.isConfirmed) {
                     this.deletePet();
                 }
             })
         },
-        async deletePet(){
-            try{
+        async deletePet() {
+            try {
                 await axios.delete(`/animals/${this.pet.id}`);
                 Swal.fire({
                     title: 'Pet deletado com sucesso!',
@@ -126,7 +161,7 @@ export default {
                 }).then(() => {
                     this.$router.go(-1);
                 });
-            }catch(error){
+            } catch (error) {
                 console.error('Erro ao deletar pet:', error);
                 alert('Erro ao deletar pet. Tente novamente mais tarde.');
             }
@@ -187,17 +222,18 @@ export default {
     .petDetails {
         align-content: center;
         width: 800px;
-        
-        .buttons{
+
+        .buttons {
             display: flex;
             gap: 32px;
+
             button {
-                    font: var(--button-font-composite);
-                    padding: 8px 16px;
-                    width: max-content;
-                    align-self: flex-start;
-                }
+                font: var(--button-font-composite);
+                padding: 8px 16px;
+                width: max-content;
+                align-self: flex-start;
             }
+        }
 
         .title {
             color: var(--p3);
@@ -214,12 +250,12 @@ export default {
                 width: 100%;
                 max-width: 400px;
 
-                input, select {
+                input,
+                select {
                     flex: 1;
                     margin-left: 10px;
                 }
-            }      
-
+            }
         }
     }
 }
